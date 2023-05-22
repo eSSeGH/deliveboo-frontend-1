@@ -1,5 +1,5 @@
 @use './partials/colors.scss';
-//titles
+//TITLES
 .my-h1 {
     font-size: 3.25rem;
     margin-bottom: 1rem;
@@ -19,10 +19,28 @@
     font-size: 1.875rem;
     margin-bottom: 1rem;
 }
-// /titles
 
-// colors
+.my-footer-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
+// /TITLES
 
+// TEXT
+.my-text {
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.my-footer-text {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+// /TEXT
+
+// COLORS
 // purple
 .purple-1 {
     color: $purple-1;
