@@ -1,9 +1,27 @@
-//titoli
-
-h1 {
+@use './partials/colors.scss';
+//titles
+.my-h1 {
     font-size: 3.25rem;
+    margin-bottom: 1rem;
 }
 
-h2 {
+.my-h2 {
     font-size: 2.75rem;
+    margin-bottom: 1rem;
 }
+
+.my-h3 {
+    font-size: 2.125rem;
+    margin-bottom: 1rem;
+}
+
+.my-h4 {
+    font-size: 1.875rem;
+    margin-bottom: 1rem;
+}
+
+// /titles
+
+// colors
+
+
