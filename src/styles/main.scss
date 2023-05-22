@@ -1,4 +1,5 @@
-@use './partials/colors.scss';
+@use './partials/colors.scss' as *;
+
 //TITLES
 .my-h1 {
     font-size: 3.25rem;
@@ -63,7 +64,7 @@
 }
 // /purple
 
-//orange
+// orange
 .orange-1 {
     color: $orange-1;
 }
@@ -84,6 +85,14 @@
     color: $orange-5;
 }
 // /orange
+
+// footer colors
+.footer-bg {
+    color: $footer-bg;
+}
+// /footer colors
+// /COLORS
+
 
 
 

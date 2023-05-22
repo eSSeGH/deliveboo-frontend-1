@@ -23,5 +23,10 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 library.add(faUserSecret)
 // /FONTAWESOME
 
+// BOOTSTRAP
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap'
+// /BOOTSTRAP
+
 //se non funziona scambiare .component con .use (.use(router))
 createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app')

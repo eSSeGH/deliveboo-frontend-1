@@ -1,16 +1,35 @@
-// import { createRouter, createWebHistory } from 'vue-router'; 
-// // import AppHome from './pages/AppHome.vue'; 
-// // import PostList from './pages/PostList.vue';
+// import { createRouter, createWebHistory } from 'vue-router';
 
-// const router = createRouter({ 
+// import Home from './pages/Home.vue'; 
+// import RestaurantsIndex from './pages/Restaurants.index.vue';
+// import RestaurantsShow from './pages/Restaurants.show.vue';
+// import PageNotFound from './404.vue';
+
+// const router = createRouter({
+//      
 //     history: createWebHistory(),
-//     routes: [ 
+
+//     routes: [
 //     {
-//         // path: '/', name: 'home', component: AppHome
+//         path: '/',
+//         name: 'home',
+//         component: Home,
 //     }, 
 //     {
-//         // path: '/blog', name: 'posts', component: PostList
-//     }, 
+//         path: '/restaurants',
+//         name: 'restaurants.index', 
+//         component: RestaurantsIndex,
+//     },
+//     {
+//         path: '/restaurants/:slug', //maybe slug is to insert here
+//         name: 'restaurants.show', 
+//         component: RestaurantsShow,
+//     },
+//     {
+//         path: '/404',
+//         name: '404',
+//         component: PageNotFound,
+//     }
 // ] 
 // });
 
