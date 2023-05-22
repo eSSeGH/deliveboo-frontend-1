@@ -1,9 +1,21 @@
-<script setup>
+<script>
+import AppFooter from './components/AppFooter.vue';
+
+  export default {
+    components: {
+      AppFooter,
+    }
+}
 </script>
 
 <template>
-  <h1 style="text-align: center; padding: 2rem;">Ciao mamma sono pronto</h1>
-  <h2 style="text-align: center; padding: 2rem;">Bravo ragazzo</h2>
+
+  <div class="container">
+    <h1 style="text-align: center; padding: 2rem;">Ciao mamma sono pronto</h1>
+    <h2 style="text-align: center; padding: 2rem;">Bravo ragazzo</h2>
+  </div>
+
+  <AppFooter />
 </template>
 
 <style lang="scss" scoped>
