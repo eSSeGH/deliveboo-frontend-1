@@ -1,9 +1,89 @@
-//titoli
-
-h1 {
+@use './partials/colors.scss';
+//TITLES
+.my-h1 {
     font-size: 3.25rem;
+    margin-bottom: 1rem;
 }
 
-h2 {
+.my-h2 {
     font-size: 2.75rem;
+    margin-bottom: 1rem;
 }
+
+.my-h3 {
+    font-size: 2.125rem;
+    margin-bottom: 1rem;
+}
+
+.my-h4 {
+    font-size: 1.875rem;
+    margin-bottom: 1rem;
+}
+
+.my-footer-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
+// /TITLES
+
+// TEXT
+.my-text {
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+}
+
+.my-footer-text {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+// /TEXT
+
+// COLORS
+// purple
+.purple-1 {
+    color: $purple-1;
+}
+
+.purple-2 {
+    color: $purple-2;
+}
+
+.purple-3 {
+    color: $purple-3;
+}
+
+.purple-4 {
+    color: $purple-4;
+}
+
+.purple-5 {
+    color: $purple-5;
+}
+// /purple
+
+//orange
+.orange-1 {
+    color: $orange-1;
+}
+
+.orange-2 {
+    color: $orange-2;
+}
+
+.orange-3 {
+    color: $orange-3;
+}
+
+.orange-4 {
+    color: $orange-4;
+}
+
+.orange-5 {
+    color: $orange-5;
+}
+// /orange
+
+
+
