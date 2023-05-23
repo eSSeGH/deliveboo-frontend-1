@@ -5,8 +5,8 @@
     <section class="container-auto py-5">
 
         <div class="d-flex gap-2 flex-wrap justify-content-center align-items-center">
-            <div class="card p-1" v-for="category in singleCategories" :key="category.name">
-                <router-link :to="{name: 'restaurants.index'}">{{ category }}</router-link>
+            <div class="card px-2" v-for="category in categories" :key="category.name">
+                {{ category }}
             </div>
         </div>
 
@@ -18,32 +18,48 @@
 
 <script>
 import store from '../../store';
+import axios from 'axios';
 
     export default {
         data() {
             return {
                 store,
-                singleCategories: []
+                categories: [],
             }
         },
-
-        created() {
-            this.getSingleCategories();
-        },
+        mounted() {
+            this.fetchCategories()
+            // console.log(this.categories)
+        },  
         
         methods: {
-            // create a method that push only different categories into SingleCategories array
-            getSingleCategories() {
+            fetchCategories(){
+                axios.get('http://127.0.0.1:8000/api/restaurant', {
+                })
+                .then(res=> {
 
-                for(let i = 0; i < store.restaurants.length; i ++) {
+                    const results = res.data.results
 
-                    const restaurant = store.restaurants[i]
+                    for(let i = 0; i < results.length; i ++) {
 
-                    if (!this.singleCategories.includes(restaurant.category)) {
+                        const singleCategories = results[i].categories
 
-                        this.singleCategories.push(restaurant.category)
+                        // console.log(singleCategories)
+
+                        for(let j = 0; j < singleCategories.length; j ++) {
+
+                            const category = singleCategories[j]
+
+                            // console.log(category.name)
+
+                            if(!this.categories.includes(category.name)) {
+
+                                this.categories.push(category.name)
+                            }
+                        }
                     }
-                }
+                    // console.log(results)
+                })
             }
         }
     }
