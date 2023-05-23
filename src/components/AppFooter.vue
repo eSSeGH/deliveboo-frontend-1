@@ -5,40 +5,52 @@
 
     <div class="container-auto footer-bg">
 
-        <div class="container-sm py-3 d-flex align-items-center justify-content-center">
+        <div class="container py-3 d-flex align-items-center justify-content-center">
             <img class="logo-thumb" src="/imgs/logo/logo4.png" alt="">
         </div>
     
-        <div class="container-sm py-3 d-flex flex-wrap justify-content-between pb-4 text-center text-white row-cols-1 row-cols-sm-2 row-cols-md-4">
+        <div class="container px-2">
 
-            <div class="col d-flex flex-column pb-4 gap-2 my-footer-text">
-                <h3 class="my-footer-title">Let's do it together</h3>
-                <div class="col">Careers</div>
-                <div class="col">Glovo for Partners</div>
-                <div class="col">Couriers</div>
-                <div class="col">Glovo Business</div>
-            </div>
+            <div class="row gx-3 row-gap-3 py-3 justify-content-center text-center text-white row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4">
 
-            <div class="col d-flex flex-column pb-4 gap-2 my-footer-text">
-                <h3 class="my-footer-title">Links of interest</h3>
-                <div class="col">About us</div>
-                <div class="col">FAQ</div>
-                <div class="col">Glovo Prime</div>
-                <div class="col">Blog</div>
-                <div class="col">Contact us</div>
-                <div class="col">Security</div>
-            </div>
+                <div class="col">
+                    <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow">
+                        <h3 class="my-footer-title">Let's do it together</h3>
+                        <div class="col">Careers</div>
+                        <div class="col">Glovo for Partners</div>
+                        <div class="col">Couriers</div>
+                        <div class="col">Glovo Business</div>
+                    </div>
+                </div>
 
-            <div class="col d-flex flex-column pb-4 gap-2 my-footer-text">
-                <h3 class="my-footer-title">Follow us</h3>
-                <FollowButton class="follow-btn" />
-            </div>
+                <div class="col">
+                    <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow">
+                        <h3 class="my-footer-title">Links of interest</h3>
+                        <div class="col">About us</div>
+                        <div class="col">FAQ</div>
+                        <div class="col">Glovo Prime</div>
+                        <div class="col">Blog</div>
+                        <div class="col">Contact us</div>
+                        <div class="col">Security</div>
+                    </div>
+                </div>
 
-            <div class="col d-flex flex-column pb-4 gap-2 my-footer-text uppercase">
-                <h3 class="my-footer-title">Terms & Conditions</h3>
-                <div class="col">Privacy policy</div>
-                <div class="col">Cookies policy</div>
-                <div class="col">Compliance</div>
+                <div class="col">
+                    <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow">
+                        <h3 class="my-footer-title">Follow us</h3>
+                        <FollowButton class="follow-btn" />
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow uppercase">
+                        <h3 class="my-footer-title">Terms & Conditions</h3>
+                        <div class="col">Privacy policy</div>
+                        <div class="col">Cookies policy</div>
+                        <div class="col">Compliance</div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -76,6 +88,13 @@ import FollowButton from './elements/FollowButton.vue';
 
 .my-footer-title {
     margin-bottom: 1rem;
+}
+
+.shadow {
+    padding: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset !important;
+    border-radius: 5px;
+    height: 100%;
 }
 
 .uppercase {
