@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import './style.css'
 import App from './App.vue'
-// import { router } from './router'
 
 //FONTS
 import "@fontsource/kanit"
@@ -28,5 +27,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap'
 // /BOOTSTRAP
 
+import { router } from './router'
+
 //se non funziona scambiare .component con .use (.use(router))
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
+createApp(App).use(router).component('font-awesome-icon', FontAwesomeIcon).mount('#app')
