@@ -11,8 +11,7 @@ import AppFooter from './components/AppFooter.vue';
 <template>
 
   <div class="container">
-    <h1 style="text-align: center; padding: 2rem;">Ciao mamma sono pronto</h1>
-    <h2 style="text-align: center; padding: 2rem;">Bravo ragazzo</h2>
+    <router-view></router-view>
   </div>
 
   <AppFooter />

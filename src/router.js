@@ -1,13 +1,15 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router'
 
-import Home from './pages/Home.vue'; 
-import RestaurantsIndex from './pages/Restaurants.index.vue';
-import RestaurantsShow from './pages/Restaurants.show.vue';
+import Home from './components/pages/Home.vue'
+import RestaurantsIndex from './components/pages/Restaurants.index.vue'
+import RestaurantsShow from './components/pages/Restaurants.show.vue'
 // import PageNotFound from './404.vue';
 
+const history = createWebHistory()
+
 const router = createRouter({
-     
-    history: createWebHistory(),
+
+    history,
 
     routes: [
     {
