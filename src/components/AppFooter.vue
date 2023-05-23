@@ -110,6 +110,4 @@ import FollowButton from './elements/FollowButton.vue';
 .spacing {
     padding: 0 2rem !important;
 }
-
-
 </style>
