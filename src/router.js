@@ -24,7 +24,7 @@ const router = createRouter({
     },
     {
         path: '/restaurants/:slug', //maybe slug is to insert here
-        name: 'restaurants.show', 
+        name: 'restaurants.show',
         component: RestaurantsShow,
     },
     // {

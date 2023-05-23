@@ -20,15 +20,15 @@ const store = reactive({
         },
         {
           "name": "Mexican Fiesta",
-          "category": "Mexican"
+          "category": "Chinese"
         },
         {
           "name": "Greek Taverna",
-          "category": "Greek"
+          "category": "Spanish"
         },
         {
           "name": "Burger Joint",
-          "category": "American"
+          "category": "Indian"
         },
         {
           "name": "French Bistro",
@@ -36,7 +36,7 @@ const store = reactive({
         },
         {
           "name": "Thai Spice",
-          "category": "Thai"
+          "category": "Indian"
         },
         {
           "name": "Steakhouse Grill",
@@ -44,11 +44,11 @@ const store = reactive({
         },
         {
           "name": "Vegetarian Garden",
-          "category": "Vegetarian"
+          "category": "Japanese"
         },
         {
           "name": "Seafood Shack",
-          "category": "Seafood"
+          "category": "Spanish"
         },
         {
           "name": "Korean BBQ",
@@ -56,11 +56,11 @@ const store = reactive({
         },
         {
           "name": "Mediterranean Delights",
-          "category": "Mediterranean"
+          "category": "Italian"
         },
         {
           "name": "Brazilian Churrasco",
-          "category": "Brazilian"
+          "category": "Spanish"
         },
         {
           "name": "Vietnamese Pho",
@@ -72,7 +72,7 @@ const store = reactive({
         },
         {
           "name": "Cajun Creole",
-          "category": "Cajun/Creole"
+          "category": "Japanese"
         },
         {
           "name": "Japanese Ramen",
