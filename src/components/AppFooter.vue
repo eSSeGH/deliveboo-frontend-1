@@ -17,9 +17,9 @@
                     <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow">
                         <h3 class="my-footer-title">Let's do it together</h3>
                         <div class="col">Careers</div>
-                        <div class="col">Glovo for Partners</div>
+                        <div class="col">Debliveboo for Partners</div>
                         <div class="col">Couriers</div>
-                        <div class="col">Glovo Business</div>
+                        <div class="col">Deliveboo Business</div>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@
                         <h3 class="my-footer-title">Links of interest</h3>
                         <div class="col">About us</div>
                         <div class="col">FAQ</div>
-                        <div class="col">Glovo Prime</div>
+                        <div class="col">Deliveboo Prime</div>
                         <div class="col">Blog</div>
                         <div class="col">Contact us</div>
                         <div class="col">Security</div>
