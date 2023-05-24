@@ -1,3 +1,7 @@
-<svg width="1280" height="43" viewBox="0 0 1280 43" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M1280 0H0V41.9883C156.611 19.9113 385.09 5.99992 639.53 5.99994C894.48 5.99996 1123.36 19.9671 1280 42.1212V0Z" fill="#2a2a2a"/>
+<svg viewBox="0 0 1440 165" xmlns="http://www.w3.org/2000/svg">
+
+ <g>
+  <title>Layer 1</title>
+  <path id="svg_1" d="m0,160l80,-16c80,-16 240,-48 400,-58.7c160,-10.3 320,-0.3 480,0c160,-0.3 320,-10.3 400,-16l80,-5.3l0,-64l-80,0c-80,0 -240,0 -400,0c-160,0 -320,0 -480,0c-160,0 -320,0 -400,0l-80,0l0,160z" fill="#FF8500"/>
+ </g>
 </svg>
