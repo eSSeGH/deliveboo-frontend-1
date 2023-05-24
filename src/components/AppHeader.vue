@@ -57,6 +57,9 @@ export default {
 .header-home {
     background-color: $orange-3;
     height: 90px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
 
     .container {
         height: 100%;
