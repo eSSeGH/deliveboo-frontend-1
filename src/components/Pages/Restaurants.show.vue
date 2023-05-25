@@ -16,20 +16,29 @@
 
     <!-- DISHES -->
     <div class="container card-box mx-auto">
-        <div class="row">
-            <div class="col-7">
-                <ul class="d-flex align-items-center justify-content-between flex-wrap flex-sm-wrap row-gap-2">
+        <div class="row justify-content-center justify-content-lg-between">
+            <div class="col col-sm-8">
 
-                    <li class="my-card row" v-for="dish in dishes" :key="dish.id">
+                <ul class="d-flex align-items-center justify-content-center justify-content-md-between flex-wrap flex-sm-wrap row-gap-2">
 
-                        <div class="d-flex align-items-center justify-content-between mb-1">
-                            <p class="food-title">{{ dish.name }}</p>
-                            <p>{{ dish.price }}</p>
+                    <li class="my-card gap-3 d-flex justify-content-between" v-for="dish in dishes" :key="dish.id">
+
+                        <div class="food-img flex-{grow|shrink}-0 d-none d-md-block">
+                            <img class="food-thumb" :src="dish.thumb" alt="">
                         </div>
 
-                        <div class="d-flex align-items-center justify-content-between">
-                            <p class="food-desc">{{ dish.description }}</p>
-
+                        <div class="col">
+                            <div class="d-flex flex-wrap align-items-center justify-content-between mb-1">
+                                <p class="food-title col-10">{{ dish.name }}</p>
+                                <p class="col-2 align-items-end">{{ dish.price }}</p>
+                            </div>
+    
+                            <div class="d-flex align-items-center flex-row-reverse flex-sm-row justify-content-between">
+                                <p class="food-desc d-none d-sm-block col-8">{{ dish.description }}</p>
+                                <div class="d-flex flex-row-reverse col-sm-4">
+                                    <FoodButton />
+                                </div>
+                            </div>
                         </div>
 
                     </li>
@@ -42,7 +51,13 @@
 </template>
 
 <script>
+import FoodButton from '../elements/FoodButton.vue'
+
     export default {
+        components: {
+            FoodButton,
+        },
+
         data() {
             return {
 
@@ -85,7 +100,7 @@
 
 .image-container {
     width: 100%;
-    height: 300px;
+    height: 400px;
     position: relative;
     top: -90px;
     left: 0;
@@ -121,8 +136,17 @@
 .my-card {
    padding: 1.5rem;
    border-radius: 1rem; 
-   width: 350px;
-   height: 95px;
+   width: 400px;
    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.food-img {
+    width: 80px;
+    height: 80px;
+
+    .food-thumb {
+        aspect-ratio: 1;
+        object-fit: cover;
+    }
 }
 </style>
