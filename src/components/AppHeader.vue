@@ -3,15 +3,22 @@
         <div class="container-sm">
             <div class="row justify-content-between align-items-center">
 
+
                 <div class="my-col logo d-none d-md-block">
-                    <img src="/imgs/logo/logo1.png" alt="">
+                    <router-link to="/">
+                        <img src="/imgs/logo/logo1.png" alt="">
+                    </router-link>
                 </div>
                 <div class="my-col logo-sm d-md-none">
-                    <img src="/imgs/logo/logo-sm.png" alt="">
+                    <router-link to="/">
+                        <img src="/imgs/logo/logo-sm.png" alt="">
+                    </router-link>
                 </div>
 
+
                 <div class="my-col searchbar-box">
-                    <input type="text" name="search" class="searchbar" placeholder="Cerca ristorante...">
+                    <input v-on:keyup.enter="goToAdvancedSearchPage" v-model="store.currentSelectedCategories" type="text"
+                        name="search" class="searchbar" placeholder="Cerca per tipologia di ristorante...">
                 </div>
 
                 <div class="header-buttons my-col d-flex justify-content-end">
@@ -39,11 +46,69 @@
 </template>
 
 <script>
-export default {
-    setup() {
-        return {
+import store from '../store';
+import axios from 'axios';
 
+export default {
+    data() {
+        return {
+            store,
         }
+    },
+    methods: {
+        fetchRestaurantsByCategory() {
+            console.log('launched fetchRestaurantsByCategory')
+
+            const basePath = 'http://127.0.0.1:8000/api/restaurants'
+
+            this.currentSelectedCategories.toLowerCase()
+            this.selectedCategories.push(this.currentSelectedCategories)
+
+            const categories = this.store.selectedCategories
+            console.log('after push:', categories)
+
+            axios.get(basePath, {
+                params: {
+                    categories,
+                }
+            })
+                .then((res) => {
+                    this.store.restaurants = res.data.results
+                })
+                .catch((error) => {
+                    console.log('error')
+                }).
+                finally(() => {
+                    this.store.selectedCategories = []
+                    console.log('refresh')
+                })
+        },
+        goToAdvancedSearchPage() {
+            if (this.$route.name === 'home') {
+                console.log('redirect to restaurant.index triggered')
+                this.$router.push('/restaurants')
+                console.log('al redirect:', this.currentSelectedCategories)
+
+                this.fetchRestaurantsByCategory()
+                console.log('nell if')
+            } else {
+                this.fetchRestaurantsByCategory()
+                console.log('nell else')
+            }
+        }
+    },
+    computed: {
+        currentSelectedCategories() {
+            return this.store.currentSelectedCategories
+        },
+        selectedCategories() {
+            return this.store.selectedCategories
+        },
+    },
+    watch: {
+        currentSelectedCategories(newVal, oldVal) {
+        }
+
     }
 }
 </script>
