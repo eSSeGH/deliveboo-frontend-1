@@ -10,7 +10,6 @@
 
     <!-- FILTERED RESULT SECTION -->
     <section class="py-3">
-
         
 
     </section>
