@@ -10,7 +10,7 @@
                 <div class="row justify-content-center">
     
                     <div class="col-6 d-md-flex flex-row-reverse d-none">
-                        <iframe src="https://embed.lottiefiles.com/animation/69733"></iframe>
+                        <iframe src="https://embed.lottiefiles.com/animation/4762"></iframe>
                     </div>
     
                     <div class="col-6">
@@ -69,7 +69,7 @@ import axios from 'axios';
         
         methods: {
             fetchCategories(){
-                axios.get('http://127.0.0.1:8000/api/restaurant', {
+                axios.get('http://127.0.0.1:8000/api/restaurants', {
                 })
                 .then(res=> {
 
