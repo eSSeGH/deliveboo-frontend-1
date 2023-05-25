@@ -76,7 +76,7 @@ export default {
                     this.store.restaurants = res.data.results
                 })
                 .catch((error) => {
-                    console.log('error')
+                    // this.$router.push('/404')
                 }).
                 finally(() => {
                     this.store.selectedCategories = []

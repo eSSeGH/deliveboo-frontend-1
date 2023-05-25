@@ -10,7 +10,8 @@
             </section>
 
             <div class="error-message" v-if="store.restaurants.length == 0">
-                <h2>Per favore seleziona almeno un filtro per visualizzare i risultati</h2>
+                <h2>Nessun ristorante corrisponde ai parametri di ricerca, per favore prova a ricercare un'altra categoria.
+                </h2>
             </div>
 
         </div>
