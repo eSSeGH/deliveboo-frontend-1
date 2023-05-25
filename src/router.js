@@ -12,27 +12,27 @@ const router = createRouter({
     history,
 
     routes: [
-    {
-        path: '/',
-        name: 'home',
-        component: Home,
-    }, 
-    {
-        path: '/restaurants',
-        name: 'restaurants.index', 
-        component: RestaurantsIndex,
-    },
-    {
-        path: '/restaurants/:slug', //maybe slug is to insert here
-        name: 'restaurants.show',
-        component: RestaurantsShow,
-    },
-    // {
-    //     path: '/404',
-    //     name: '404',
-    //     component: PageNotFound,
-    // }
-] 
+        {
+            path: '/',
+            name: 'home',
+            component: Home,
+        },
+        {
+            path: '/restaurants',
+            name: 'restaurants.index',
+            component: RestaurantsIndex,
+        },
+        {
+            path: '/restaurants/:slug', //maybe slug is to insert here
+            name: 'restaurants.show',
+            component: RestaurantsShow,
+        },
+        // {
+        //     path: '/404',
+        //     name: '404',
+        //     component: PageNotFound,
+        // }
+    ]
 });
 
 export { router };

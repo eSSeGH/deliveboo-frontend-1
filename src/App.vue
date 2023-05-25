@@ -6,12 +6,13 @@ export default {
   components: {
     AppFooter,
     AppHeader,
-  }
+  },
 }
 </script>
 
 <template>
   <AppHeader></AppHeader>
+
   
   <div>
     <router-view></router-view>
