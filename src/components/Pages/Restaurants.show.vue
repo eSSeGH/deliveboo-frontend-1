@@ -7,9 +7,15 @@
 
     <!-- RESTAURANT INFOS -->
     <div class="container mx-auto restaurant-box">
-        <div class="container p-3 box-bg shadow">
-            <h1 class="mb-3">{{ restaurant.name }}</h1>
-            <p>{{ restaurant.address }}</p>
+        <div class="d-flex justify-content-between align-items-center box-bg shadow">
+            <div class="container p-3">
+                <h1 class="mb-3 restaurant-name">{{ restaurant.name }}</h1>
+                <p class="restaurant-address d-none d-sm-block">{{ restaurant.address }}</p>
+            </div>
+
+            <div class="animation d-none d-sm-block">
+                <iframe src="https://embed.lottiefiles.com/animation/99271"></iframe>
+            </div>
         </div>
     </div>
     <!-- /RESTAURANT INFOS -->
@@ -115,53 +121,53 @@ import axios from 'axios'
         object-position: center;
     }
 }
-
 .restaurant-box {
     padding: 0rem 2rem 6rem !important;
     margin-top: -150px;
     position: relative;
     z-index: 1;
+    .box-bg {
+        background-color: white;
+    }
+    .shadow {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        border-radius: 9px;
+    }
+    .restaurant-name {
+        font-size: 3rem;
+        font-weight: bold;
+    }
+    .restaurant-address {
+        font-size: 1.5rem;
+    }
 }
-
-.box-bg {
-    background-color: white;
-}
-
-.shadow {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 9px;
-}
-
 .card-box {
     padding: 0rem 2rem 6rem !important;
-}
-
-.my-card {
-   padding: 1.5rem;
-   border-radius: 1rem; 
-   width: 400px;
-   box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
-}
-
-.food-title {
-    font-size: 1.125rem;
-    font-weight: bold;
-}
-.food-desc {
-    font-size: 0.875rem;
-}
-
-.food-img {
-    width: 80px;
-    height: 80px;
-    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-    border-radius: 50%;
-
-    .food-thumb {
-        aspect-ratio: 1;
-        object-fit: cover;
-        object-position: center;
+    .my-card {
+       padding: 1.5rem;
+       border-radius: 1rem; 
+       width: 400px;
+       box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    }
+    .food-title {
+        font-size: 1.125rem;
+        font-weight: bold;
+    }
+    .food-desc {
+        font-size: 0.875rem;
+    }
+    .food-img {
+        width: 80px;
+        height: 80px;
+        box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
         border-radius: 50%;
+    
+        .food-thumb {
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 50%;
+        }
     }
 }
 </style>
