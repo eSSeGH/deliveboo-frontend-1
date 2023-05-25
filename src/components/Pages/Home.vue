@@ -1,5 +1,4 @@
 <template>
-
     <!-- HERO SECTION -->
     <section>
 
@@ -48,7 +47,6 @@
     </section>
 
     <!-- CATEGORY SECTION -->
-
 </template>
 
 <script>
@@ -75,29 +73,31 @@ import axios from 'axios';
 
                     const results = res.data.results
 
-                    for(let i = 0; i < results.length; i ++) {
+                    for (let i = 0; i < results.length; i++) {
 
                         const singleCategories = results[i].categories
 
                         // console.log(singleCategories)
 
-                        for(let j = 0; j < singleCategories.length; j ++) {
+                        for (let j = 0; j < singleCategories.length; j++) {
 
                             const category = singleCategories[j]
 
                             // console.log(category.name)
 
-                            if(!this.categories.includes(category.name)) {
+                            if (!this.categories.includes(category.name)) {
 
                                 this.categories.push(category.name)
                             }
                         }
                     }
                     // console.log(results)
+                }).catch(err => {
+                    console.log('error')
                 })
-            }
         }
     }
+}
 
 </script>
 
