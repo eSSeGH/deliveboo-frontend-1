@@ -1,15 +1,15 @@
 <template>
     <!-- HERO RESTAURANT -->
     <div class="image-container">
-        <img class="restaurant-img" :src="restaurant[0].thumb" alt="">
+        <img class="restaurant-img" :src="getImageUrl(restaurant.img)" alt="">
     </div>
     <!-- /HERO RESTAURANT -->
 
     <!-- RESTAURANT INFOS -->
     <div class="container mx-auto restaurant-box">
         <div class="container p-3 box-bg shadow">
-            <h1 class="mb-3">{{ restaurant[0].name }}</h1>
-            <p>{{ restaurant[0].address }}</p>
+            <h1 class="mb-3">{{ restaurant.name }}</h1>
+            <p>{{ restaurant.address }}</p>
         </div>
     </div>
     <!-- /RESTAURANT INFOS -->
@@ -24,7 +24,7 @@
                     <li class="my-card gap-3 d-flex justify-content-between" v-for="dish in dishes" :key="dish.id">
 
                         <div class="food-img flex-{grow|shrink}-0 d-none d-md-block">
-                            <img class="food-thumb" :src="dish.thumb" alt="">
+                            <img class="food-thumb" :src="getImageUrl(dish.img)" alt="">
                         </div>
 
                         <div class="col">
@@ -52,43 +52,73 @@
 
 <script>
 import FoodButton from '../elements/FoodButton.vue'
+import axios from 'axios'
 
     export default {
         components: {
             FoodButton,
         },
 
+        methods: {
+            fetchRestaurantBySlug(){
+
+                const slug = this.$route.params.slug
+
+                axios.get(`http://127.0.0.1:8000/api/restaurants/${slug}`)
+                .then(res=> {
+
+                    console.log(res)
+
+                    this.restaurant = res.data.results
+
+                    this.dishes = this.restaurant.dishes
+                })
+            },
+            getImageUrl(imagePath) {
+                return `http://127.0.0.1:8000/storage/${imagePath}`
+            }
+        },
+
+        mounted() {
+            this.fetchRestaurantBySlug()
+            console.log(this.dishes)
+        },
+
         data() {
             return {
 
-                restaurant: [
-                    {
-                        thumb: "/public/imgs/temporary-img/giapponese.jpg",
-                        name: "Yamamia",
-                        address: "Via Tokyo 23"
-                    }
-                ],
+                restaurant: [],
 
-                dishes: [
-                    {
-                        name: "n.4 nigiri salmone",
-                        price: "5,00€",
-                        description: "molto buoni",
-                        thumb: "/public/imgs/temporary-img/nigiri.jpg"
-                    },
-                    {
-                        name: "n.2 nigiri tonno",
-                        price: "7,00€",
-                        description: "molto buoni",
-                        thumb: "/public/imgs/temporary-img/nigiri2.jpg"
-                    },
-                    {
-                        name: "n.5 osomaki al salmone",
-                        price: "7,50€",
-                        description: "molto buoni",
-                        thumb: "/public/imgs/temporary-img/osomaki.jpg"
-                    }
-                ]
+                dishes: [],
+
+                // restaurant: [
+                //     {
+                //         thumb: "/public/imgs/temporary-img/giapponese.jpg",
+                //         name: "Yamamia",
+                //         address: "Via Tokyo 23"
+                //     }
+                // ],
+
+                // dishes: [
+                //     {
+                //         name: "n.4 nigiri salmone",
+                //         price: "5,00€",
+                //         description: "molto buoni",
+                //         thumb: "/public/imgs/temporary-img/nigiri.jpg"
+                //     },
+                //     {
+                //         name: "n.2 nigiri tonno",
+                //         price: "7,00€",
+                //         description: "molto buoni",
+                //         thumb: "/public/imgs/temporary-img/nigiri2.jpg"
+                //     },
+                //     {
+                //         name: "n.5 osomaki al salmone",
+                //         price: "7,50€",
+                //         description: "molto buoni",
+                //         thumb: "/public/imgs/temporary-img/osomaki.jpg"
+                //     }
+                // ]
             }
         }
     }
