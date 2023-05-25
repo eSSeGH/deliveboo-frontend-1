@@ -9,7 +9,7 @@ export default {
   },
   computed: {
     showHeader() {
-      return this.$route.path !== '/restaurant/menu'
+      return this.$route.path !== '/restaurants/:slug'
     }
   }
 }
