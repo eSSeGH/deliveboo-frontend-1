@@ -55,7 +55,7 @@ export default {
 
 
 .header-home {
-    background-color: $orange-3;
+    background-color: transparent;
     height: 90px;
     position: sticky;
     top: 0;
