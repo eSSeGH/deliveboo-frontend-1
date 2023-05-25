@@ -21,20 +21,23 @@
 
                 <ul class="d-flex align-items-center justify-content-center justify-content-md-between flex-wrap flex-sm-wrap row-gap-2">
 
-                    <li class="my-card gap-3 d-flex justify-content-between" v-for="dish in dishes" :key="dish.id">
+                    <li class="my-card gap-3 d-flex flex-column justify-content-between" v-for="dish in dishes" :key="dish.id">
 
-                        <div class="food-img flex-{grow|shrink}-0 d-none d-md-block">
-                            <img class="food-thumb" :src="getImageUrl(dish.img)" alt="">
+                        <div class="row justify-content-between">
+                            <div class="food-img col-4 d-none d-md-block">
+                                <img class="food-thumb" :src="getImageUrl(dish.img)" alt="">
+                            </div>
+
+                            <div class="mb-3 col-8">
+                                <p class="food-title col-10">{{ dish.name }}</p>
+                                <p class="food-desc d-none d-sm-block">{{ dish.description }}</p>
+                            </div>
                         </div>
 
-                        <div class="col">
-                            <div class="d-flex flex-wrap align-items-center justify-content-between mb-1">
-                                <p class="food-title col-10">{{ dish.name }}</p>
-                                <p class="col-2 d-flex flex-row-reverse">{{ dish.price }}</p>
-                            </div>
+                        <div class="row">
     
-                            <div class="d-flex align-items-center flex-row-reverse flex-sm-row justify-content-between">
-                                <p class="food-desc d-none d-sm-block col-8">{{ dish.description }}</p>
+                            <div class="d-flex align-items-center flex-sm-row justify-content-between">
+                                <p class="d-flex col-8">{{ dish.price }}</p>
                                 <div class="d-flex flex-row-reverse col-sm-4">
                                     <FoodButton />
                                 </div>
@@ -66,7 +69,7 @@ import axios from 'axios'
                 axios.get(`http://127.0.0.1:8000/api/restaurants/${slug}`)
                 .then(res=> {
 
-                    console.log(res)
+                    // console.log(res)
 
                     this.restaurant = res.data.results
 
@@ -80,7 +83,7 @@ import axios from 'axios'
 
         mounted() {
             this.fetchRestaurantBySlug()
-            console.log(this.dishes)
+            // console.log(this.dishes)
         },
 
         data() {
@@ -100,7 +103,7 @@ import axios from 'axios'
 
 .image-container {
     width: 100%;
-    height: 400px;
+    height: 420px;
     position: relative;
     top: -90px;
     left: 0;
@@ -140,13 +143,25 @@ import axios from 'axios'
    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 
+.food-title {
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+.food-desc {
+    font-size: 0.875rem;
+}
+
 .food-img {
     width: 80px;
     height: 80px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: 50%;
 
     .food-thumb {
         aspect-ratio: 1;
         object-fit: cover;
+        object-position: center;
+        border-radius: 50%;
     }
 }
 </style>
