@@ -7,12 +7,18 @@ export default {
     AppFooter,
     AppHeader,
   },
+
+  computed: {
+    showHeader() {
+      return this.$route.path !== '/restaurants/:slug' //controllare questo
+    }
+  }
 }
 </script>
 
 <template>
-  <AppHeader></AppHeader>
 
+  <AppHeader v-if="showHeader"></AppHeader>
   
   <div>
     <router-view></router-view>
