@@ -1,14 +1,7 @@
 <template>
     
-    <div>
-        Restaurants Cart
-    </div>
 
-    <div>
-
-    </div>
-
-    <!-- FILTERED RESULT SECTION -->
+    <!-- CART-->
     <section class="py-3">
 
         <div class="card w-25">
@@ -70,7 +63,7 @@
         
 
     </section>
-    <!-- /FILTERED RESULT SECTION -->
+    <!-- /CART -->
 
 </template>
 

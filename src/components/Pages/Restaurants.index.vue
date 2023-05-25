@@ -6,6 +6,7 @@
 
     <div>
 
+        <CartOrder/>
     </div>
 
     <!-- FILTERED RESULT SECTION -->
@@ -19,8 +20,12 @@
 
 <script>
 import store from '../../store';
+import CartOrder from '../elements/CartOrder.vue';
 
     export default {
+        components: {
+            CartOrder,
+        },
         data() {
             return {
                
