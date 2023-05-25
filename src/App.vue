@@ -10,7 +10,7 @@ export default {
 
   computed: {
     showHeader() {
-      return this.$route.path !== '/restaurants/:slug' //controllare questo
+      return !this.$route.path.includes('/restaurant/')
     }
   }
 }

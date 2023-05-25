@@ -30,7 +30,7 @@
                         <div class="col">
                             <div class="d-flex flex-wrap align-items-center justify-content-between mb-1">
                                 <p class="food-title col-10">{{ dish.name }}</p>
-                                <p class="col-2 align-items-end">{{ dish.price }}</p>
+                                <p class="col-2 d-flex flex-row-reverse">{{ dish.price }}</p>
                             </div>
     
                             <div class="d-flex align-items-center flex-row-reverse flex-sm-row justify-content-between">
@@ -40,7 +40,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </li>
                 </ul>
             </div>
@@ -90,35 +89,6 @@ import axios from 'axios'
                 restaurant: [],
 
                 dishes: [],
-
-                // restaurant: [
-                //     {
-                //         thumb: "/public/imgs/temporary-img/giapponese.jpg",
-                //         name: "Yamamia",
-                //         address: "Via Tokyo 23"
-                //     }
-                // ],
-
-                // dishes: [
-                //     {
-                //         name: "n.4 nigiri salmone",
-                //         price: "5,00€",
-                //         description: "molto buoni",
-                //         thumb: "/public/imgs/temporary-img/nigiri.jpg"
-                //     },
-                //     {
-                //         name: "n.2 nigiri tonno",
-                //         price: "7,00€",
-                //         description: "molto buoni",
-                //         thumb: "/public/imgs/temporary-img/nigiri2.jpg"
-                //     },
-                //     {
-                //         name: "n.5 osomaki al salmone",
-                //         price: "7,50€",
-                //         description: "molto buoni",
-                //         thumb: "/public/imgs/temporary-img/osomaki.jpg"
-                //     }
-                // ]
             }
         }
     }
