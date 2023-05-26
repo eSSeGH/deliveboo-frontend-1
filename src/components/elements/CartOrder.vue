@@ -2,9 +2,9 @@
     
 
     <!-- CART-->
-    <section class="py-3">
+    <section>
 
-        <div class="card w-25">
+        <div class="card">
             <div class="card-body px-4">
             <h3 class="card-title text-center fw-bold py-4">
                 Il tuo Deliveboo
@@ -98,6 +98,8 @@ import store from '../../store';
 @use '../../styles/partials/colors.scss' as *;
 .card {
     margin: 0 auto;
+    border-radius: 1rem; 
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
 }
 .box-cart {
     padding: 0.5em;
