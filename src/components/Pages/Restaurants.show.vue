@@ -44,7 +44,7 @@
                             <div class="d-flex align-items-center flex-sm-row justify-content-between">
                                 <p class="d-flex col-8">{{ dish.price }}</p>
                                 <div class="d-flex flex-row-reverse col-sm-4">
-                                    <FoodButton />
+                                    <FoodButton @click="addFoodToCart(dish)" />
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,69 @@
                 </ul>
             </div>
             <div class="col-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4 flex-{grow|shrink}-0">
-                <CartOrder />
+                <!-- CART-->
+                <section>
+
+                    <div class="card">
+                        <div class="card-body px-4">
+                        <h3 class="card-title text-center fw-bold py-4">
+                            Il tuo Deliveboo
+                        </h3>
+                        <div v-for="dish in cart" :key="dish.id">  
+                            <div class="box-cart d-flex align-items-start">
+                                <span class="col-3 fw-bold fs-5">{{ dish.quantity }}x</span>
+                                <p class="col-6 m-0">{{ dish.name }}</p>
+                                <p class="col-3 m-0 fw-bold text-end">{{ dish.quantity * dish.price }}€</p>
+                            </div>
+                        </div>
+
+                        <div class="confirm-button d-flex justify-content-center py-3">
+                            <button v-if="showButtonConfirm" @click="showOrderForm">
+                                Conferma ordine 
+                                <span class="fw-bold" v-if="totalCart === 0 ? '' : totalCart">{{ totalCart }}€</span>
+                            </button>
+                        </div>
+                        </div>
+                        <div v-if="showForm">
+                            <div class="card-body px-4">
+                                <h5 class="card-title text-center fw-bold pb-2">
+                                    Prosegui con l'ordine
+                                </h5>
+                                <form action="" class="form">
+                                    <div class="">
+                                        <label for="exampleFormControlInput1" class="form-label">Nome</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Nome...">
+                                    </div>
+                                    <div class="">
+                                        <label for="exampleFormControlInput1" class="form-label">Cognome</label>
+                                        <input type="text" class="form-control" id="surname" placeholder="Cognome...">
+                                    </div>
+                                    <div class="">
+                                        <label for="exampleFormControlInput1" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                    </div>
+                                    <div class="">
+                                        <label for="exampleFormControlInput1" class="form-label">Numero</label>
+                                        <input type="text" class="form-control" id="number" placeholder="Numero...">
+                                    </div>
+                                    <div class="">
+                                        <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
+                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo...">
+                                    </div>
+                                    <div class="">
+                                        <label for="exampleFormControlInput1" class="form-label">Codice postale</label>
+                                        <input type="text" class="form-control" id="postal-code" placeholder="Codice postale...">
+                                    </div>
+
+                                    <div class="col-12 d-flex justify-content-center py-3">
+                                        <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- /CART -->
             </div>
         </div>
     </div>
@@ -62,13 +124,13 @@
 
 <script>
 import FoodButton from '../elements/FoodButton.vue'
-import CartOrder from '../elements/CartOrder.vue'
+import store from '../../store';
 import axios from 'axios'
+import { counter } from '@fortawesome/fontawesome-svg-core'
 
     export default {
         components: {
             FoodButton,
-            CartOrder,
         },
 
         methods: {
@@ -88,7 +150,27 @@ import axios from 'axios'
             },
             getImageUrl(imagePath) {
                 return `http://127.0.0.1:8000/storage/${imagePath}`
-            }
+            },
+            addFoodToCart(dish) {
+
+                if(this.cart.includes(dish)) {
+                    dish.quantity += 1
+                    this.totalCart += dish.price
+                } else {
+                    dish.quantity = 1
+                    this.cart.push(dish)
+                    this.totalCart += dish.price
+                }
+
+                console.log(this.cart)
+            },
+            showOrderForm() {
+
+                if(this.totalCart !== 0) {
+                    this.showForm = true
+                    this.showButtonConfirm = false
+                }
+            },
         },
 
         mounted() {
@@ -98,10 +180,13 @@ import axios from 'axios'
 
         data() {
             return {
-
+                store,
+                showForm: false,
+                showButtonConfirm: true,
+                totalCart: 0,
                 restaurant: [],
-
                 dishes: [],
+                cart: [],
             }
         }
     }
@@ -110,6 +195,7 @@ import axios from 'axios'
 <style lang="scss" scoped>
 @use '../src/styles/main.scss' as *;
 @use '../src/styles/partials/resets.scss' as *;
+@use '../../styles/partials/colors.scss' as *;
 
 .image-container {
     width: 100%;
@@ -173,6 +259,49 @@ import axios from 'axios'
             border-radius: 50%;
         }
     }
+}
+
+.card {
+    margin: 0 auto;
+    border-radius: 1rem; 
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+.box-cart {
+    padding: 0.5em;
+}
+
+.form * {
+    padding: 0.5em 0;
+    margin: 0;
+}
+
+button {
+ padding: 10px 20px;
+ max-width: 90%;
+ border-radius: 50px;
+ border: 0;
+ background-color: $orange-1;
+ box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+ letter-spacing: 1.5px;
+ text-transform: uppercase;
+ font-size: 15px;
+ transition: all .5s ease;
+}
+
+button:hover {
+ letter-spacing: 3px;
+ background-color: hsl(261deg 80% 48%);
+ color: hsl(0, 0%, 100%);
+ box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+button:active {
+ letter-spacing: 3px;
+ background-color: hsl(261deg 80% 48%);
+ color: hsl(0, 0%, 100%);
+ box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+ transform: translateY(10px);
+ transition: 100ms;
 }
 
 </style>
