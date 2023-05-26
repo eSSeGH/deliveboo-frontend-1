@@ -59,15 +59,37 @@ export default {
         fetchRestaurantsByCategory() {
             console.log('launched fetchRestaurantsByCategory')
 
+            this.store.selectedCategories = []
+            console.log('refresh')
+
             const basePath = 'http://127.0.0.1:8000/api/restaurants'
 
-            this.currentSelectedCategories.toLowerCase()
-            this.selectedCategories.push(this.currentSelectedCategories)
+            // evito di pushare 'this.currentSelectedCategories' quando è nullo
+            if (this.currentSelectedCategories != null) {
+                this.currentSelectedCategories.toLowerCase()
+                this.selectedCategories.push(this.currentSelectedCategories)
+            }
 
             const categories = this.store.selectedCategories
             console.log('after push:', categories)
 
+            // se la barra di ricerca è vuota e viene premuto enter parte una chiamata che recupera tutti i ristoranti
+            if (categories == []) {
+                axios.get(basePath)
+                    .then((res) => {
+                        this.store.restaurants = res.data.results
+                    })
+                    .catch((error) => {
+                        this.$router.push('/404')
+                    }).
+                    finally(() => {
+                        console.log('store.restaurants senza parametri', this.store.restaurants)
+                    })
+            }
+
+            // chiamata axios con parametri per le query (categorie)
             axios.get(basePath, {
+
                 params: {
                     categories,
                 }
@@ -79,11 +101,10 @@ export default {
                     this.$router.push('/404')
                 }).
                 finally(() => {
-                    this.store.selectedCategories = []
-                    console.log('refresh')
                     console.log('store.restaurants', this.store.restaurants)
                 })
         },
+        // funzione di redirect all'advanced search page alla pressione di enter
         goToAdvancedSearchPage() {
             if (this.$route.name === 'home') {
                 console.log('redirect to restaurant.index triggered')
@@ -91,10 +112,8 @@ export default {
                 console.log('al redirect:', this.currentSelectedCategories)
 
                 this.fetchRestaurantsByCategory()
-                console.log('nell if')
             } else {
                 this.fetchRestaurantsByCategory()
-                console.log('nell else')
             }
         }
     },
@@ -109,7 +128,7 @@ export default {
     watch: {
         currentSelectedCategories(newVal, oldVal) {
         }
-    }
+    },
 }
 </script>
 
