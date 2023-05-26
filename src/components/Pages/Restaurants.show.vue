@@ -62,9 +62,9 @@
                         </h3>
                         <div v-for="dish in cart" :key="dish.id">  
                             <div class="box-cart d-flex align-items-start">
-                                <span class="col-2 fw-bold fs-5">{{ dish.quantity }}x</span>
-                                <p class="col-8 m-0">{{ dish.name }}</p>
-                                <p class="col-2 m-0 fw-bold">{{ dish.quantity * dish.price }}€</p>
+                                <span class="col-3 fw-bold fs-5">{{ dish.quantity }}x</span>
+                                <p class="col-6 m-0">{{ dish.name }}</p>
+                                <p class="col-3 m-0 fw-bold text-end">{{ dish.quantity * dish.price }}€</p>
                             </div>
                         </div>
 
