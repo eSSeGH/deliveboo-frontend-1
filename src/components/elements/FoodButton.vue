@@ -29,7 +29,7 @@ button.learn-more {
  font-weight: 600;
  color: #000000;
  text-transform: uppercase;
- padding: 0.25rem;
+ padding: 0.25rem 0.75rem;
  background: #f7f0ff;
  border: 2px solid $purple-1;
  border-radius: 0.75em;

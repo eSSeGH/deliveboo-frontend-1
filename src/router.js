@@ -23,7 +23,7 @@ const router = createRouter({
             component: RestaurantsIndex,
         },
         {
-            path: '/restaurants/:slug', //maybe slug is to insert here
+            path: '/restaurant/:slug', //maybe slug is to insert here
             name: 'restaurants.show',
             component: RestaurantsShow,
         },
