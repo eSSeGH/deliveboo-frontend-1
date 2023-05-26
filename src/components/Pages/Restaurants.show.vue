@@ -57,25 +57,28 @@
 
                     <div class="card">
                         <div class="card-body px-4">
-                        <h3 class="card-title text-center fw-bold py-4">
-                            Il tuo Deliveboo
-                        </h3>
-                        <div v-for="dish in cart" :key="dish.id">  
-                            <div class="box-cart d-flex align-items-start">
+                            <h3 class="card-title text-center fw-bold py-4">
+                                Il tuo Deliveboo
+                            </h3>
+                            <div v-for="(dish, index) in cart" :key="dish.id">  
+                                <div class="box-cart d-flex align-items-start">
 
-                                <span class="col-3 fw-bold fs-5">{{ dish.quantity }}x</span>
-                                <p class="col-6 m-0">{{ dish.name }}</p>
-                                <p class="col-3 m-0 fw-bold text-end">{{ dish.quantity * dish.price }}€</p>
+                                    <span class="col-2 fw-bold fs-5">{{ dish.quantity }}x</span>
+                                    <p class="col-6 m-0">{{ dish.name }}</p>
+                                    <p class="col-3 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
+
+                                    <div class="col-1 ms-1 btn btn-danger align-self-start" @click="deleteFoodToCart(dish, index)"> - </div>
+                                </div>
+                            </div>
+
+                            <div class="confirm-button d-flex justify-content-center py-3">
+                                <button v-if="showButtonConfirm" @click="showOrderForm">
+                                    Conferma ordine 
+                                    <span class="fw-bold" v-if="totalCart === 0 ? '' : totalCart">{{ totalCart }}€</span>
+                                </button>
                             </div>
                         </div>
 
-                        <div class="confirm-button d-flex justify-content-center py-3">
-                            <button v-if="showButtonConfirm" @click="showOrderForm">
-                                Conferma ordine 
-                                <span class="fw-bold" v-if="totalCart === 0 ? '' : totalCart">{{ totalCart }}€</span>
-                            </button>
-                        </div>
-                        </div>
                         <div v-if="showForm">
                             <div class="card-body px-4">
                                 <h5 class="card-title text-center fw-bold pb-2">
@@ -164,15 +167,41 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                 }
                 // console.log(this.cart)
             },
+            deleteFoodToCart(dish, index){
+
+                //se il carrello ha un elemento e, quell'elemento ha 1 sola quantità e, il 'conferma ordine' è nascosto
+                if(this.cart.length === 1 && dish.quantity === 1 && !this.showButtonConfirm){
+                    //togli prezzo ed elemento da carrello
+                    this.totalCart -= dish.price 
+                    this.cart.splice(index, 1)
+
+                    //riportami il 'conferma ordine'
+                    this.showForm = false
+                    this.showButtonConfirm = true
+
+                }
+
+                //se abbiamo elementi nel carrello, gestisci il delete e totale
+                if(this.cart.includes(dish)) {
+                    if(dish.quantity > 1){
+                        dish.quantity -= 1
+                        this.totalCart -= dish.price
+                    } else if(dish.quantity === 1){
+                        this.totalCart -= dish.price
+                        this.cart.splice(index, 1)
+                    }
+                } 
+            },
             showOrderForm() {
 
                 if(this.totalCart !== 0) {
                     this.showForm = true
                     this.showButtonConfirm = false
-                    console.log(this.cart)
-                    console.log(this.totalCart)
+                    console.log('show form')
+                    //console.log(this.cart)
+                    //console.log(this.totalCart)
                     // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
-                }
+                } 
             },
         },
 
