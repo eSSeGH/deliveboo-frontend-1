@@ -4,7 +4,6 @@
 
             <section class="restaurants-list" v-if="store.restaurants.length > 0">
                 <h2 class="my-h2">Ristoranti</h2>
-        </div>
 
                 <IndexCard v-for="(el, i) in store.restaurants" :key="i" :restaurant="el" :name="store.restaurants.name"
                     :address="store.restaurants.address" class="col"></IndexCard>
