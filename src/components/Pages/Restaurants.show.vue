@@ -165,8 +165,11 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                 console.log(this.cart)
             },
             showOrderForm() {
-                this.showForm = true
-                this.showButtonConfirm = false
+
+                if(this.totalCart !== 0) {
+                    this.showForm = true
+                    this.showButtonConfirm = false
+                }
             },
         },
 
@@ -181,11 +184,8 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                 showForm: false,
                 showButtonConfirm: true,
                 totalCart: 0,
-
                 restaurant: [],
-
                 dishes: [],
-
                 cart: [],
             }
         }
