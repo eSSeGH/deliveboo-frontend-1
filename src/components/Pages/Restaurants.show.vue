@@ -153,7 +153,9 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                 })
             },
             getImageUrl(imagePath) {
-                return `http://127.0.0.1:8000/storage/${imagePath}`
+                if(imagePath) {
+                    return `http://127.0.0.1:8000/storage/${imagePath}`
+                }
             },
             addFoodToCart(dish) {
 
