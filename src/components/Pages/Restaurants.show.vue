@@ -29,19 +29,18 @@
 
                     <li class="my-card col-12 col-xxl-5 gap-3 d-flex flex-column justify-content-between" v-for="dish in dishes" :key="dish.id">
 
-                        <div class="row justify-content-between">
-                            <div class="food-img col-4 d-none d-md-block">
+                        <div class="row justify-content-center justify-content-sm-between gap-2 text-center ">
+                            <div class="food-img col-4">
                                 <img class="food-thumb" :src="getImageUrl(dish.img)" alt="">
                             </div>
 
-                            <div class="mb-3 col-8">
-                                <p class="food-title col-10">{{ dish.name }}</p>
-                                <p class="food-desc d-none d-sm-block">{{ dish.description }}</p>
+                            <div class="mb-3 col-8 text-center text-sm-start ">
+                                <div class="food-title">{{ dish.name }}</div>
+                                <div class="food-desc">{{ dish.description }}</div>
                             </div>
                         </div>
 
                         <div class="row">
-    
                             <div class="d-flex align-items-center flex-sm-row justify-content-between">
                                 <p class="d-flex col-8">{{ dish.price }}</p>
                                 <div class="d-flex flex-row-reverse col-sm-4">
