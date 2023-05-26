@@ -198,11 +198,13 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                     this.showForm = true
                     this.showButtonConfirm = false
                     console.log('show form')
-                    //console.log(this.cart)
-                    //console.log(this.totalCart)
-                    // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
                 } 
             },
+            goToPay(){
+                console.log(this.cart)
+                console.log(this.totalCart)
+                // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
+            }
         },
 
         mounted() {
