@@ -66,8 +66,7 @@
                                     <span class="col-2 fw-bold fs-5">{{ dish.quantity }}x</span>
                                     <p class="col-6 m-0">{{ dish.name }}</p>
                                     <p class="col-3 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
-
-                                    <div class="col-1 ms-1 btn btn-danger align-self-start" @click="deleteFoodToCart(dish, index)"> - </div>
+                                    <DeleteButton class="col-1 ms-1 align-self-start" @click="deleteFoodToCart(dish, index)" />
                                 </div>
                             </div>
 
@@ -128,13 +127,15 @@
 
 <script>
 import FoodButton from '../elements/FoodButton.vue'
-import store from '../../store';
+import DeleteButton from '../elements/DeleteButton.vue'
+import store from '../../store'
 import axios from 'axios'
 import { counter } from '@fortawesome/fontawesome-svg-core'
 
     export default {
         components: {
             FoodButton,
+            DeleteButton,
         },
 
         methods: {

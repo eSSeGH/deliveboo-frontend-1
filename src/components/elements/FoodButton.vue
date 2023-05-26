@@ -1,5 +1,5 @@
 <template>
-    <button class="learn-more">+</button>
+    <div class="learn-more">+</div>
 </template>
 
 <script>
@@ -13,7 +13,7 @@
 @use '../src/styles/partials/resets.scss' as *;
 @use '../src/styles/partials/colors.scss' as *;
 
-button {
+div {
  position: relative;
  display: inline-block;
  cursor: pointer;
@@ -25,7 +25,7 @@ button {
  font-size: 15px;
 }
 
-button.learn-more {
+div.learn-more {
  font-weight: 600;
  color: #000000;
  text-transform: uppercase;
@@ -39,7 +39,7 @@ button.learn-more {
  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-button.learn-more::before {
+div.learn-more::before {
  position: absolute;
  content: '';
  width: auto;
@@ -57,26 +57,26 @@ button.learn-more::before {
  transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-transform 150ms cubic-bezier(0, 0, 0.58, 1), -webkit-box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
 }
 
-button.learn-more:hover {
+div.learn-more:hover {
  background: #efe2ff;
  -webkit-transform: translate(0, 0.25em);
  transform: translate(0, 0.25em);
 }
 
-button.learn-more:hover::before {
+div.learn-more:hover::before {
  -webkit-box-shadow: 0 0 0 2px #9685b1, 0 0.5em 0 0 #efe2ff;
  box-shadow: 0 0 0 2px #9685b1, 0 0.5em 0 0 #efe2ff;
  -webkit-transform: translate3d(0, 0.5em, -1em);
  transform: translate3d(0, 0.5em, -1em);
 }
 
-button.learn-more:active {
+div.learn-more:active {
  background: #efe2ff;
  -webkit-transform: translate(0em, 0.75em);
  transform: translate(0em, 0.75em);
 }
 
-button.learn-more:active::before {
+div.learn-more:active::before {
  -webkit-box-shadow: 0 0 0 2px #9685b1, 0 0 #efe2ff;
  box-shadow: 0 0 0 2px #9685b1, 0 0 #efe2ff;
  -webkit-transform: translate3d(0, 0, -1em);
