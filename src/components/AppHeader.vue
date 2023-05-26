@@ -124,7 +124,7 @@ export default {
     height: 90px;
     position: sticky;
     top: 0;
-    z-index: 1;
+    z-index: 10;
 
     .container {
         height: 100%;
