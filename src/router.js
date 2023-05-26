@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from './components/pages/Home.vue'
 import RestaurantsIndex from './components/pages/Restaurants.index.vue'
 import RestaurantsShow from './components/pages/Restaurants.show.vue'
+import PageNotFound from './components/pages/404.vue'
 // import PageNotFound from './404.vue';
 
 const history = createWebHistory()
@@ -27,11 +28,11 @@ const router = createRouter({
             name: 'restaurants.show',
             component: RestaurantsShow,
         },
-        // {
-        //     path: '/404',
-        //     name: '404',
-        //     component: PageNotFound,
-        // }
+        {
+            path: '/404',
+            name: '404',
+            component: PageNotFound,
+        }
     ]
 });
 

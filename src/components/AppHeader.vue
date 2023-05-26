@@ -76,11 +76,12 @@ export default {
                     this.store.restaurants = res.data.results
                 })
                 .catch((error) => {
-                    // this.$router.push('/404')
+                    this.$router.push('/404')
                 }).
                 finally(() => {
                     this.store.selectedCategories = []
                     console.log('refresh')
+                    console.log('store.restaurants', this.store.restaurants)
                 })
         },
         goToAdvancedSearchPage() {
@@ -108,7 +109,6 @@ export default {
     watch: {
         currentSelectedCategories(newVal, oldVal) {
         }
-
     }
 }
 </script>
