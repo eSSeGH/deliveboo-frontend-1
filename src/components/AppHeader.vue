@@ -120,7 +120,7 @@ export default {
 
 
 .header-home {
-    background-color: transparent;
+    background-color: $orange-3;
     height: 90px;
     position: sticky;
     top: 0;
