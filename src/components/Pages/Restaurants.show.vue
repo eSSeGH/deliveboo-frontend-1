@@ -44,7 +44,7 @@
                             <div class="d-flex align-items-center flex-sm-row justify-content-between">
                                 <p class="d-flex col-8">{{ dish.price }}</p>
                                 <div class="d-flex flex-row-reverse col-sm-4">
-                                    <FoodButton />
+                                    <FoodButton @click="addFoodToCart(dish)" />
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,15 @@
                 </ul>
             </div>
             <div class="col-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4 flex-{grow|shrink}-0">
-                <CartOrder />
+                <CartOrder :cart="cart" />
+                <div class="test" v-for="dish in cart" :key="dish.id">
+                    <p>
+                        {{ dish.name }}
+                    </p>
+                    <p>
+                        {{ dish.quantity }}
+                    </p>
+                </div>
             </div>
         </div>
     </div>
@@ -64,6 +72,7 @@
 import FoodButton from '../elements/FoodButton.vue'
 import CartOrder from '../elements/CartOrder.vue'
 import axios from 'axios'
+import { counter } from '@fortawesome/fontawesome-svg-core'
 
     export default {
         components: {
@@ -88,6 +97,17 @@ import axios from 'axios'
             },
             getImageUrl(imagePath) {
                 return `http://127.0.0.1:8000/storage/${imagePath}`
+            },
+            addFoodToCart(dish) {
+
+                if(this.cart.includes(dish)) {
+                    dish.quantity += 1
+                } else {
+                    dish.quantity = 1
+                    this.cart.push(dish)
+                }
+
+                console.log(this.cart)
             }
         },
 
@@ -102,6 +122,8 @@ import axios from 'axios'
                 restaurant: [],
 
                 dishes: [],
+
+                cart: [],
             }
         }
     }

@@ -9,13 +9,14 @@
             <h3 class="card-title text-center fw-bold py-4">
                 Il tuo Deliveboo
             </h3>
-            <div v-for="order in store.orders" :key="order.name">
+         <!--  <div v-for="order in store.orders" :key="order.name">  
                 <div class="box-cart d-flex align-items-start">
-                    <span class="col-2 fw-bold fs-5">{{ order.quantity }}x</span>
-                    <p class="col-8 m-0">{{ order.name }}</p>
-                    <p class="col-2 m-0">{{ order.price * order.quantity }}€</p>
+                    <span class="col-2 fw-bold fs-5">   QUANTITàx</span>
+                    <p class="col-8 m-0">{{ }}</p>
+                    <p class="col-2 m-0">TOTALE€</p>
                 </div>
-            </div>
+            </div>  -->
+
             <div class="confirm-button d-flex justify-content-center py-3">
                 <button v-if="showButtonConfirm" @click="showOrderForm">Conferma ordine (tot€)</button>
             </div>
@@ -78,6 +79,11 @@ import store from '../../store';
                 showButtonConfirm: true,
             }
         },
+        // props: {
+        //    cart: {
+        //       type: Array,
+        //  }
+        //}, 
         computed: {
             orders() {
             return this.store.orders;
@@ -87,7 +93,14 @@ import store from '../../store';
             showOrderForm() {
                 this.showForm = true
                 this.showButtonConfirm = false
+            },
+            dataFromCard() {
+                console.log(this.cart)
             }
+        },
+        mounted() {
+            this.dataFromCard()
+            console.log(this.store.cart)
         }
     }
 </script>
