@@ -3,9 +3,12 @@
         <div class="container mx-auto">
 
             <section class="filters-categories row justify-content-center my-2">
-                <button v-for="category in categories" class="animated-button col-auto">
-                    <span class="button-text">{{ category }}</span>
+
+                <button v-for="category in categories" :class="selectedCategories.includes(category) ? 'active' : ''"
+                    class="animated-button col-auto">
+                    <span v-on:click="addFilter(category)" class="button-text">{{ category }}</span>
                 </button>
+
             </section>
 
             <section class="restaurants-list" v-if="store.restaurants.length > 0">
@@ -54,7 +57,6 @@ export default {
             axios.get('http://127.0.0.1:8000/api/restaurants', {
             })
                 .then(res => {
-                    console.log('fetching categories')
 
                     const results = res.data.results
 
@@ -76,18 +78,59 @@ export default {
                             }
                         }
                     }
-                    console.log(this.categories)
                 }).catch(err => {
-                    console.log('error')
+                    this.$router.push('/404')
+                })
+        },
+        addFilter(category) {
+            console.log('launched addFilter')
+            console.log('category', category)
+
+            const basePath = 'http://127.0.0.1:8000/api/restaurants'
+
+            const categories = this.selectedCategories
+
+            // controllo: se la categoria selezionata è presente nell'array allora elimino quella categoria
+            if (this.selectedCategories.includes(category)) {
+                category.toLowerCase()
+                this.selectedCategories.splice(this.selectedCategories.indexOf(category), 1)
+            }
+            // altrimenti pusho la categoria nell'array dello store
+            else {
+                category.toLowerCase()
+                this.selectedCategories.push(category)
+            }
+
+            console.log('selected categories dopo il push di category', this.selectedCategories)
+
+            // chiamata con l'array di parametri inseriti nello store
+            axios.get(basePath, {
+                params: {
+                    categories,
+                }
+            })
+                .then((res) => {
+                    this.store.restaurants = res.data.results
+                })
+                .catch((error) => {
+                    this.$router.push('/404')
+                }).
+                finally(() => {
+                    console.log('store.restaurants', this.store.restaurants)
                 })
         },
         getImageUrl(imagePath) {
             return `http://127.0.0.1:8000/storage/${imagePath}`
         },
     },
+    computed: {
+        selectedCategories() {
+            return this.store.selectedCategories
+        }
+    },
     mounted() {
         this.fetchCategories()
-    }
+    },
 }
 
 </script>
@@ -176,7 +219,7 @@ main {
         .filters-categories {
 
             .animated-button {
-                background-color: $purple-5;
+                background-color: #b87ee7;
                 opacity: 1;
                 border: none;
                 color: white;
@@ -207,9 +250,9 @@ main {
                 left: 50%;
                 width: 0;
                 height: 0;
-                background-color: $purple-3;
+                background-color: $purple-4;
                 border-radius: 50%;
-                opacity: 0.3;
+                opacity: 1;
                 transform: translate(-50%, -50%);
                 transition: all 0.5s ease;
                 z-index: -1;
@@ -218,7 +261,7 @@ main {
             .animated-button:hover:after {
                 width: 100px;
                 height: 100px;
-                opacity: 0.5;
+                opacity: 1;
                 z-index: -1;
             }
 
@@ -228,7 +271,12 @@ main {
 
             .animated-button:active {
                 transform: translateY(2px);
+                transition: 0.1s;
                 box-shadow: none;
+            }
+
+            .active {
+                background-color: $purple-4;
             }
         }
     }
