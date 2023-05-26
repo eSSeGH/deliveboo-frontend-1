@@ -21,27 +21,26 @@
     <!-- /RESTAURANT INFOS -->
 
     <!-- DISHES -->
-    <div class="container card-box mx-auto">
-        <div class="row justify-content-center justify-content-lg-between">
-            <div class="col col-sm-8">
+    <div class="container card-box mx-auto w-100 w-lg-50">
+        <div class="d-flex justify-content-center justify-content-md-between justify-content-xl-between flex-wrap row-gap-5">
+            <div class="col col-md-6 col-lg-6 col-xl-6 col-xxl-8">
 
-                <ul class="d-flex align-items-center justify-content-center justify-content-md-between flex-wrap flex-sm-wrap row-gap-2">
+                <ul class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
 
-                    <li class="my-card gap-3 d-flex flex-column justify-content-between" v-for="dish in dishes" :key="dish.id">
+                    <li class="my-card col-12 col-xxl-5 gap-3 d-flex flex-column justify-content-between" v-for="dish in dishes" :key="dish.id">
 
-                        <div class="row justify-content-between">
-                            <div class="food-img col-4 d-none d-md-block">
+                        <div class="row justify-content-center justify-content-sm-between gap-2 text-center ">
+                            <div class="food-img col-4">
                                 <img class="food-thumb" :src="getImageUrl(dish.img)" alt="">
                             </div>
 
-                            <div class="mb-3 col-8">
-                                <p class="food-title col-10">{{ dish.name }}</p>
-                                <p class="food-desc d-none d-sm-block">{{ dish.description }}</p>
+                            <div class="mb-3 col-8 text-center text-sm-start ">
+                                <div class="food-title">{{ dish.name }}</div>
+                                <div class="food-desc">{{ dish.description }}</div>
                             </div>
                         </div>
 
                         <div class="row">
-    
                             <div class="d-flex align-items-center flex-sm-row justify-content-between">
                                 <p class="d-flex col-8">{{ dish.price }}</p>
                                 <div class="d-flex flex-row-reverse col-sm-4">
@@ -52,6 +51,9 @@
                     </li>
                 </ul>
             </div>
+            <div class="col-12 col-md-5 col-lg-5 col-xl-5 col-xxl-4 flex-{grow|shrink}-0">
+                <CartOrder />
+            </div>
         </div>
     </div>
     <!-- /DISHES -->
@@ -60,11 +62,13 @@
 
 <script>
 import FoodButton from '../elements/FoodButton.vue'
+import CartOrder from '../elements/CartOrder.vue'
 import axios from 'axios'
 
     export default {
         components: {
             FoodButton,
+            CartOrder,
         },
 
         methods: {
@@ -146,7 +150,7 @@ import axios from 'axios'
     .my-card {
        padding: 1.5rem;
        border-radius: 1rem; 
-       width: 400px;
+       margin-right: auto;
        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
     }
     .food-title {
@@ -170,4 +174,5 @@ import axios from 'axios'
         }
     }
 }
+
 </style>
