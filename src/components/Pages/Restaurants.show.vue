@@ -62,6 +62,7 @@
                         </h3>
                         <div v-for="dish in cart" :key="dish.id">  
                             <div class="box-cart d-flex align-items-start">
+
                                 <span class="col-3 fw-bold fs-5">{{ dish.quantity }}x</span>
                                 <p class="col-6 m-0">{{ dish.name }}</p>
                                 <p class="col-3 m-0 fw-bold text-end">{{ dish.quantity * dish.price }}€</p>
@@ -161,14 +162,16 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                     this.cart.push(dish)
                     this.totalCart += dish.price
                 }
-
-                console.log(this.cart)
+                // console.log(this.cart)
             },
             showOrderForm() {
 
                 if(this.totalCart !== 0) {
                     this.showForm = true
                     this.showButtonConfirm = false
+                    console.log(this.cart)
+                    console.log(this.totalCart)
+                    // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
                 }
             },
         },
@@ -186,7 +189,7 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                 totalCart: 0,
                 restaurant: [],
                 dishes: [],
-                cart: [],
+                cart: [], // NON TOCCARE MAREMMAHANE
             }
         }
     }
