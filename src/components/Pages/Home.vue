@@ -61,7 +61,7 @@
     <!-- /OUTRO TOP WAVE -->
 
     <!-- OUTRO SECTION  -->
-    <section class="container-auto outro-bg py-5">
+    <section class="container-auto outro-bg">
         <div class="d-flex justify-content-center aling-items-center flex-wrap row-gap-4">
             <div class="col-12 col-md-6 col-lg-4">
 
@@ -174,7 +174,7 @@ import axios from 'axios';
 @use '../src/styles/partials/colors.scss' as *;
 
 .my-space {
-    padding: 6rem 0;
+    padding: 5rem 0;
 }
 .hero-bg {
     background-color: $orange-3;
@@ -214,7 +214,8 @@ import axios from 'axios';
 }
 
 .outro-bg {
-    background-color: #ff9d0044;    
+    background-color: #ff9d0044;
+    padding: 5rem 0 10rem;
 }
 
 .outro-desc {
