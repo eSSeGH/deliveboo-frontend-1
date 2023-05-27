@@ -55,17 +55,20 @@
 
 
     <!-- OUTRO TOP WAVE -->
+    <section class="container-auto">
+        <img class="wave" src="/imgs/waves/outro-wave-desktop.svg" alt="">
+    </section>
     <!-- /OUTRO TOP WAVE -->
 
     <!-- OUTRO SECTION  -->
-    <section class="container-auto">
+    <section class="container-auto outro-bg py-5">
         <div class="d-flex justify-content-center aling-items-center flex-wrap row-gap-4">
             <div class="col-12 col-md-6 col-lg-4">
 
                 <div class="d-flex flex-column gap-2 align-items-center">
 
                     <div class="outro-img-box d-flex justify-content-center">
-                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/rider-bycycle.png" alt="">
+                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/delivery.svg" alt="">
                     </div>
 
                     <div class="outro-desc text-center">
@@ -81,7 +84,7 @@
                 <div class="d-flex flex-column gap-2 align-items-center">
 
                     <div class="outro-img-box d-flex justify-content-center">
-                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/recycle.png" alt="">
+                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/restaurants.svg" alt="">
                     </div>
 
                     <div class="outro-desc text-center">
@@ -97,7 +100,7 @@
                 <div class="d-flex flex-column gap-2 align-items-center">
 
                     <div class="outro-img-box d-flex justify-content-center">
-                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/team.png" alt="">
+                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/groceries.svg" alt="">
                     </div>
 
                     <div class="outro-desc text-center">
@@ -110,9 +113,6 @@
         </div>
     </section>
     <!-- /OUTRO SECTION  -->
-
-    <!-- OUTRO BOT WAVE -->
-    <!-- /OUTRO BOT WAVE -->
 
 </template>
 
@@ -174,7 +174,7 @@ import axios from 'axios';
 @use '../src/styles/partials/colors.scss' as *;
 
 .my-space {
-    padding-bottom: 8rem;
+    padding: 6rem 0;
 }
 .hero-bg {
     background-color: $orange-3;
@@ -213,11 +213,8 @@ import axios from 'axios';
 
 }
 
-.outro-img-box {
-    width: 130px;
-    height: 90px;
-    object-fit: contain;
-    object-position: center;
+.outro-bg {
+    background-color: #ff9d0044;    
 }
 
 .outro-desc {

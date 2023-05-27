@@ -1,5 +1,5 @@
 <template>
-    <div class="container-auto">
+    <div class="container-auto bg-wave pt-5">
         <img class="wave" src="/imgs/waves/footer-wave-desktop.svg" alt="">
     </div>
 
@@ -71,6 +71,10 @@ import FollowButton from './elements/FollowButton.vue';
 <style lang="scss" scoped>
 @use '../styles/main.scss' as *;
 @use '../styles/partials/colors.scss' as *;
+
+.bg-wave  {
+    background-color: #ff9d0044;
+}
 .wave {
     width: 100%;
 }
