@@ -6,9 +6,9 @@
 
             <div class="container-sm mx-auto">
 
-                <div class="row justify-content-center">
+                <div class="row justify-content-center align-items-center">
     
-                    <div class="col-6 d-md-flex flex-row-reverse d-none">
+                    <div class="col d-md-flex justify-content-center d-none frame-box">
                         <iframe src="https://embed.lottiefiles.com/animation/4762"></iframe>
                     </div>
     
@@ -52,6 +52,68 @@
     </section>
 
     <!-- CATEGORY SECTION -->
+
+
+    <!-- OUTRO TOP WAVE -->
+    <!-- /OUTRO TOP WAVE -->
+
+    <!-- OUTRO SECTION  -->
+    <section class="container-auto">
+        <div class="d-flex justify-content-center aling-items-center flex-wrap row-gap-4">
+            <div class="col-12 col-md-6 col-lg-4">
+
+                <div class="d-flex flex-column gap-2 align-items-center">
+
+                    <div class="outro-img-box d-flex justify-content-center">
+                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/rider-bycycle.png" alt="">
+                    </div>
+
+                    <div class="outro-desc text-center">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, esse.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 col-md-6 col-lg-4">
+
+                <div class="d-flex flex-column gap-2 align-items-center">
+
+                    <div class="outro-img-box d-flex justify-content-center">
+                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/recycle.png" alt="">
+                    </div>
+
+                    <div class="outro-desc text-center">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, esse.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-4">
+
+                <div class="d-flex flex-column gap-2 align-items-center">
+
+                    <div class="outro-img-box d-flex justify-content-center">
+                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/team.png" alt="">
+                    </div>
+
+                    <div class="outro-desc text-center">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, esse.</p>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- /OUTRO SECTION  -->
+
+    <!-- OUTRO BOT WAVE -->
+    <!-- /OUTRO BOT WAVE -->
+
 </template>
 
 <script>
@@ -116,6 +178,9 @@ import axios from 'axios';
 }
 .hero-bg {
     background-color: $orange-3;
+    .frame-box {
+        height: 250px;
+    }
 }
 .big-text {
     font-weight:bold !important;
@@ -146,5 +211,16 @@ import axios from 'axios';
         filter: blur(0px);
     }
 
+}
+
+.outro-img-box {
+    width: 130px;
+    height: 90px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.outro-desc {
+    padding: 0 5rem;
 }
 </style>
