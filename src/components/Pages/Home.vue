@@ -214,7 +214,7 @@ import axios from 'axios';
 }
 
 .outro-bg {
-    background-color: #ff9d0044;
+    background-color: #FF850044;
     padding: 5rem 0 10rem;
 }
 

@@ -73,7 +73,7 @@ import FollowButton from './elements/FollowButton.vue';
 @use '../styles/partials/colors.scss' as *;
 
 .bg-wave  {
-    background-color: #ff9d0044;
+    background-color: #FF850044;
 }
 .wave {
     width: 100%;
