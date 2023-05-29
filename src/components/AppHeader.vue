@@ -15,8 +15,8 @@
                     </router-link>
                 </div>
 
-
-                <div class="my-col searchbar-box">
+                //bug su searchbar quindi rimossa se in pagina advanced search
+                <div v-if="this.$route.name != 'restaurants.index'" class="my-col searchbar-box">
                     <input v-on:keyup.enter="goToAdvancedSearchPage" v-model="store.currentSelectedCategories" type="text"
                         name="search" class="searchbar" placeholder="Cerca per tipologia di ristorante...">
                 </div>
