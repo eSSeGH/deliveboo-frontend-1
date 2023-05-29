@@ -14,18 +14,20 @@
     <!-- /HERO RESTAURANT -->
 
     <!-- RESTAURANT INFOS -->
-    <div class="container mx-auto restaurant-box">
-        <div class="d-flex justify-content-between align-items-center box-bg shadow">
-            <div class="container p-3">
-                <h1 class="mb-3 restaurant-name">{{ restaurant.name }}</h1>
-                <p class="restaurant-address d-none d-sm-block">{{ restaurant.address }}</p>
-            </div>
+    <section class="restaurant-section">
+        <div class="mx-auto container restaurant-box">
+            <div class="d-flex justify-content-between align-items-center box-bg shadow">
+                <div class="container px-5 py-3">
+                    <h1 class="mb-3 restaurant-name">{{ restaurant.name }}</h1>
+                    <p class="restaurant-address d-none d-sm-block">{{ restaurant.address }}</p>
+                </div>
 
-            <div class="animation d-none d-sm-block">
-                <iframe src="https://embed.lottiefiles.com/animation/99271"></iframe>
+                <div class="animation d-none d-sm-block">
+                    <iframe src="https://embed.lottiefiles.com/animation/99271"></iframe>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
     <!-- /RESTAURANT INFOS -->
 
     <!-- DISHES -->
@@ -257,9 +259,17 @@ export default {
 .logo-box {
     padding: 0 2rem !important;
     margin-top: 2rem !important;
+    background-color: rgba($color: #000000, $alpha: 0);
+    position: relative;
+    z-index: 0;
 
     .logo-thumb {
-        width: 120px;
+        width: 180px;
+        background-color: rgba($color: white, $alpha: 0.3);
+        padding: 0 15px;
+        border-radius: 30px;
+        z-index: 10;
+        position: relative;
     }
 }
 
@@ -270,7 +280,7 @@ export default {
     top: -150px;
     left: 0;
     z-index: -1;
-    filter: blur(5px);
+    // filter: blur(5px);
 
     .restaurant-img {
         width: 100%;
@@ -280,28 +290,36 @@ export default {
     }
 }
 
-.restaurant-box {
-    padding: 0rem 2rem 6rem !important;
-    margin-top: -150px;
-    position: relative;
+.restaurant-section {
     z-index: 1;
+    background: linear-gradient(to top,
+            white 65%,
+            white 65%,
+            rgba(0, 0, 0, 0) 100%);
 
-    .box-bg {
-        background-color: white;
-    }
+    .restaurant-box {
+        padding: 0rem 2rem 6rem !important;
+        margin-top: -280px;
+        position: relative;
 
-    .shadow {
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        border-radius: 9px;
-    }
 
-    .restaurant-name {
-        font-size: 3rem;
-        font-weight: bold;
-    }
+        .box-bg {
+            background-color: white;
+        }
 
-    .restaurant-address {
-        font-size: 1.5rem;
+        .shadow {
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 9px;
+        }
+
+        .restaurant-name {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+
+        .restaurant-address {
+            font-size: 1.5rem;
+        }
     }
 }
 
