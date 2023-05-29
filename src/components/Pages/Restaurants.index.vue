@@ -14,7 +14,8 @@
             <section class="restaurants-list" v-if="store.restaurants.length > 0">
                 <h2 class="my-h2">Ristoranti</h2>
 
-                <div class="card my-col d-flex flex-column" v-for="(restaurant, i) in store.restaurants" :key="i">
+                <div @click="fetchRestaurantBySlug(restaurant.slug)" class="card my-col d-flex flex-column"
+                    v-for="(restaurant, i) in store.restaurants" :key="i">
                     <img class="thumb" :src="getImageUrl(restaurant.img)" alt="restaurant img">
 
                     <div class="info-text">
@@ -112,6 +113,20 @@ export default {
                 })
                 .catch((error) => {
                     this.$router.push('/404')
+                })
+        },
+        fetchRestaurantBySlug(slug) {
+
+            axios.get(`http://127.0.0.1:8000/api/restaurants/${slug}`)
+                .then(res => {
+
+                    this.restaurant = res.data.results
+
+                    this.dishes = this.restaurant.dishes
+
+                    this.$router.push(`/restaurant/${slug}`)
+                }).catch((err) => {
+                    console.log(err)
                 })
         },
         getImageUrl(imagePath) {

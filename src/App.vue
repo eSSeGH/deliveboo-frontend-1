@@ -9,16 +9,19 @@ export default {
   },
   methods: {
     handleScroll() {
-      const headerEl = document.querySelector('.header')
 
-      const pagePosition = window.scrollY
+      if (this.$route.name === 'home' || this.$route.name === 'restaurants.index') {
+        const headerEl = document.querySelector('.header')
 
-      if (pagePosition > 0) {
-        headerEl.style.transition = 'box-shadow 1s'
-        headerEl.style.boxShadow = '0 0 10px grey'
-      } else {
-        headerEl.style.transition = 'box-shadow 1s'
-        headerEl.style.boxShadow = 'none'
+        const pagePosition = window.scrollY
+
+        if (pagePosition > 0) {
+          headerEl.style.transition = 'box-shadow 1s'
+          headerEl.style.boxShadow = '0 0 10px grey'
+        } else {
+          headerEl.style.transition = 'box-shadow 1s'
+          headerEl.style.boxShadow = 'none'
+        }
       }
     },
   },
