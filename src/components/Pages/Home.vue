@@ -133,7 +133,7 @@ export default {
     },
     mounted() {
         this.fetchCategories()
-        // console.log(this.categories)
+        console.log(this.categories)
     },
 
     methods: {
@@ -159,10 +159,13 @@ export default {
 
                             const categoryLC = category.name.toLowerCase()
 
-                            if (!this.categories.includes(categoryLC)) {
+                            const categoryImg = category.img
+                            
+                            if (!this.categories.some(value => {return name === categoryLC})) {
 
-                                this.categories.push(categoryLC)
+                                this.categories.push({name: categoryLC, img: categoryImg})
                             }
+                            
                         }
                     }
                     // console.log(results)
