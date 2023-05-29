@@ -92,32 +92,33 @@
                                 <h5 class="card-title text-center fw-bold pb-2">
                                     Prosegui con l'ordine
                                 </h5>
-                                <form action="" class="form">
+                                <form action="http://127.0.0.1:8000/api/restaurants/payment" method="POST" class="form">
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Nome...">
+                                        <input type="text" class="form-control" id="name" name="firstName" v-model="firstName" placeholder="Nome...">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Cognome</label>
-                                        <input type="text" class="form-control" id="surname" placeholder="Cognome...">
+                                        <input type="text" class="form-control" id="surname" name="lastName" v-model="lastName" placeholder="Cognome...">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                                        <input type="email" class="form-control" id="exampleFormControlInput1" name="email" v-model="email" placeholder="name@example.com">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Numero</label>
-                                        <input type="text" class="form-control" id="number" placeholder="Numero...">
+                                        <input type="text" class="form-control" id="number" name="phone" v-model="phone" placeholder="Numero...">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
-                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo...">
+                                        <input type="text" class="form-control" id="address" name="address" v-model="address" placeholder="Indirizzo...">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Codice postale</label>
-                                        <input type="text" class="form-control" id="postal-code" placeholder="Codice postale...">
+                                        <input type="text" class="form-control" id="postal-code" name="postal_code" v-model="postalCode" placeholder="Codice postale...">
                                     </div>
-
+                                    <input type="hidden" name="amount" :value="totalCart">
+                                    <textarea name="cart" cols="30" rows="10">{{ cart }}</textarea>
                                     <div class="col-12 d-flex justify-content-center py-3">
                                         <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
                                     </div>
@@ -214,8 +215,11 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
             },
             goToPay(){
                 console.log(this.cart)
-                console.log(this.totalCart)
-                // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
+                const data = "Prova"
+                axios.post("http://127.0.0.1:8000/api/restaurants/payment")
+                .then((res) => {
+                    console.log(res.data.results);
+                });
             }
         },
 
@@ -232,9 +236,15 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                 totalCart: 0,
                 restaurant: [],
                 dishes: [],
-                cart: [], // NON TOCCARE MAREMMAHANE
+                cart: [], //carrello
+                firstName: "", //nome del cliente
+                lastName: "", //cognome del cliente
+                email: "", //email del cliente
+                phone: "", //telefono del cliente
+                address: "", //indirizzo del cliente
+                postalCode: "", //codice postal del cliente
             }
-        }
+        },
     }
 </script>
 
