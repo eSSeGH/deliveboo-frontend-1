@@ -113,6 +113,10 @@
         </div>
     </section>
     <!-- /OUTRO SECTION  -->
+
+    <div class="container-auto bg-wave pt-5">
+        <img class="wave-bottom" src="/imgs/waves/footer-wave-desktop.svg" alt="">
+    </div>
 </template>
 
 <script>
@@ -230,7 +234,6 @@ export default {
     .category-thumb:hover {
         filter: blur(0px);
     }
-
 }
 
 .outro-bg {
@@ -240,5 +243,12 @@ export default {
 
 .outro-desc {
     padding: 0 5rem;
+}
+
+.bg-wave  {
+    background-color: #FF850044;
+}
+.wave-bottom {
+    width: 100%;
 }
 </style>

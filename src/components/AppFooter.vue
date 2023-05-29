@@ -1,7 +1,4 @@
 <template>
-    <div class="container-auto bg-wave pt-5">
-        <img class="wave" src="/imgs/waves/footer-wave-desktop.svg" alt="">
-    </div>
 
     <div class="container-auto footer-bg">
 
@@ -72,12 +69,6 @@ import FollowButton from './elements/FollowButton.vue';
 @use '../styles/main.scss' as *;
 @use '../styles/partials/colors.scss' as *;
 
-.bg-wave  {
-    background-color: #FF850044;
-}
-.wave {
-    width: 100%;
-}
 .footer-bg {
     background-color: $footer-bg;
 }
