@@ -1,4 +1,13 @@
 <template>
+
+    <div class="container mx-auto d-flex logo-box">
+        <router-link :to="{name: 'home'}">
+            <div class="logo-thumb">
+                <img src="/public/imgs/logo/logo1.png" alt="">
+            </div>
+        </router-link>
+    </div>
+
     <!-- HERO RESTAURANT -->
     <div class="image-container">
         <img class="restaurant-img" :src="getImageUrl(restaurant.img)" alt="">
@@ -66,8 +75,7 @@
                                     <span class="col-2 fw-bold fs-5">{{ dish.quantity }}x</span>
                                     <p class="col-6 m-0">{{ dish.name }}</p>
                                     <p class="col-3 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
-
-                                    <div class="col-1 ms-1 btn btn-danger align-self-start" @click="deleteFoodToCart(dish, index)"> - </div>
+                                    <DeleteButton class="col-1 ms-1 align-self-start" @click="deleteFoodToCart(dish, index)" />
                                 </div>
                             </div>
 
@@ -128,13 +136,15 @@
 
 <script>
 import FoodButton from '../elements/FoodButton.vue'
-import store from '../../store';
+import DeleteButton from '../elements/DeleteButton.vue'
+import store from '../../store'
 import axios from 'axios'
 import { counter } from '@fortawesome/fontawesome-svg-core'
 
     export default {
         components: {
             FoodButton,
+            DeleteButton,
         },
 
         methods: {
@@ -153,7 +163,9 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                 })
             },
             getImageUrl(imagePath) {
-                return `http://127.0.0.1:8000/storage/${imagePath}`
+                if(imagePath) {
+                    return `http://127.0.0.1:8000/storage/${imagePath}`
+                }
             },
             addFoodToCart(dish) {
 
@@ -231,12 +243,20 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
 @use '../src/styles/partials/resets.scss' as *;
 @use '../../styles/partials/colors.scss' as *;
 
+.logo-box {
+    padding: 0 2rem !important;
+    margin-top: 2rem !important;
+    .logo-thumb {
+        width: 120px;
+    }
+}
 .image-container {
     width: 100%;
     height: 420px;
     position: relative;
-    top: -90px;
+    top: -150px;
     left: 0;
+    z-index: -1;
     filter: blur(5px);
     .restaurant-img  {
         width: 100%;
