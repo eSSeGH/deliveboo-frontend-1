@@ -236,6 +236,7 @@ export default {
             position: absolute;
             bottom: 0;
             padding: 0px;
+            padding: 2px;
             width: 100%;
             color: white;
             font-weight: bold;
