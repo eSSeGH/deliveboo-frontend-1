@@ -37,6 +37,10 @@
             </div>
 
         </div>
+
+        <div class="container-auto bg-wave pt-5">
+            <img class="wave" src="/imgs/waves/footer-wave-desktop.svg" alt="">
+        </div>
     </main>
 </template>
 
@@ -325,6 +329,10 @@ main {
             }
         }
     }
+}
+.wave {
+    width: 100%;
+    margin-bottom: -16px;
 }
 
 @media (max-width: 991px) {
