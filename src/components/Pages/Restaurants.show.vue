@@ -84,7 +84,7 @@
                                 <h5 class="card-title text-center fw-bold pb-2">
                                     Prosegui con l'ordine
                                 </h5>
-                                <form action="" class="form">
+                                <form action="http://localhost:8000/api/restaurants/payment" class="form">
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
                                         <input type="text" class="form-control" id="name" placeholder="Nome...">
@@ -111,9 +111,9 @@
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-center py-3">
-                                        <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
                                     </div>
                                 </form>
+                                <button @click="goToPay()" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
                             </div>
                         </div>
                     </div>
@@ -201,6 +201,11 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                 } 
             },
             goToPay(){
+
+                axios.post('http://localhost:8000/api/restaurants/payment', {
+                    data: this.cart,
+                }).then((res)=>{console.log(res)})
+
                 console.log(this.cart)
                 console.log(this.totalCart)
                 // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
