@@ -15,8 +15,9 @@
                     </router-link>
                 </div>
 
-                //bug su searchbar quindi rimossa se in pagina advanced search
-                <div v-if="this.$route.name != 'restaurants.index'" class="my-col searchbar-box">
+                <!-- bug su searchbar dopo aver inserito una tipologia se si cerca con campo vuoto non trova risultati e i filtri smettono di funzionare riparte se si effettua nuovamente una ricerca -->
+                <!-- v-if="this.$route.name != 'restaurants.index' in caso volessimo omettere la searchbar dall'advanced search page -->
+                <div class="my-col searchbar-box">
                     <input v-on:keyup.enter="goToAdvancedSearchPage" v-model="store.currentSelectedCategories" type="text"
                         name="search" class="searchbar" placeholder="Cerca per tipologia di ristorante...">
                 </div>
