@@ -41,9 +41,9 @@
         <div class="d-flex gap-3 flex-wrap justify-content-center align-items-center text-center">
             <div class="my-card col-4 col-sm-3 col-md-2" v-for="category in categories" :key="category.name">
                 <div class="category-box" v-on:click="goToAdvancedSearchPage(category)">
-                    <img class="category-thumb" src="/public/imgs/temporary-img/giapponese.jpg" alt="">
+                    <img class="category-thumb" :src="getImageUrl(category.img)" alt="">
                     <div class="text-box">
-                        {{ category }}
+                        {{ category.name }}
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@ export default {
     },
     mounted() {
         this.fetchCategories()
-        // console.log(this.categories)
+        console.log(this.categories)
     },
 
     methods: {
@@ -147,6 +147,8 @@ export default {
 
                     const results = res.data.results
 
+                    // console.log(results)
+
                     for (let i = 0; i < results.length; i++) {
 
                         const singleCategories = results[i].categories
@@ -159,9 +161,15 @@ export default {
 
                             const categoryLC = category.name.toLowerCase()
 
-                            if (!this.categories.includes(categoryLC)) {
+                            // console.log(categoryLC)
 
-                                this.categories.push(categoryLC)
+                            const categoryImg = category.img
+
+                            // console.log(categoryImg)
+                            
+                            if (!this.categories.filter(value => value.name === categoryLC).length > 0) {
+
+                                this.categories.push({name: categoryLC, img: categoryImg})
                             }
                         }
                     }
@@ -179,9 +187,13 @@ export default {
 
             console.log('dopo il reindirizzamento + fetchRestaurantByCategories', this.store.selectedCategories)
         },
+        getImageUrl(imagePath) {
+            if (imagePath) {
+                return `http://127.0.0.1:8000/storage/${imagePath}`
+            }
+        },
     }
 }
-
 </script>
 
 <style lang="scss" scoped>
