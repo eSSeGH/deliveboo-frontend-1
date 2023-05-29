@@ -210,20 +210,32 @@ export default {
 
     .category-box {
         position: relative;
-        object-fit: cover;
-        object-position: center;
-        box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
         border-radius: 10px;
+        transition: transform 0.3s;
+
+        &:hover {
+            transform: scale(1.05);
+            font-size: 1.1rem;
+        }
 
         .category-thumb {
             border-radius: 10px;
-            filter: blur(1px);
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(80%);
+            transition: filter 0.3s;
+
+            &:hover {
+                filter: brightness(100%);
+            }
         }
 
         .text-box {
-            background-color: rgba(0, 0, 0, 0.53);
+            background-color: rgba(28, 15, 41, 0.53);
             position: absolute;
             bottom: 0;
+            padding: 0px;
             width: 100%;
             color: white;
             font-weight: bold;
@@ -231,9 +243,7 @@ export default {
         }
     }
 
-    .category-thumb:hover {
-        filter: blur(0px);
-    }
+    
 }
 
 .outro-bg {
