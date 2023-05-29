@@ -63,21 +63,19 @@ export default {
 
                         const singleCategories = results[i].categories
 
-                        // console.log(singleCategories)
-
                         for (let j = 0; j < singleCategories.length; j++) {
 
                             const category = singleCategories[j]
 
-                            // console.log(category.name)
+                            const categoryLC = category.name.toLowerCase()
 
-                            if (!this.categories.includes(category.name)) {
+                            if (!this.categories.includes(categoryLC)) {
 
-                                this.categories.push(category.name)
+                                this.categories.push(categoryLC)
                             }
                         }
                     }
-                }).catch(err => {
+                }).catch((err) => {
                     this.$router.push('/404')
                 })
         },
@@ -130,7 +128,6 @@ export default {
                 })
         },
         getImageUrl(imagePath) {
-
             if (imagePath) {
                 return `http://127.0.0.1:8000/storage/${imagePath}`
             }
@@ -155,7 +152,6 @@ export default {
                     this.$router.push('/404')
                 })
         }
-
         this.fetchCategories()
     },
 }

@@ -81,7 +81,7 @@ export default {
                 .then((res) => {
                     this.store.restaurants = res.data.results
                 })
-                .catch((error) => {
+                .catch((err) => {
                     this.$router.push('/404')
                 })
         },
@@ -91,8 +91,11 @@ export default {
                 this.$router.push('/restaurants')
 
                 this.fetchRestaurantsByCategory()
+
+                console.log('dopo il reindirizzamento + fetchRestaurantByCategories', this.selectedCategories)
             } else {
                 this.fetchRestaurantsByCategory()
+                console.log('dopo il reindirizzamento + fetchRestaurantByCategories', this.selectedCategories)
             }
         }
     },
