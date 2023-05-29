@@ -151,6 +151,26 @@ export default {
                 .catch((err) => {
                     this.$router.push('/404')
                 })
+        } else {
+
+            const basePath = 'http://127.0.0.1:8000/api/restaurants'
+
+            const categories = this.selectedCategories
+
+            // chiamata con l'array di parametri inseriti nello store
+            axios.get(basePath, {
+                params: {
+                    categories,
+                }
+            })
+                .then((res) => {
+                    this.store.restaurants = res.data.results
+                })
+                .catch((err) => {
+                    this.$router.push('/404')
+                })
+
+            window.scrollTo(0, 0)
         }
         this.fetchCategories()
     },
