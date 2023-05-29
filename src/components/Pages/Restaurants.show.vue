@@ -111,7 +111,8 @@
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-center py-3">
-                                        <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
+                                        <!-- <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button> -->
+                                        <div class="px-4" @click="goToPay()">Paga <span class="fw-bold">{{ totalCart }}€</span></div>
                                     </div>
                                 </form>
                             </div>
@@ -131,6 +132,9 @@ import FoodButton from '../elements/FoodButton.vue'
 import store from '../../store';
 import axios from 'axios'
 import { counter } from '@fortawesome/fontawesome-svg-core'
+
+    const previousCart = JSON.parse(localStorage.getItem('cart') || '[]') //coverto di nuovo la stringa salvata nel local storage in un array
+    console.log(previousCart) //array di oggetti
 
     export default {
         components: {
@@ -165,6 +169,8 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
                     this.cart.push(dish)
                     this.totalCart += dish.price
                 }
+                // converto l'array in stringa e lo salvo nel localStorage passando una key: cart per identificare l'array converito.
+                localStorage.setItem('cart', JSON.stringify(this.cart))
                 // console.log(this.cart)
             },
             deleteFoodToCart(dish, index){
@@ -203,12 +209,23 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
             goToPay(){
                 console.log(this.cart)
                 console.log(this.totalCart)
-                // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
+                // TODO: QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
+            },
+            dataRestore(){
+                //FIXME: il carrello non riconosce i vecchi piatti e tratta l'array come se fosse vuoto aggiungendone sempre di nuovi
+                //TODO: implementare il "remove" localStorage in modo che venga eliminato il contenuto in localStorage quando si rimuove un piatto
+                //TODO: capire come e quando gestire l'eliminazione totale del localStorage
+                //TODO: controllare il calcolo del totale
+
+                //inserico nell'array vuoto this.cart gli elementi presenti nella variabile/array previous cart.
+                this.cart = previousCart
+                console.log(this.cart)
             }
         },
 
         mounted() {
             this.fetchRestaurantBySlug()
+            this.dataRestore()
             // console.log(this.dishes)
         },
 
