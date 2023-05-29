@@ -60,7 +60,6 @@ export default {
             console.log('launched fetchRestaurantsByCategory')
 
             this.store.selectedCategories = []
-            console.log('refresh')
 
             const basePath = 'http://127.0.0.1:8000/api/restaurants'
 
@@ -71,21 +70,6 @@ export default {
             }
 
             const categories = this.store.selectedCategories
-            console.log('after push:', categories)
-
-            // se la barra di ricerca è vuota e viene premuto enter parte una chiamata che recupera tutti i ristoranti
-            if (categories == []) {
-                axios.get(basePath)
-                    .then((res) => {
-                        this.store.restaurants = res.data.results
-                    })
-                    .catch((error) => {
-                        this.$router.push('/404')
-                    }).
-                    finally(() => {
-                        console.log('store.restaurants senza parametri', this.store.restaurants)
-                    })
-            }
 
             // chiamata axios con parametri per le query (categorie)
             axios.get(basePath, {
@@ -99,17 +83,12 @@ export default {
                 })
                 .catch((error) => {
                     this.$router.push('/404')
-                }).
-                finally(() => {
-                    console.log('store.restaurants', this.store.restaurants)
                 })
         },
         // funzione di redirect all'advanced search page alla pressione di enter
         goToAdvancedSearchPage() {
             if (this.$route.name === 'home') {
-                console.log('redirect to restaurant.index triggered')
                 this.$router.push('/restaurants')
-                console.log('al redirect:', this.currentSelectedCategories)
 
                 this.fetchRestaurantsByCategory()
             } else {
@@ -144,6 +123,7 @@ export default {
     position: sticky;
     top: 0;
     z-index: 10;
+
 
     .container {
         height: 100%;

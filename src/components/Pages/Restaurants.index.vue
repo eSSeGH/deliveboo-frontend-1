@@ -15,9 +15,7 @@
                 <h2 class="my-h2">Ristoranti</h2>
 
                 <div class="card my-col d-flex flex-column" v-for="(restaurant, i) in store.restaurants" :key="i">
-                    <img class="thumb"
-                        src="/imgs/placeholder-icon-vector-restaurant-collection-thin-line-outline-illustration-linear-symbol-use-web-mobile-apps-143543775.jpg"
-                        alt="restaurant img">
+                    <img class="thumb" :src="getImageUrl(restaurant.img)" alt="restaurant img">
 
                     <div class="info-text">
                         <h4 class="restaurant-title my-text text-center mb-0">{{ restaurant.name }}</h4>
@@ -57,7 +55,7 @@ export default {
             axios.get('http://127.0.0.1:8000/api/restaurants', {
             })
                 .then(res => {
-
+                    console.log('fetchCategories lanciato')
                     const results = res.data.results
 
                     for (let i = 0; i < results.length; i++) {
@@ -114,13 +112,13 @@ export default {
                 })
                 .catch((error) => {
                     this.$router.push('/404')
-                }).
-                finally(() => {
-                    console.log('store.restaurants', this.store.restaurants)
                 })
         },
         getImageUrl(imagePath) {
-            return `http://127.0.0.1:8000/storage/${imagePath}`
+
+            if (imagePath) {
+                return `http://127.0.0.1:8000/storage/${imagePath}`
+            }
         },
     },
     computed: {
@@ -129,6 +127,20 @@ export default {
         }
     },
     mounted() {
+        if (this.selectedCategories == false) {
+            // come mai non gli va bene l'array vuoto ma lo zero/false si
+            const basePath = 'http://127.0.0.1:8000/api/restaurants'
+
+            axios.get(basePath)
+
+                .then((res) => {
+                    this.store.restaurants = res.data.results
+                })
+                .catch((error) => {
+                    this.$router.push('/404')
+                })
+        }
+
         this.fetchCategories()
     },
 }
@@ -166,7 +178,7 @@ main {
                 box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
                 cursor: pointer;
                 overflow: hidden;
-                background-color: $orange-3;
+                background-color: white;
 
                 &:hover>.thumb {
                     transform: scale(1.3);
@@ -205,12 +217,14 @@ main {
                     font-size: 0.75rem;
                     padding: 5px;
                     gap: 2px;
+                    height: 100%;
 
                     .category-name {
                         background-color: $purple-5;
                         padding: 0 3px;
                         border-radius: 10px;
                         color: white;
+                        align-self: flex-start;
                     }
                 }
             }
