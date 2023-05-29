@@ -134,6 +134,9 @@ export default {
 
     methods: {
         fetchCategories() {
+
+            this.store.selectedCategories = []
+
             axios.get('http://127.0.0.1:8000/api/restaurants', {
             })
                 .then(res => {
