@@ -111,7 +111,7 @@ export default {
                 .then((res) => {
                     this.store.restaurants = res.data.results
                 })
-                .catch((error) => {
+                .catch((err) => {
                     this.$router.push('/404')
                 })
         },
@@ -126,7 +126,7 @@ export default {
 
                     this.$router.push(`/restaurant/${slug}`)
                 }).catch((err) => {
-                    console.log(err)
+                    this.$router.push('/404')
                 })
         },
         getImageUrl(imagePath) {
@@ -151,7 +151,7 @@ export default {
                 .then((res) => {
                     this.store.restaurants = res.data.results
                 })
-                .catch((error) => {
+                .catch((err) => {
                     this.$router.push('/404')
                 })
         }
