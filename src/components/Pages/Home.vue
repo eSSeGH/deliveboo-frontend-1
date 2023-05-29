@@ -233,6 +233,8 @@ export default {
 
         .category-thumb {
             border-radius: 10px;
+            width: 100%;
+            aspect-ratio: 16/9;
             object-fit: cover;
             object-position: center;
             filter: brightness(80%);
