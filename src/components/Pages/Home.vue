@@ -189,8 +189,9 @@ export default {
 
             this.$router.push('/restaurants')
 
-            category.toLowerCase()
-            this.store.selectedCategories.push(category)
+            const categoryName = category.name.toLowerCase()
+            
+            this.store.selectedCategories.push(categoryName)
 
             console.log('dopo il reindirizzamento + fetchRestaurantByCategories', this.store.selectedCategories)
         },
