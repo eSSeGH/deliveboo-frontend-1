@@ -71,8 +71,9 @@
                         <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/delivery.svg" alt="">
                     </div>
 
-                    <div class="outro-desc text-center">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, esse.</p>
+                    <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
+                        <h4 class="outro-title">Fast delivery</h4>
+                        <p>We pride ourselves on speed. Order or send anything in your city and we'll pick it up and deliver it in minutes.</p>
                     </div>
 
                 </div>
@@ -87,8 +88,9 @@
                         <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/restaurants.svg" alt="">
                     </div>
 
-                    <div class="outro-desc text-center">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, esse.</p>
+                    <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
+                        <h4 class="outro-title">Your city's top restaurants</h4>
+                        <p>With a great variety of restaurants you can order your favourite food or explore new restaurants nearby!</p>
                     </div>
 
                 </div>
@@ -103,8 +105,9 @@
                         <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/groceries.svg" alt="">
                     </div>
 
-                    <div class="outro-desc text-center">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum, esse.</p>
+                    <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
+                        <h4 class="outro-title">Groceries delivery & more</h4>
+                        <p>Find anything you need! From supermarkets to shops, pharmacies to florists — if it's in your city you can count on us to get it.</p>
                     </div>
 
                 </div>
@@ -257,19 +260,18 @@ export default {
             border-radius: 0 0 10px 10px;
         }
     }
-
-    
 }
-
 .outro-bg {
     background-color: #FF850044;
-    padding: 5rem 0 10rem;
+    padding: 5rem 0 5rem;
 }
-
 .outro-desc {
-    padding: 0 5rem;
-}
+    padding: 0 3rem;
 
+    .outro-title {
+        font-weight: bold;
+    }
+}
 .bg-wave  {
     background-color: #FF850044;
 }
