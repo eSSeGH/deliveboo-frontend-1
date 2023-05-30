@@ -97,7 +97,7 @@
                                 <h5 class="card-title text-center fw-bold pb-2">
                                     Prosegui con l'ordine
                                 </h5>
-                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET" class="form" id="payment-form">
+                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="POST" class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
