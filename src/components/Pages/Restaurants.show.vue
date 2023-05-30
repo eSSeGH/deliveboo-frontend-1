@@ -56,8 +56,9 @@
                         <div class="row">
                             <div class="d-flex align-items-center flex-sm-row justify-content-between">
                                 <p class="d-flex col-8">{{ dish.price }}</p>
-                                <div class="d-flex flex-row-reverse col-sm-4">
-                                    <FoodButton @click="addFoodToCart(dish)" />
+                                <div class="d-flex flex-row-reverse col-sm-4 gap-2">
+                                    <AddFoodButton class="card-buttons text-center" @click="addFoodToCart(dish)" />
+                                    <!-- <RemoveFoodButton class="card-buttons text-center" @click="deleteFoodFromCard(dish)" /> -->
                                 </div>
                             </div>
                         </div>
@@ -84,6 +85,10 @@
                                         @click="deleteFoodQuantity(dish, index)" />
                                     <DeleteEntityButton @click="deleteFoodEntity(dish, index)" class="col-1 ms-1 align-self-start" />
                                 </div>
+                            </div>
+
+                            <div class="d-flex justify-content-center pt-3" v-if="this.cart.length != []">
+                                <DeleteAllFoodButton @click="deleteAllFood()" />
                             </div>
 
                             <div class="confirm-button d-flex justify-content-center py-3">
@@ -148,19 +153,23 @@
 </template>
 
 <script>
-import FoodButton from '../elements/FoodButton.vue'
+import AddFoodButton from '../elements/AddFoodButton.vue'
 import DeleteButton from '../elements/DeleteButton.vue'
 import DeleteEntityButton from '../elements/DeleteEntityButton.vue'
+import DeleteAllFoodButton from '../elements/DeleteAllFoodButton.vue'
+import RemoveFoodButton from '../elements/RemoveFoodButton.vue'
 import store from '../../store'
 import axios from 'axios'
 import { counter } from '@fortawesome/fontawesome-svg-core'
 
 export default {
     components: {
-        FoodButton,
-        DeleteButton,
-        DeleteEntityButton,
-    },
+    AddFoodButton,
+    DeleteButton,
+    DeleteEntityButton,
+    DeleteAllFoodButton,
+    RemoveFoodButton
+},
 
     methods: {
         fetchRestaurantBySlug() {
@@ -175,6 +184,7 @@ export default {
                     this.restaurant = res.data.results
 
                     this.dishes = this.restaurant.dishes
+                    
                 }).catch((err) => {
                     this.$router.push('/404')
                 })
@@ -220,6 +230,29 @@ export default {
                 }
             }
         },
+        // deleteFoodFromCard(cart) {
+
+        //     if (this.cart.length === 1 && dish.quantity === 1 && !this.showButtonConfirm) {
+        //         //togli prezzo ed elemento da carrello
+        //         this.totalCart -= dish.price
+        //         this.cart.splice(index, 1)
+
+        //         //riportami il 'conferma ordine'
+        //         this.showForm = false
+        //         this.showButtonConfirm = true
+        //     }
+
+        //     if (this.cart.includes(dish)) {
+        //         if (dish.quantity > 1) {
+        //             dish.quantity -= 1
+        //             this.totalCart -= dish.price
+        //         } else if (dish.quantity === 1) {
+        //             this.totalCart -= dish.price
+        //             this.cart.splice(index, 1)
+        //         }
+        //     }
+
+        // },
         deleteFoodEntity(dish, index) {
             //se abbiamo elementi nel carrello, gestisci il delete e totale
             if (this.cart.includes(dish)) {
@@ -227,6 +260,13 @@ export default {
                 dish.quantity = 0
                 this.cart.splice(index, 1)
             }
+
+            this.showForm = false
+            this.showButtonConfirm = true
+        },
+        deleteAllFood() {
+            this.cart = []
+            this.totalCart = 0
 
             this.showForm = false
             this.showButtonConfirm = true
@@ -345,6 +385,10 @@ export default {
         border-radius: 1rem;
         margin-right: auto;
         box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+    }
+
+    .card-buttons {
+        width: 40px;
     }
 
     .food-title {
