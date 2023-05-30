@@ -126,7 +126,7 @@
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-center py-3">
-                                        <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart
+                                        <button @click="goToPay()" type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart
                                         }}€</span></button>
                                     </div>
                                 </form>
@@ -181,23 +181,30 @@ export default {
             }
         },
         addFoodToCart(dish) {
-
+            console.log(this.cart)
+            
             if (this.cart.includes(dish)) {
                 dish.quantity += 1
-                this.totalCart += dish.price
+                this.totalCart += parseFloat(dish.price)
+                console.log(dish.price)
             } else {
                 dish.quantity = 1
                 this.cart.push(dish)
-                this.totalCart += dish.price
+                this.totalCart += parseFloat(dish.price)
+                console.log(this.totalCart)
             }
-            // console.log(this.cart)
+            //STEP:1 salvare dati nel local storage ad ogni modifica
+            localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando aggiungo un piatto
+            localStorage.setItem('totalCart', this.totalCart) // salvo il totale nel local storage quando aggiungo un piatto
+            console.log(localStorage.getItem('totalCart'))
+            // console.log(localStorage.getItem('cart'))
         },
         deleteFoodToCart(dish, index) {
 
             //se il carrello ha un elemento e, quell'elemento ha 1 sola quantità e, il 'conferma ordine' è nascosto
             if (this.cart.length === 1 && dish.quantity === 1 && !this.showButtonConfirm) {
                 //togli prezzo ed elemento da carrello
-                this.totalCart -= dish.price
+                this.totalCart -= parseFloat(dish.price)
                 this.cart.splice(index, 1)
 
                 //riportami il 'conferma ordine'
@@ -210,12 +217,64 @@ export default {
             if (this.cart.includes(dish)) {
                 if (dish.quantity > 1) {
                     dish.quantity -= 1
-                    this.totalCart -= dish.price
+                    this.totalCart -= parseFloat(dish.price)
                 } else if (dish.quantity === 1) {
-                    this.totalCart -= dish.price
+                    this.totalCart -= parseFloat(dish.price)
                     this.cart.splice(index, 1)
                 }
             }
+            // STEP:1
+            localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
+            localStorage.setItem('totalCart', this.totalCart) // salvo il totale nel local storage quando rimuovo un piatto
+        },
+        // deleteFoodFromCard(cart) {
+
+        //     if (this.cart.length === 1 && dish.quantity === 1 && !this.showButtonConfirm) {
+        //         //togli prezzo ed elemento da carrello
+        //         this.totalCart -= parseFloat(dish.price)
+        //         this.cart.splice(index, 1)
+
+        //         //riportami il 'conferma ordine'
+        //         this.showForm = false
+        //         this.showButtonConfirm = true
+        //     }
+
+        //     if (this.cart.includes(dish)) {
+        //         if (dish.quantity > 1) {
+        //             dish.quantity -= 1
+        //             this.totalCart -= parseFloat(dish.price)
+        //         } else if (dish.quantity === 1) {
+        //             this.totalCart -= parseFloat(dish.price)
+        //             this.cart.splice(index, 1)
+        //         }
+        //     }
+
+        // },
+        deleteFoodEntity(dish, index) {
+            //se abbiamo elementi nel carrello, gestisci il delete e totale
+            if (this.cart.includes(dish)) {
+                this.totalCart -= parseFloat(dish.price) * dish.quantity
+                dish.quantity = 0
+                this.cart.splice(index, 1)
+            }
+
+            this.showForm = false
+            this.showButtonConfirm = true
+
+            // STEP:1
+            localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
+            localStorage.setItem('totalCart', this.totalCart) // salvo il totale nel local storage quando rimuovo un piatto
+        },
+        deleteAllFood() {
+            this.cart = []
+            this.totalCart = 0
+
+            this.showForm = false
+            this.showButtonConfirm = true
+
+            // STEP:1
+            localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
+            localStorage.setItem('totalCart', this.totalCart) // salvo il totale nel local storage quando rimuovo un piatto
         },
         showOrderForm() {
 
@@ -225,15 +284,55 @@ export default {
                 console.log('show form')
             }
         },
+        // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
+        getCartFromLocalStorage() {
+            // recupero il carrello JSON dal local storage e 
+            // SE esiste lo converto in array 
+            // ALTRIMENTI metto l'array vuoto
+            const savedCartData = localStorage.getItem('cart') 
+            let localCart = []
+
+            if(savedCartData) {
+                localCart = JSON.parse(savedCartData)
+            }else {
+                localCart = []
+            }
+            
+            // recupero il total local storage e 
+            // SE esiste diventa float 
+            // ALTRIMENTI metto il totale a 0
+            const savedTotalCart = parseFloat(localStorage.getItem('totalCart'))
+            console.log(savedTotalCart)
+            let localTotalCart = 0
+            console.log(localTotalCart)
+            
+            if(savedTotalCart !== 0) {
+                localTotalCart = parseFloat(savedTotalCart)
+            } else {
+                localTotalCart = 0
+            }
+            
+            this.cart = localCart
+            // this.totalCart = parseFloat(localTotalCart)
+            console.log(this.totalCart)
+        },
         goToPay() {
             console.log(this.cart)
             console.log(this.totalCart)
-            // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
+            // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART
+            //nel finally dopo la chiamata axios
+            this.clearLocalStorage() 
+        },
+        clearLocalStorage() {
+            localStorage.removeItem('cart') // elimino dal local storage i dati salvati
+            localStorage.removeItem('totalCart') // elimino dal local storage i dati salvati
         }
     },
 
     mounted() {
         this.fetchRestaurantBySlug()
+        this.getCartFromLocalStorage()
+        console.log(this.cart)
         // console.log(this.dishes)
     },
 
