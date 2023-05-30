@@ -232,7 +232,7 @@ export default {
                         firstName: this.firstName,
                         lastName: this.lastName,
                         email: this.email,
-                        phone: this.addressNum,
+                        phone: this.phone,
                         address: this.address,
                         postalCode: this.postalCode
                     }
