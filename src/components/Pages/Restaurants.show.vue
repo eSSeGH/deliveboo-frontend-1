@@ -230,7 +230,6 @@ export default {
 
             axios.post('http://localhost:8000/api/order/pay', {
                     cart: this.cart,
-                    totalCart: this.totalCart,
                     form: {
                         firstName: this.firstName,
                         lastName: this.lastName,
