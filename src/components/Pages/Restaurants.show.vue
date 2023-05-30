@@ -235,7 +235,7 @@ export default {
                         firstName: this.firstName,
                         lastName: this.lastName,
                         email: this.email,
-                        addressNum: this.addressNum,
+                        phone: this.addressNum,
                         address: this.address,
                         postalCode: this.postalCode
                     }
