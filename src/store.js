@@ -20,7 +20,7 @@ const store = reactive({
   ],
 
   // store momentaneo della stringa dell'input
-  currentSelectedCategories: null,
+  currentSelectedCategories: '',
   // array dei filtri selezionati
   selectedCategories: [],
   // array dei ristoranti recuperati con axios

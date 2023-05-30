@@ -61,13 +61,20 @@ export default {
             console.log('launched fetchRestaurantsByCategory')
 
             this.store.selectedCategories = []
-
+            
             const basePath = 'http://127.0.0.1:8000/api/restaurants'
 
             // evito di pushare 'this.currentSelectedCategories' quando è nullo
-            if (this.currentSelectedCategories != null) {
+            // console.log('null? ', this.currentSelectedCategories)
+            if (this.currentSelectedCategories != '') {
+
                 this.currentSelectedCategories.toLowerCase()
                 this.selectedCategories.push(this.currentSelectedCategories)
+
+                if(this.selectedCategories[0] === '') {
+                    console.log('sei nell if === ', this.selectedCategories)
+                    this.selectedCategories.shift()
+                }
             }
 
             const categories = this.store.selectedCategories
