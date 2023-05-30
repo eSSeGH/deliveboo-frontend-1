@@ -97,40 +97,39 @@
                                 <h5 class="card-title text-center fw-bold pb-2">
                                     Prosegui con l'ordine
                                 </h5>
-                                <form action="" class="form">
+                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET" class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Nome..." v-model="firstName">
+                                        <input type="text" class="form-control" id="name" placeholder="Nome..." name="firstName" v-model="firstName">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Cognome</label>
-                                        <input type="text" class="form-control" id="surname" placeholder="Cognome..." v-model="lastName">
+                                        <input type="text" class="form-control" id="surname" placeholder="Cognome..." name="lastName" v-model="lastName">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="name@example.com" v-model="email">
+                                            placeholder="name@example.com" name="email" v-model="email">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Numero</label>
-                                        <input type="text" class="form-control" id="number" placeholder="Numero..." v-model="addressNum">
+                                        <input type="text" class="form-control" id="number" placeholder="Numero..." name="phone" v-model="addressNum">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
-                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo..." v-model="address">
+                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo..." name="address" v-model="address">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Codice postale</label>
                                         <input type="text" class="form-control" id="postal-code"
-                                            placeholder="Codice postale..." v-model="postalCode">
+                                            placeholder="Codice postale..." name="postal_code" v-model="postalCode">
                                     </div>
 
                                     <div class="col-12 d-flex justify-content-center py-3">
                                     </div>
+                                    <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
                                 </form>
-                                <!-- serve fuori dal form, non è un submit ma una call axios -->
-                                <button @click="goToPay()" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
                             </div>
                         </div>
                     </div>
@@ -227,7 +226,6 @@ export default {
             }
         },
         goToPay() {
-
             axios.post('http://localhost:8000/api/order/pay', {
                     cart: this.cart,
                     form: {
@@ -239,11 +237,15 @@ export default {
                         postalCode: this.postalCode
                     }
 
-            }).then((res)=>{console.log(res)}) //check se risposta arrivata
-
+            })
+            .then((res) => {
+                console.log(res)
+            })
+            .finally(() => {
+                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
+                paymentFormEl.submit(); //faccio il submit del form di pagamento
+            })
             console.log(this.cart)
-            console.log(this.totalCart)
-            // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART 
         }
     },
 
