@@ -196,8 +196,10 @@ export default {
         },
         addFoodToCart(dish) {
 
-            if (this.cart.includes(dish)) {
-                dish.quantity += 1
+            //controllo se filtrando il cart mi trova l'elemento dish (se > 0)
+            if (this.cart.filter(value => value.id === dish.id).length > 0) {
+                let filteredCart = this.cart.filter(value => value.id === dish.id) //mi salvo l'array filtrato con il mio dish
+                filteredCart[0].quantity++ //tanto c'è solo un elemento in questo array
                 this.totalCart += parseFloat(dish.price)
             } else {
                 dish.quantity = 1
@@ -206,8 +208,8 @@ export default {
             }
             //STEP:1 salvare dati nel local storage ad ogni modifica
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando aggiungo un piatto
-            localStorage.setItem('totalCart', this.totalCart) // salvo il totale nel local storage quando aggiungo un piatto
-            console.log(localStorage.getItem('totalCart'))
+            localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando aggiungo un piatto
+            console.log(this.cart)
             // console.log(localStorage.getItem('cart'))
         },
         deleteFoodQuantity(dish, index) {
@@ -236,7 +238,7 @@ export default {
 
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
-            localStorage.setItem('totalCart', this.totalCart) // salvo il totale nel local storage quando rimuovo un piatto
+            localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
         },
         // deleteFoodFromCard(cart) {
 
@@ -274,7 +276,7 @@ export default {
 
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
-            localStorage.setItem('totalCart', this.totalCart) // salvo il totale nel local storage quando rimuovo un piatto
+            localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
         },
         deleteAllFood() {
             this.cart = []
@@ -285,7 +287,7 @@ export default {
 
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
-            localStorage.setItem('totalCart', this.totalCart) // salvo il totale nel local storage quando rimuovo un piatto
+            localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
         },
         showOrderForm() {
 
@@ -306,23 +308,20 @@ export default {
 
             if(savedCartData) {
                 localCart = JSON.parse(savedCartData)
-            }else {
+            } else {
                 localCart = []
             }
             
             // recupero il total local storage e 
             // SE esiste diventa float 
             // ALTRIMENTI metto il totale a 0
-            const savedTotalCart = localStorage.getItem('totalCart').value
-            console.log(savedTotalCart)
-            console.log(typeof savedTotalCart)
+            const savedTotalCart = localStorage.getItem('totalCart')
+            console.log(savedTotalCart, typeof savedTotalCart)
             let localTotalCart = 0
             // console.log(localTotalCart)
             
             if(savedTotalCart !== 0) {
-                localTotalCart = savedTotalCart
-            } else {
-                localTotalCart = 0
+                localTotalCart = JSON.parse(savedTotalCart)
             }
             
             this.cart = localCart
@@ -346,10 +345,7 @@ export default {
     mounted() {
         this.fetchRestaurantBySlug()
         this.getCartFromLocalStorage()
-        // console.log(this.dishes)
-    },
-    beforeMount() {
-        console.log(this.totalCart)
+        console.log(this.cart)
     },
 
     data() {
