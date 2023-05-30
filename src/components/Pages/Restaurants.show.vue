@@ -114,7 +114,7 @@
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Numero</label>
-                                        <input type="text" class="form-control" id="number" placeholder="Numero..." name="phone" v-model="addressNum">
+                                        <input type="text" class="form-control" id="number" placeholder="Numero..." name="phone" v-model="phone">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
@@ -125,7 +125,7 @@
                                         <input type="text" class="form-control" id="postal-code"
                                             placeholder="Codice postale..." name="postal_code" v-model="postalCode">
                                     </div>
-
+                                    <input type="hidden" name="order_id" v-model="orderID">
                                     <div class="col-12 d-flex justify-content-center py-3">
                                     </div>
                                     <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
@@ -239,7 +239,8 @@ export default {
 
             })
             .then((res) => {
-                console.log(res)
+                console.log(res.data.results)
+                this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
             })
             .finally(() => {
                 const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
@@ -263,13 +264,13 @@ export default {
             restaurant: [],
             dishes: [],
             cart: [], // NON TOCCARE MAREMMAHANE
-
-            firstName: '',
-            lastName: '',
-            email: '',
-            addressNum: '',
-            address: '',
-            postalCode: '',
+            orderID: '', //id dell' ordine
+            firstName: '', //nome del cliente
+            lastName: '', //cognome del cliente
+            email: '', //email del cliente
+            phone: '', //telefono del cliente
+            address: '', //indirizzo del cliente
+            postalCode: '', //codice postal del cliente
         }
     }
 }
