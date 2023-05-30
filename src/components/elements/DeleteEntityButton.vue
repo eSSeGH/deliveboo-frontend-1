@@ -1,7 +1,7 @@
 <template>
     <div class="btn">
         <span class="icon-wrapper">
-            -
+            X
         </span>
     </div>
 </template>
@@ -18,7 +18,7 @@
   width: 25px;
   height: 25px;
   border: none;
-  background-color: #FFC107;
+  background-color: #DC3545;
   position: relative;
   border-radius: 10px;
   -webkit-box-shadow: 1px 1px 5px .2px #00000035;
