@@ -16,9 +16,17 @@
                 </div>
 
 
-                <div class="my-col searchbar-box">
+                <div class="my-col searchbar-box d-flex align-items-center">
+
                     <input v-on:keyup.enter="goToAdvancedSearchPage" v-model="store.currentSelectedCategories" type="text"
                         name="search" class="searchbar" placeholder="Cerca per tipologia di ristorante...">
+
+                    <button class="search-btn" @click="goToAdvancedSearchPage">
+
+                        <font-awesome-icon id="icon" class="magnifying-glass"
+                            icon="fa-solid fa-magnifying-glass icon"></font-awesome-icon>
+
+                    </button>
                 </div>
 
                 <div class="header-buttons my-col d-flex justify-content-end">
@@ -194,15 +202,43 @@ export default {
                 color: black;
                 cursor: pointer;
                 padding: 7px 12px;
-                transition: all 1s;
+                transition: outline-color 1s;
                 flex-shrink: 1;
                 width: 100%;
+            }
 
+            .search-btn {
+                border: none !important;
+                border-radius: 0 20px 20px 0;
+                background-color: $purple-3;
+                color: white;
+                cursor: pointer;
+                width: 0;
+                height: 0;
+                transition: all 0.3s;
+                overflow: hidden;
+                position: relative;
+                right: 3px;
+
+                #icon {
+                    font-family: Font Awesome 6 Free;
+                    color: white;
+                }
             }
         }
 
         .searchbar:focus {
             outline-color: yellow;
+            border-radius: 20px 0 0 20px;
+            border-right: 0;
+        }
+
+        .searchbar:focus+.search-btn {
+            border: 3px solid rgb(254, 254, 150) !important;
+            width: 30px;
+            height: 28px;
+            padding-right: 3px;
+            border-left: none !important;
         }
 
         .header-buttons {
