@@ -76,33 +76,35 @@ import FollowButton from './elements/FollowButton.vue';
     width: 200px;
     cursor: pointer;
 }
-
 .col > .col {
     cursor: pointer;
 }
-
 .my-footer-title {
     margin-bottom: 1rem;
 }
-
 .shadow {
     padding: 2rem;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset !important;
     border-radius: 5px;
     height: 100%;
 }
-
 .uppercase {
     text-transform: uppercase;
 }
-
 .follow-btn {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
 .spacing {
     padding: 0 2rem !important;
+}
+.d-flex > .col {
+    cursor: pointer;
+    color: rgba(181, 181, 181, 0.858);
+}
+.d-flex > .col:hover {
+    text-decoration: underline;
+    color: white;
 }
 </style>

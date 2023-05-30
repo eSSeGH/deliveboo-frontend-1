@@ -169,6 +169,10 @@ export default {
                             const categoryImg = category.img
 
                             // console.log(categoryImg)
+
+                            // filtriamo this.categories per il nome di categoryLC
+                            // SE la category viene trovata il filtro restituisce un array con quell'elemento > 0
+                            // ALTRIMENTI restituisce un array vuoto e quindi pushamo nell'array this.categories
                             
                             if (!this.categories.filter(value => value.name === categoryLC).length > 0) {
 
@@ -185,8 +189,9 @@ export default {
 
             this.$router.push('/restaurants')
 
-            category.toLowerCase()
-            this.store.selectedCategories.push(category)
+            const categoryName = category.name.toLowerCase()
+            
+            this.store.selectedCategories.push(categoryName)
 
             console.log('dopo il reindirizzamento + fetchRestaurantByCategories', this.store.selectedCategories)
         },
