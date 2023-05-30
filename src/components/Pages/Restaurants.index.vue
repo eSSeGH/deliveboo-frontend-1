@@ -39,7 +39,7 @@
         </div>
 
         <div class="container-auto bg-wave pt-5">
-            <img class="wave" src="/imgs/waves/footer-wave-desktop.svg" alt="">
+            <img class="wave-bottom" src="/imgs/waves/footer-wave-desktop.svg" alt="">
         </div>
     </main>
 </template>
@@ -330,11 +330,6 @@ main {
     }
 }
 
-.wave {
-    width: 100%;
-    margin-bottom: -16px;
-}
-
 @media (max-width: 991px) {
     .my-col {
         flex-basis: calc(100%/3 - 16px*2/3) !important;
@@ -358,6 +353,30 @@ main {
 
     .restaurants-list {
         margin: 30px;
+    }
+}
+
+.wave-bottom {
+    min-width: 100%;
+    position: relative;
+    bottom: -16px;
+}
+
+@media (max-width: 378px) {
+    .wave-bottom {
+        margin-bottom: -2px;
+    }
+}
+
+@media (max-width: 382px) {
+    .wave-bottom {
+        margin-bottom: -3px;
+    }
+}
+
+@media (max-width: 422px) {
+    .wave-bottom {
+        bottom: -17px;
     }
 }
 </style>

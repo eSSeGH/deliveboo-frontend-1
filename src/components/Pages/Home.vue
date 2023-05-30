@@ -289,6 +289,8 @@ export default {
 
 .wave-bottom {
     min-width: 100%;
+    position: relative;
+    bottom: 0;
 }
 
 @media (max-width: 393px) {
@@ -297,9 +299,9 @@ export default {
     }
 }
 
-@media (max-width: 405px) {
+@media (max-width: 415px) {
     .wave-bottom {
-        margin-bottom: -2px;
+        bottom: -1px;
     }
 }
 </style>
