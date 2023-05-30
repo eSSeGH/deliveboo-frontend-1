@@ -38,6 +38,37 @@
 
         </div>
 
+        <div class="container-auto pt-5">
+            <img class="wave-middle" src="/imgs/waves/desc-wave-desktop.svg" alt="">
+        </div>
+
+        <section class="d-flex flex-column gap-5 pb-5 px-4 bg-descpription">
+
+            <h1 class="text-center py-4">Il nostro mondo</h1>
+
+            <div class="container mx-auto d-flex justify-content-between flex-wrap row-gap-5">
+                <div class="col-12 col-md-5 d-flex flex-column">
+                    <h3 class="mb-2">Ben Arrivato cliente!</h3>
+                    <p>Benvenuti nel nostro sito internet, il luogo ideale per soddisfare le vostre voglie culinarie senza uscire di casa! Siamo un servizio di consegna di cibo online che collabora con una vasta selezione di ristoranti locali, offrendovi una varietà di delizie gastronomiche da gustare nel comfort del vostro salotto.</p>
+                </div>
+                <div class="col-12 col-md-5 d-flex flex-column">
+                    <h3 class="mb-2">Il nostro Obiettivo</h3>
+                    <p>Il nostro obiettivo è offrirvi una piattaforma facile da usare, dove potrete sfogliare i menu dei migliori ristoranti della zona e ordinare i vostri piatti preferiti con pochi clic. Che siate alla ricerca di una pizza saporita, una pasta al dente, un sushi fresco o un'insalata croccante, avrete a disposizione un'ampia scelta di cucine internazionali per accontentare ogni palato.</p>
+                </div>
+            </div>
+
+            <div class="container mx-auto d-flex justify-content-between flex-wrap row-gap-5">
+                <div class="col-12 col-md-5 d-flex flex-column">
+                    <h3 class="mb-2">&eacute; Facile!</h3>
+                    <p>La nostra interfaccia intuitiva vi permetterà di filtrare le opzioni in base alle vostre preferenze, consentendovi di cercare ristoranti di diverse nazionalit&aacute; tra le quali: cinese, giapponese, argentino, indiano e molto altro </p>
+                </div>
+                <div class="col-12 col-md-5 d-flex flex-column">
+                    <h3 class="mb-2">Il nostro Impegno</h3>
+                    <p>Ci preoccupiamo della qualità del cibo che offriamo e collaboriamo solo con ristoranti che rispettano i più alti standard igienici e di sicurezza. I nostri corrieri dedicati garantiranno che il vostro ordine arrivi caldo e fresco direttamente a casa vostra, in tempi rapidi e puntuali.</p>
+                </div>
+            </div>
+        </section>
+
         <div class="container-auto bg-wave pt-5">
             <img class="wave-bottom" src="/imgs/waves/footer-wave-desktop.svg" alt="">
         </div>
@@ -330,6 +361,18 @@ main {
     }
 }
 
+.bg-descpription {
+    background-color: #EBEBEB;
+}
+
+.bg-wave {
+    background-color: #EBEBEB;
+}
+
+.wave-middle {
+    width: 100%;
+}
+
 @media (max-width: 991px) {
     .my-col {
         flex-basis: calc(100%/3 - 16px*2/3) !important;
@@ -360,6 +403,7 @@ main {
     min-width: 100%;
     position: relative;
     bottom: -16px;
+    background-color: #EBEBEB;
 }
 
 @media (max-width: 376px) {
