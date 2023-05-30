@@ -104,38 +104,38 @@
                                 <h5 class="card-title text-center fw-bold pb-2">
                                     Prosegui con l'ordine
                                 </h5>
-                                <form action="" class="form">
+                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="POST" class="form" id="payment-form">
+                                    <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Nome...">
+                                        <input type="text" class="form-control" id="name" placeholder="Nome..." name="firstName" v-model="firstName">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Cognome</label>
-                                        <input type="text" class="form-control" id="surname" placeholder="Cognome...">
+                                        <input type="text" class="form-control" id="surname" placeholder="Cognome..." name="lastName" v-model="lastName">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="exampleFormControlInput1"
-                                            placeholder="name@example.com">
+                                            placeholder="name@example.com" name="email" v-model="email">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Numero</label>
-                                        <input type="text" class="form-control" id="number" placeholder="Numero...">
+                                        <input type="text" class="form-control" id="number" placeholder="Numero..." name="phone" v-model="phone">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
-                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo...">
+                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo..." name="address" v-model="address">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Codice postale</label>
                                         <input type="text" class="form-control" id="postal-code"
-                                            placeholder="Codice postale...">
+                                            placeholder="Codice postale..." name="postal_code" v-model="postalCode">
                                     </div>
-
+                                    <input type="hidden" name="order_id" v-model="orderID">
                                     <div class="col-12 d-flex justify-content-center py-3">
-                                        <button @click="goToPay" type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart
-                                        }}€</span></button>
                                     </div>
+                                    <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
                                 </form>
                             </div>
                         </div>
@@ -297,6 +297,7 @@ export default {
                 console.log('show form')
             }
         },
+
         // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
         getCartFromLocalStorage() {
             // recupero il carrello JSON dal local storage e 
@@ -329,11 +330,29 @@ export default {
             console.log(this.totalCart)
         },
         goToPay() {
-            // console.log(this.cart)
-            // console.log(this.totalCart)
-            // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART
-            //nel finally dopo la chiamata axios
+            axios.post('http://localhost:8000/api/order/pay', {
+                    cart: this.cart,
+                    form: {
+                        firstName: this.firstName,
+                        lastName: this.lastName,
+                        email: this.email,
+                        phone: this.phone,
+                        address: this.address,
+                        postalCode: this.postalCode
+                    }
+
+            })
+            .then((res) => {
+                console.log(res.data.results)
+                this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+            })
+            .finally(() => {
+                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
+                paymentFormEl.submit(); //faccio il submit del form di pagamento 
+            })
             this.clearLocalStorage()
+            console.log(this.cart)
+            
         },
         clearLocalStorage() {
             localStorage.removeItem('cart') // elimino dal local storage i dati salvati
@@ -357,6 +376,13 @@ export default {
             restaurant: [],
             dishes: [],
             cart: [], // NON TOCCARE MAREMMAHANE
+            orderID: '', //id dell' ordine
+            firstName: '', //nome del cliente
+            lastName: '', //cognome del cliente
+            email: '', //email del cliente
+            phone: '', //telefono del cliente
+            address: '', //indirizzo del cliente
+            postalCode: '', //codice postal del cliente
         }
     }
 }
