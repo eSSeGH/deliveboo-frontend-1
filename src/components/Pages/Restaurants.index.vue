@@ -362,21 +362,15 @@ main {
     bottom: -16px;
 }
 
-@media (max-width: 378px) {
+@media (max-width: 376px) {
     .wave-bottom {
-        margin-bottom: -2px;
-    }
-}
-
-@media (max-width: 382px) {
-    .wave-bottom {
-        margin-bottom: -3px;
+        bottom: -18px;
     }
 }
 
 @media (max-width: 422px) {
     .wave-bottom {
-        bottom: -17px;
+        bottom: -18px;
     }
 }
 </style>
