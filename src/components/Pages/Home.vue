@@ -73,7 +73,8 @@
 
                     <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
                         <h4 class="outro-title">Fast delivery</h4>
-                        <p>We pride ourselves on speed. Order or send anything in your city and we'll pick it up and deliver it in minutes.</p>
+                        <p>We pride ourselves on speed. Order or send anything in your city and we'll pick it up and deliver
+                            it in minutes.</p>
                     </div>
 
                 </div>
@@ -90,7 +91,8 @@
 
                     <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
                         <h4 class="outro-title">Your city's top restaurants</h4>
-                        <p>With a great variety of restaurants you can order your favourite food or explore new restaurants nearby!</p>
+                        <p>With a great variety of restaurants you can order your favourite food or explore new restaurants
+                            nearby!</p>
                     </div>
 
                 </div>
@@ -107,7 +109,8 @@
 
                     <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
                         <h4 class="outro-title">Groceries delivery & more</h4>
-                        <p>Find anything you need! From supermarkets to shops, pharmacies to florists — if it's in your city you can count on us to get it.</p>
+                        <p>Find anything you need! From supermarkets to shops, pharmacies to florists — if it's in your city
+                            you can count on us to get it.</p>
                     </div>
 
                 </div>
@@ -173,10 +176,10 @@ export default {
                             // filtriamo this.categories per il nome di categoryLC
                             // SE la category viene trovata il filtro restituisce un array con quell'elemento > 0
                             // ALTRIMENTI restituisce un array vuoto e quindi pushamo nell'array this.categories
-                            
+
                             if (!this.categories.filter(value => value.name === categoryLC).length > 0) {
 
-                                this.categories.push({name: categoryLC, img: categoryImg})
+                                this.categories.push({ name: categoryLC, img: categoryImg })
                             }
                         }
                     }
@@ -190,7 +193,7 @@ export default {
             this.$router.push('/restaurants')
 
             const categoryName = category.name.toLowerCase()
-            
+
             this.store.selectedCategories.push(categoryName)
 
             console.log('dopo il reindirizzamento + fetchRestaurantByCategories', this.store.selectedCategories)
@@ -266,10 +269,12 @@ export default {
         }
     }
 }
+
 .outro-bg {
     background-color: #FF850044;
     padding: 5rem 0 5rem;
 }
+
 .outro-desc {
     padding: 0 3rem;
 
@@ -277,10 +282,24 @@ export default {
         font-weight: bold;
     }
 }
-.bg-wave  {
+
+.bg-wave {
     background-color: #FF850044;
 }
+
 .wave-bottom {
-    width: 100%;
+    min-width: 100%;
+}
+
+@media (max-width: 393px) {
+    .wave-bottom {
+        margin-bottom: -3px;
+    }
+}
+
+@media (max-width: 405px) {
+    .wave-bottom {
+        margin-bottom: -2px;
+    }
 }
 </style>
