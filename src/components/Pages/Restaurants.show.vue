@@ -301,6 +301,7 @@ export default {
             // SE esiste lo converto in array 
             // ALTRIMENTI metto l'array vuoto
             const savedCartData = localStorage.getItem('cart') 
+            // console.log(savedCartData)
             let localCart = []
 
             if(savedCartData) {
@@ -312,20 +313,20 @@ export default {
             // recupero il total local storage e 
             // SE esiste diventa float 
             // ALTRIMENTI metto il totale a 0
-            const savedTotalCart = localStorage.getItem('totalCart')
+            const savedTotalCart = localStorage.getItem('totalCart').value
             console.log(savedTotalCart)
             console.log(typeof savedTotalCart)
-            let localTotalCart = '0'
+            let localTotalCart = 0
             // console.log(localTotalCart)
             
             if(savedTotalCart !== 0) {
-                localTotalCart = parseFloat(savedTotalCart)
+                localTotalCart = savedTotalCart
             } else {
-                localTotalCart = '0'
+                localTotalCart = 0
             }
             
             this.cart = localCart
-            this.totalCart = parseFloat(localTotalCart)
+            this.totalCart = localTotalCart
             console.log(this.totalCart)
         },
         goToPay() {
@@ -334,8 +335,6 @@ export default {
             // TODO QUI PARTE LA CHIAMATA AL BACKEND CON I DATI DI THIS.CART
             //nel finally dopo la chiamata axios
             this.clearLocalStorage()
-            this.cart = [] 
-            this.totalCart = 0 
         },
         clearLocalStorage() {
             localStorage.removeItem('cart') // elimino dal local storage i dati salvati
@@ -345,15 +344,11 @@ export default {
     },
 
     mounted() {
-        this.totalCart = '0'
-        console.log(this.totalCart)
         this.fetchRestaurantBySlug()
-        localStorage.clear()
         this.getCartFromLocalStorage()
         // console.log(this.dishes)
     },
     beforeMount() {
-        this.totalCart = '0'
         console.log(this.totalCart)
     },
 
@@ -362,7 +357,7 @@ export default {
             store,
             showForm: false,
             showButtonConfirm: true,
-            totalCart: '0',
+            totalCart: 0,
             restaurant: [],
             dishes: [],
             cart: [], // NON TOCCARE MAREMMAHANE
