@@ -73,14 +73,16 @@
                             <h3 class="card-title text-center fw-bold py-4">
                                 Il tuo Deliveboo
                             </h3>
+                            <p class="text-center my-text" v-if="this.cart.length === 0">Aggiungi dei piatti al carrello...</p>
                             <div v-for="(dish, index) in cart" :key="dish.id">
                                 <div class="box-cart d-flex align-items-start">
 
                                     <span class="col-2 fw-bold fs-5">{{ dish.quantity }}x</span>
                                     <p class="col-6 m-0">{{ dish.name }}</p>
-                                    <p class="col-3 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
-                                    <DeleteButton class="col-1 ms-1 align-self-start"
-                                        @click="deleteFoodToCart(dish, index)" />
+                                    <p class="col-2 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
+                                    <DeleteButton class="col-1 "
+                                        @click="deleteFoodQuantity(dish, index)" />
+                                    <DeleteEntityButton @click="deleteFoodEntity(dish, index)" class="col-1 ms-1 align-self-start" />
                                 </div>
                             </div>
 
@@ -148,6 +150,7 @@
 <script>
 import FoodButton from '../elements/FoodButton.vue'
 import DeleteButton from '../elements/DeleteButton.vue'
+import DeleteEntityButton from '../elements/DeleteEntityButton.vue'
 import store from '../../store'
 import axios from 'axios'
 import { counter } from '@fortawesome/fontawesome-svg-core'
@@ -156,6 +159,7 @@ export default {
     components: {
         FoodButton,
         DeleteButton,
+        DeleteEntityButton,
     },
 
     methods: {
@@ -192,7 +196,7 @@ export default {
             }
             // console.log(this.cart)
         },
-        deleteFoodToCart(dish, index) {
+        deleteFoodQuantity(dish, index) {
 
             //se il carrello ha un elemento e, quell'elemento ha 1 sola quantità e, il 'conferma ordine' è nascosto
             if (this.cart.length === 1 && dish.quantity === 1 && !this.showButtonConfirm) {
@@ -203,7 +207,6 @@ export default {
                 //riportami il 'conferma ordine'
                 this.showForm = false
                 this.showButtonConfirm = true
-
             }
 
             //se abbiamo elementi nel carrello, gestisci il delete e totale
@@ -216,6 +219,17 @@ export default {
                     this.cart.splice(index, 1)
                 }
             }
+        },
+        deleteFoodEntity(dish, index) {
+            //se abbiamo elementi nel carrello, gestisci il delete e totale
+            if (this.cart.includes(dish)) {
+                this.totalCart -= dish.price * dish.quantity
+                dish.quantity = 0
+                this.cart.splice(index, 1)
+            }
+
+            this.showForm = false
+            this.showButtonConfirm = true
         },
         showOrderForm() {
 
@@ -361,6 +375,11 @@ export default {
     margin: 0 auto;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+}
+
+.my-text {
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.495)
 }
 
 .box-cart {
