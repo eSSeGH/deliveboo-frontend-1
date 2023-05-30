@@ -60,7 +60,6 @@ export default {
             axios.get('http://127.0.0.1:8000/api/restaurants', {
             })
                 .then(res => {
-                    console.log('fetchCategories lanciato')
                     const results = res.data.results
 
                     for (let i = 0; i < results.length; i++) {
@@ -330,6 +329,7 @@ main {
         }
     }
 }
+
 .wave {
     width: 100%;
     margin-bottom: -16px;

@@ -60,13 +60,19 @@ export default {
             console.log('launched fetchRestaurantsByCategory')
 
             this.store.selectedCategories = []
+            console.log('refresh', this.selectedCategories)
 
             const basePath = 'http://127.0.0.1:8000/api/restaurants'
 
             // evito di pushare 'this.currentSelectedCategories' quando è nullo
-            if (this.currentSelectedCategories != null) {
+            if (this.currentSelectedCategories != null || this.currentSelectedCategories != '') {
                 this.currentSelectedCategories.toLowerCase()
                 this.selectedCategories.push(this.currentSelectedCategories)
+            }
+
+            // controllo: se è stato pushato '' tramite v-model la elimino dall'array
+            if (this.selectedCategories[0] === '') {
+                this.selectedCategories.splice(0, 1)
             }
 
             const categories = this.store.selectedCategories
@@ -95,7 +101,7 @@ export default {
                 console.log('dopo il reindirizzamento + fetchRestaurantByCategories', this.selectedCategories)
             } else {
                 this.fetchRestaurantsByCategory()
-                console.log('dopo il reindirizzamento + fetchRestaurantByCategories', this.selectedCategories)
+                console.log('senza il reindirizzamento + fetchRestaurantByCategories', this.selectedCategories)
             }
         }
     },
