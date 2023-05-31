@@ -89,6 +89,10 @@
                             </div>
 
                             <div class="d-flex justify-content-center pt-3" v-if="this.cart.length != []">
+                                <span class="block-msg">Per favore svuota
+                                    il carrello per
+                                    aggiungere piatti di un
+                                    ristornte diverso =></span>
                                 <DeleteAllFoodButton @click="deleteAllFood()" />
                             </div>
 
@@ -205,29 +209,27 @@ export default {
             }
         },
         addFoodToCartWithRID(dish) {
+
             if (localStorage.getItem('RID')) {
-                console.log('esiste già salvato un RID persistente')
                 const savedRID = localStorage.getItem('RID')
 
                 if (parseInt(savedRID) === parseInt(this.store.restaurantID)) {
-                    console.log('i RID combaciano')
-                    console.log('aggiungo piatto')
-
                     this.addFoodToCart(dish)
                 } else {
-                    console.log('i RID non combaciano, per favore svuota il carrello per aggiungere piatti di un altro ristorante')
-
-                    return
+                    console.log('non cambaciano i RID')
+                    this.showBlockMsg()
                 }
-
             } else {
-                console.log('non esiste un RID SALVATO E QUINDI LO CREO')
                 localStorage.setItem('RID', JSON.stringify(this.store.restaurantID))
 
-                console.log('aggiungo piatto')
                 this.addFoodToCart(dish)
             }
 
+        },
+        removeRID() {
+            if (this.cart.length == 0) {
+                localStorage.removeItem('RID')
+            }
         },
         addFoodToCart(dish) {
 
@@ -279,6 +281,8 @@ export default {
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
+
+            this.removeRID()
         },
         // deleteFoodFromCard(cart) {
 
@@ -317,6 +321,8 @@ export default {
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
+
+            this.removeRID()
         },
         deleteAllFood() {
             this.cart = []
@@ -328,6 +334,8 @@ export default {
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
+
+            this.removeRID()
         },
         showOrderForm() {
 
@@ -341,7 +349,10 @@ export default {
                 // console.log(this.totalCart)
             }
         },
-
+        showBlockMsg() {
+            const blockMsg = document.querySelector('.block-msg')
+            blockMsg.style.display = 'inline'
+        },
         // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
         getCartFromLocalStorage() {
             // recupero il carrello JSON dal local storage e 
@@ -546,6 +557,11 @@ export default {
     margin: 0 auto;
     border-radius: 1rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+    .block-msg {
+        display: none;
+        color: red;
+    }
 }
 
 .my-text {
