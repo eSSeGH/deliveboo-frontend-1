@@ -36,7 +36,8 @@
             class="d-flex justify-content-center justify-content-md-between justify-content-xl-between flex-wrap row-gap-5">
             <div class="col col-md-6 col-lg-6 col-xl-6 col-xxl-8">
 
-                <ul class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
+                <ul
+                    class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
 
                     <li class="my-card col-12 col-xxl-5 gap-3 d-flex flex-column justify-content-between"
                         v-for="dish in dishes" :key="dish.id">
@@ -56,7 +57,7 @@
                             <div class="d-flex align-items-center flex-sm-row justify-content-between">
                                 <p class="d-flex col-8">{{ dish.price }} €</p>
                                 <div class="d-flex flex-row-reverse col-sm-4 gap-2">
-                                    <AddFoodButton class="card-buttons text-center" @click="addFoodToCart(dish)" />
+                                    <AddFoodButton class="card-buttons text-center" @click="addFoodToCartWithRID(dish)" />
                                     <!-- <RemoveFoodButton class="card-buttons text-center" @click="deleteFoodFromCard(dish)" /> -->
                                 </div>
                             </div>
@@ -73,16 +74,17 @@
                             <h3 class="card-title text-center fw-bold py-4">
                                 Il tuo Deliveboo
                             </h3>
-                            <p class="text-center my-text" v-if="this.cart.length === 0">Aggiungi dei piatti al carrello...</p>
+                            <p class="text-center my-text" v-if="this.cart.length === 0">Aggiungi dei piatti al carrello...
+                            </p>
                             <div v-for="(dish, index) in cart" :key="dish.id">
                                 <div class="box-cart d-flex align-items-start">
 
                                     <span class="col-2 fw-bold fs-5">{{ dish.quantity }}x</span>
                                     <p class="col-6 m-0">{{ dish.name }}</p>
                                     <p class="col-2 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
-                                    <DeleteButton class="col-1 "
-                                        @click="deleteFoodQuantity(dish, index)" />
-                                    <DeleteEntityButton @click="deleteFoodEntity(dish, index)" class="col-1 ms-1 align-self-start" />
+                                    <DeleteButton class="col-1 " @click="deleteFoodQuantity(dish, index)" />
+                                    <DeleteEntityButton @click="deleteFoodEntity(dish, index)"
+                                        class="col-1 ms-1 align-self-start" />
                                 </div>
                             </div>
 
@@ -103,15 +105,18 @@
                                 <h5 class="card-title text-center fw-bold pb-2">
                                     Prosegui con l'ordine
                                 </h5>
-                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="POST" class="form" id="payment-form">
+                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="POST"
+                                    class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Nome..." name="firstName" v-model="firstName">
+                                        <input type="text" class="form-control" id="name" placeholder="Nome..."
+                                            name="firstName" v-model="firstName">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Cognome</label>
-                                        <input type="text" class="form-control" id="surname" placeholder="Cognome..." name="lastName" v-model="lastName">
+                                        <input type="text" class="form-control" id="surname" placeholder="Cognome..."
+                                            name="lastName" v-model="lastName">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Email</label>
@@ -120,11 +125,13 @@
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Numero</label>
-                                        <input type="text" class="form-control" id="number" placeholder="Numero..." name="phone" v-model="phone">
+                                        <input type="text" class="form-control" id="number" placeholder="Numero..."
+                                            name="phone" v-model="phone">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
-                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo..." name="address" v-model="address">
+                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo..."
+                                            name="address" v-model="address">
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Codice postale</label>
@@ -134,7 +141,8 @@
                                     <input type="hidden" name="order_id" v-model="orderID">
                                     <div class="col-12 d-flex justify-content-center py-3">
                                     </div>
-                                    <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart }}€</span></button>
+                                    <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart
+                                    }}€</span></button>
                                 </form>
                             </div>
                         </div>
@@ -163,12 +171,12 @@ import { counter } from '@fortawesome/fontawesome-svg-core'
 
 export default {
     components: {
-    AddFoodButton,
-    DeleteButton,
-    DeleteEntityButton,
-    DeleteAllFoodButton,
-    RemoveFoodButton
-},
+        AddFoodButton,
+        DeleteButton,
+        DeleteEntityButton,
+        DeleteAllFoodButton,
+        RemoveFoodButton
+    },
 
     methods: {
         fetchRestaurantBySlug() {
@@ -183,7 +191,10 @@ export default {
                     this.restaurant = res.data.results
 
                     this.dishes = this.restaurant.dishes
-                    
+
+                    this.store.restaurantID = this.restaurant.id
+                    console.log('salvo rid nello store')
+
                 }).catch((err) => {
                     this.$router.push('/404')
                 })
@@ -193,7 +204,37 @@ export default {
                 return `http://127.0.0.1:8000/storage/${imagePath}`
             }
         },
+        addFoodToCartWithRID(dish) {
+            if (localStorage.getItem('RID')) {
+                console.log('esiste già salvato un RID persistente')
+                const savedRID = localStorage.getItem('RID')
+
+                if (parseInt(savedRID) === parseInt(this.store.restaurantID)) {
+                    console.log('i RID combaciano')
+                    console.log('aggiungo piatto')
+
+                    this.addFoodToCart(dish)
+                } else {
+                    console.log('i RID non combaciano, per favore svuota il carrello per aggiungere piatti di un altro ristorante')
+
+                    return
+                }
+
+            } else {
+                console.log('non esiste un RID SALVATO E QUINDI LO CREO')
+                localStorage.setItem('RID', JSON.stringify(this.store.restaurantID))
+
+                console.log('aggiungo piatto')
+                this.addFoodToCart(dish)
+            }
+
+        },
         addFoodToCart(dish) {
+
+            // controllo se esite il rid salvato
+            // se esiste lo prendo e lo confronto con il current rid
+            // se è uguale aggiungo il paitto al carrello
+            // altrimenti creo un rid e lo salvo persistentemente
 
             //controllo se filtrando il cart mi trova l'elemento dish (se > 0)
             if (this.cart.filter(value => value.id === dish.id).length > 0) {
@@ -290,15 +331,15 @@ export default {
         },
         showOrderForm() {
 
-            if(this.totalCart === null) {
+            if (this.totalCart === null) {
                 this.showForm = false
-                this.showButtonConfirm = true 
-            }else if (this.totalCart !== 0) {
+                this.showButtonConfirm = true
+            } else if (this.totalCart !== 0) {
                 this.showForm = true
                 this.showButtonConfirm = false
                 // console.log('show form')
                 // console.log(this.totalCart)
-            } 
+            }
         },
 
         // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
@@ -306,16 +347,16 @@ export default {
             // recupero il carrello JSON dal local storage e 
             // SE esiste lo converto in array 
             // ALTRIMENTI metto l'array vuoto
-            const savedCartData = localStorage.getItem('cart') 
+            const savedCartData = localStorage.getItem('cart')
             // console.log(savedCartData)
             let localCart = []
 
-            if(savedCartData) {
+            if (savedCartData) {
                 localCart = JSON.parse(savedCartData)
             } else {
                 localCart = []
             }
-            
+
             // recupero il total local storage e 
             // SE esiste diventa float 
             // ALTRIMENTI metto il totale a 0
@@ -323,39 +364,39 @@ export default {
             console.log(savedTotalCart, typeof savedTotalCart)
             let localTotalCart = 0
             // console.log(localTotalCart)
-            
-            if(savedTotalCart !== 0) {
+
+            if (savedTotalCart !== 0) {
                 localTotalCart = JSON.parse(savedTotalCart)
             }
-            
+
             this.cart = localCart
             this.totalCart = localTotalCart
             console.log(this.totalCart)
         },
         goToPay() {
             axios.post('http://localhost:8000/api/order/pay', {
-                    cart: this.cart,
-                    form: {
-                        firstName: this.firstName,
-                        lastName: this.lastName,
-                        email: this.email,
-                        phone: this.phone,
-                        address: this.address,
-                        postalCode: this.postalCode
-                    }
+                cart: this.cart,
+                form: {
+                    firstName: this.firstName,
+                    lastName: this.lastName,
+                    email: this.email,
+                    phone: this.phone,
+                    address: this.address,
+                    postalCode: this.postalCode
+                }
 
             })
-            .then((res) => {
-                console.log(res.data.results)
-                this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
-            })
-            .finally(() => {
-                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
-                paymentFormEl.submit(); //faccio il submit del form di pagamento 
-            })
+                .then((res) => {
+                    console.log(res.data.results)
+                    this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+                })
+                .finally(() => {
+                    const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
+                    paymentFormEl.submit(); //faccio il submit del form di pagamento 
+                })
             this.clearLocalStorage()
             console.log(this.cart)
-            
+
         },
         clearLocalStorage() {
             localStorage.removeItem('cart') // elimino dal local storage i dati salvati
@@ -549,6 +590,7 @@ button:active {
     transform: translateY(10px);
     transition: 100ms;
 }
+
 .wave-bottom {
     min-width: 100%;
     position: relative;
