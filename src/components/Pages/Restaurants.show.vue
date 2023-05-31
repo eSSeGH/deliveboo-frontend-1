@@ -36,8 +36,7 @@
             class="d-flex justify-content-center justify-content-md-between justify-content-xl-between flex-wrap row-gap-5">
             <div class="col col-md-6 col-lg-6 col-xl-6 col-xxl-8">
 
-                <ul
-                    class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
+                <ul class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
 
                     <li class="my-card col-12 col-xxl-5 gap-3 d-flex flex-column justify-content-between"
                         v-for="dish in dishes" :key="dish.id">
@@ -55,7 +54,7 @@
 
                         <div class="row">
                             <div class="d-flex align-items-center flex-sm-row justify-content-between">
-                                <p class="d-flex col-8">{{ dish.price }}</p>
+                                <p class="d-flex col-8">{{ dish.price }} €</p>
                                 <div class="d-flex flex-row-reverse col-sm-4 gap-2">
                                     <AddFoodButton class="card-buttons text-center" @click="addFoodToCart(dish)" />
                                     <!-- <RemoveFoodButton class="card-buttons text-center" @click="deleteFoodFromCard(dish)" /> -->
@@ -475,12 +474,12 @@ export default {
     }
 
     .food-title {
-        font-size: 1.125rem;
+        font-size: 0.875rem;
         font-weight: bold;
     }
 
     .food-desc {
-        font-size: 0.875rem;
+        font-size: 0.75rem;
     }
 
     .food-img {
