@@ -148,7 +148,7 @@
     <!-- /DISHES -->
 
     <div class="container-auto bg-wave pt-5">
-        <img class="wave" src="/imgs/waves/footer-wave-desktop.svg" alt="">
+        <img class="wave-bottom" src="/imgs/waves/footer-wave-desktop.svg" alt="">
     </div>
 </template>
 
@@ -546,8 +546,21 @@ button:active {
     transform: translateY(10px);
     transition: 100ms;
 }
-.wave {
-    width: 100%;
-    margin-bottom: -16px;
+.wave-bottom {
+    min-width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+@media (max-width: 388px) {
+    .wave-bottom {
+        bottom: -1px;
+    }
+}
+
+@media (max-width: 418px) {
+    .wave-bottom {
+        margin-bottom: -2px;
+    }
 }
 </style>
