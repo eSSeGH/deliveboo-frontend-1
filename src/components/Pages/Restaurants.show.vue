@@ -110,7 +110,8 @@
                                     Prosegui con l'ordine
                                 </h5>
 
-                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET" class="form" id="payment-form">
+                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET"
+                                    class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
@@ -397,34 +398,35 @@ export default {
                 }
 
             })
-            .then((res) => {
-                console.log(res.data.results)
-                this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
-                //Invio la mail al ristoratore
-                axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName,
-                    email: this.restaurant.user.email,
-                    message: JSON.stringify(this.cart)
-                })
                 .then((res) => {
-                    console.log(res);
-                });
-                //Invio la mail al cliente
-                axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName,
-                    email: this.email,
-                    message: JSON.stringify(this.cart)
+                    console.log(res.data.results)
+                    this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+                    //Invio la mail al ristoratore
+                    axios.post('http://127.0.0.1:8000/api/leads', {
+                        name: this.firstName,
+                        email: this.restaurant.user.email,
+                        message: JSON.stringify(this.cart)
+                    })
+                        .then((res) => {
+                            console.log(res);
+                        });
+                    //Invio la mail al cliente
+                    axios.post('http://127.0.0.1:8000/api/leads', {
+                        name: this.firstName,
+                        email: this.email,
+                        message: JSON.stringify(this.cart)
+                    })
+                        .then((res) => {
+                            console.log(res);
+                        });
                 })
-                .then((res) => {
-                    console.log(res);
-                });
-            })
-            .finally(() => {
-                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
-                paymentFormEl.submit(); //faccio il submit del form di pagamento 
-            })
+                .finally(() => {
+                    const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
+                    paymentFormEl.submit(); //faccio il submit del form di pagamento 
+                })
 
             this.clearLocalStorage()
+            this.removeRID()
             console.log(this.cart)
 
         },
