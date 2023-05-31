@@ -271,6 +271,10 @@ export default {
                 }
             }
 
+            if(this.cart.length == 0) {
+                localStorage.removeItem('restaurant')
+            }
+
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
@@ -309,6 +313,12 @@ export default {
             this.showForm = false
             this.showButtonConfirm = true
 
+            if(this.cart.length == 0) {
+                localStorage.removeItem('restaurant')
+            }
+
+            // localStorage.removeItem('restaurant')
+
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
@@ -319,6 +329,10 @@ export default {
 
             this.showForm = false
             this.showButtonConfirm = true
+
+            if(this.cart.length == 0) {
+                localStorage.removeItem('restaurant')
+            }
 
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
