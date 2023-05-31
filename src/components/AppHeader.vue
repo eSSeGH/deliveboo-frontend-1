@@ -30,22 +30,26 @@
                 </div>
 
                 <div class="header-buttons my-col d-flex justify-content-end">
-                    <button class="login-btn me-lg-4 me-md-3 me-sm-2 me-1">
-                        <div class="sign"><svg viewBox="0 0 512 512">
-                                <path
-                                    d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z">
-                                </path>
-                            </svg></div>
-                        <div class="log-text"><a href="http://127.0.0.1:8000/login">Login</a></div>
-                    </button>
-                    <button class="register-btn">
-                        <div class="sign-register"><svg viewBox="0 0 512 512">
-                                <path
-                                    d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z">
-                                </path>
-                            </svg></div>
-                        <div class="log-text"><a href="http://127.0.0.1:8000/register">Register</a></div>
-                    </button>
+                    <a href="http://127.0.0.1:8000/login">
+                        <button class="login-btn me-lg-4 me-md-3 me-sm-2 me-1">
+                            <div class="sign"><svg viewBox="0 0 512 512">
+                                    <path
+                                        d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z">
+                                    </path>
+                                </svg></div>
+                            <div class="log-text">Login</div>
+                        </button>
+                    </a>
+                    <a href="http://127.0.0.1:8000/register">
+                        <button class="register-btn">
+                            <div class="sign-register"><svg viewBox="0 0 512 512">
+                                    <path
+                                        d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z">
+                                    </path>
+                                </svg></div>
+                            <div class="log-text">Register</div>
+                        </button>
+                    </a>
                 </div>
 
             </div>
@@ -54,6 +58,7 @@
 </template>
 
 <script>
+import { toHandlers } from 'vue';
 import store from '../store';
 import axios from 'axios';
 
@@ -73,9 +78,11 @@ export default {
             const basePath = 'http://127.0.0.1:8000/api/restaurants'
 
             // evito di pushare 'this.currentSelectedCategories' quando è nullo
-            if (this.currentSelectedCategories != null || this.currentSelectedCategories != '') {
-                this.currentSelectedCategories.toLowerCase()
-                this.selectedCategories.push(this.currentSelectedCategories)
+            if (this.currentSelectedCategories != null && this.currentSelectedCategories != '') {
+                const lcTrimmedSelectedCategory = this.currentSelectedCategories.trim().toLowerCase()
+                this.selectedCategories.push(lcTrimmedSelectedCategory)
+            } else {
+                console.log('non è entrato nel controllo')
             }
 
             // controllo: se è stato pushato '' tramite v-model la elimino dall'array
@@ -97,10 +104,13 @@ export default {
                 })
                 .catch((err) => {
                     this.$router.push('/404')
+                }).finally(() => {
+                    this.scrollToTop()
                 })
         },
         // funzione di redirect all'advanced search page alla pressione di enter
         goToAdvancedSearchPage() {
+
             if (this.$route.name === 'home') {
                 this.$router.push('/restaurants')
 
@@ -111,6 +121,16 @@ export default {
                 this.fetchRestaurantsByCategory()
                 console.log('senza il reindirizzamento + fetchRestaurantByCategories', this.selectedCategories)
             }
+
+            this.store.currentSelectedCategories = null
+
+            this.scrollToTop()
+        },
+        scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
         }
     },
     computed: {
@@ -197,28 +217,32 @@ export default {
             .searchbar {
                 height: 24px;
                 border: 3px solid $purple-4;
-                border-radius: 20px;
                 background-color: white;
                 color: black;
                 cursor: pointer;
                 padding: 7px 12px;
-                transition: outline-color 1s;
+                transition: outline-color 0.5s;
                 flex-shrink: 1;
                 width: 100%;
+                border-radius: 20px 0 0 20px;
+                border-right: 0;
             }
 
             .search-btn {
                 border: none !important;
                 border-radius: 0 20px 20px 0;
-                background-color: $purple-3;
+                background-color: $purple-4;
                 color: white;
                 cursor: pointer;
-                width: 0;
-                height: 0;
-                transition: all 0.3s;
+                transition: all 0.5s;
                 overflow: hidden;
                 position: relative;
                 right: 3px;
+                width: 30px;
+                height: 24px;
+                padding-right: 3px;
+                border-left: none !important;
+                box-sizing: content-box;
 
                 #icon {
                     font-family: Font Awesome 6 Free;
@@ -229,16 +253,12 @@ export default {
 
         .searchbar:focus {
             outline-color: yellow;
-            border-radius: 20px 0 0 20px;
-            border-right: 0;
         }
 
         .searchbar:focus+.search-btn {
             border: 3px solid rgb(254, 254, 150) !important;
-            width: 30px;
-            height: 28px;
-            padding-right: 3px;
             border-left: none !important;
+            height: 22px;
         }
 
         .header-buttons {

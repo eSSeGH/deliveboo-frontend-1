@@ -2,9 +2,11 @@
 
     <div class="container-auto footer-bg">
 
-        <div class="container py-3 d-flex align-items-center justify-content-center">
-            <img class="logo-thumb" src="/imgs/logo/logo4.png" alt="">
-        </div>
+        <router-link :to="{ name: 'home' }">
+            <div @click="scrollToTop()" class="container py-3 d-flex align-items-center justify-content-center">
+                <img class="logo-thumb" src="/imgs/logo/logo4.png" alt="">
+            </div>
+        </router-link>
     
         <div class="container spacing">
 
@@ -61,6 +63,14 @@ import FollowButton from './elements/FollowButton.vue';
     export default {
         components: {
             FollowButton,
+        },
+        methods: {
+            scrollToTop() {
+                window.scrollTo({
+                    top:0,
+                    behavior: 'smooth'
+                })
+            }
         }
     }
 </script>

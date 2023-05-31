@@ -26,7 +26,7 @@ const store = reactive({
   // array dei ristoranti recuperati con axios
   restaurants: [],
   cart: [],
-  
+  restaurantID: null,
 })
 
 

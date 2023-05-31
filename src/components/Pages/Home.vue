@@ -14,8 +14,8 @@
 
                     <div class="col col-md-6 text-center text-md-start">
                         <div class="d-flex justify-content-center flex-column gap-2 px-3">
-                            <h1 class="big-text">The Best Food Delivery</h1>
-                            <p>Cibo Italiano, Giapponese, Cinese, Internazionale e molto altro</p>
+                            <h1 class="big-text">Il miglior Food Delivery</h1>
+                            <p>Cibo Italiano, Giapponese, Cinese, Internazionale e molto altro...</p>
                         </div>
                     </div>
 
@@ -72,9 +72,8 @@
                     </div>
 
                     <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
-                        <h4 class="outro-title">Fast delivery</h4>
-                        <p>We pride ourselves on speed. Order or send anything in your city and we'll pick it up and deliver
-                            it in minutes.</p>
+                        <h4 class="outro-title">Spedizione Rapida</h4>
+                        <p>Siamo orgogliosi della velocità. Ordina o spedisci qualsiasi cosa nella tua città e noi lo ritiriamo e lo consegniamo in pochi minuti.</p>
                     </div>
 
                 </div>
@@ -90,9 +89,8 @@
                     </div>
 
                     <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
-                        <h4 class="outro-title">Your city's top restaurants</h4>
-                        <p>With a great variety of restaurants you can order your favourite food or explore new restaurants
-                            nearby!</p>
+                        <h4 class="outro-title">I migliori ristoranti della citt&aacute;</h4>
+                        <p>Con una grande varietà di ristoranti puoi ordinare il tuo cibo preferito o esplorare le nostre categorie di ristoranti! Tra cui molti ristoranti etnici.</p>
                     </div>
 
                 </div>
@@ -104,13 +102,12 @@
                 <div class="d-flex flex-column gap-2 align-items-center">
 
                     <div class="outro-img-box d-flex justify-content-center">
-                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/groceries.svg" alt="">
+                        <img class="outro-img-thumb" src="/public/imgs/outro-section-imgs/together.svg" alt="">
                     </div>
 
                     <div class="outro-desc text-center d-flex flex-column gap-2 mx-auto">
-                        <h4 class="outro-title">Groceries delivery & more</h4>
-                        <p>Find anything you need! From supermarkets to shops, pharmacies to florists — if it's in your city
-                            you can count on us to get it.</p>
+                        <h4 class="outro-title">Il nostro patto con l'ambiente</h4>
+                        <p>Collaboriamo con ristoranti che utilizzano esclusivamente contenitori riciclabili per i loro piatti e nostri rider utilizzano mezzi a bassa emissione di CO2 per effettuare consegne</p>
                     </div>
 
                 </div>
@@ -283,23 +280,42 @@ export default {
     }
 }
 
+.outro-img-thumb {
+    width: 160px;
+    aspect-ratio: 1;
+}
+
 .bg-wave {
     background-color: #FF850044;
 }
 
 .wave-bottom {
     min-width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+@media (max-width: 382px) {
+    .wave-bottom {
+        top: 2px;
+    }
 }
 
 @media (max-width: 393px) {
     .wave-bottom {
-        margin-bottom: -3px;
+        bottom: -2px;
     }
 }
 
-@media (max-width: 405px) {
+@media (max-width: 415px) {
     .wave-bottom {
-        margin-bottom: -2px;
+        bottom: -1px;
+    }
+}
+
+@media (max-width: 425px) {
+    .wave-bottom {
+        bottom: -1px;
     }
 }
 </style>
