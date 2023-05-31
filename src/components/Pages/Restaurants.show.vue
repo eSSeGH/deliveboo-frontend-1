@@ -226,15 +226,13 @@ export default {
                     localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando aggiungo un piatto
                     console.log(this.cart)
                     // console.log(localStorage.getItem('cart'))
-                } else {
-                    console.log('NON FAI NULLA')
                 }
             } else {
                 
                 console.log('NON FAI NULLA UGUALE')
             }
 
-            // controllare SE il ristorante esiste
+             // controllare SE il ristorante esiste
             // recuperarlo e salvarlo in una variabile
             // ALTRIMENTI salviamolo in localstorage restaurantID
             // salvare in localstoarge ID restaurant quando viene aggiunto un piatto al carrello
