@@ -365,8 +365,8 @@ export default {
                 });
             })
             .finally(() => {
-                // const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
-                // paymentFormEl.submit(); //faccio il submit del form di pagamento 
+                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
+                paymentFormEl.submit(); //faccio il submit del form di pagamento 
             })
             this.clearLocalStorage()
             console.log(this.cart)
