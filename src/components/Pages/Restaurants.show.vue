@@ -160,6 +160,7 @@ import RemoveFoodButton from '../elements/RemoveFoodButton.vue'
 import store from '../../store'
 import axios from 'axios'
 import { counter } from '@fortawesome/fontawesome-svg-core'
+import { faDAndD } from '@fortawesome/free-brands-svg-icons'
 
 export default {
     components: {
@@ -183,6 +184,9 @@ export default {
                     this.restaurant = res.data.results
 
                     this.dishes = this.restaurant.dishes
+
+                    this.restaurantID = this.restaurant.id
+                    console.log(this.restaurantID)
                     
                 }).catch((err) => {
                     this.$router.push('/404')
@@ -194,23 +198,55 @@ export default {
             }
         },
         addFoodToCart(dish) {
+            console.log(dish.restaurant_id)
+            
 
-            //controllo se filtrando il cart mi trova l'elemento dish (se > 0)
-            if (this.cart.filter(value => value.id === dish.id).length > 0) {
-                let filteredCart = this.cart.filter(value => value.id === dish.id) //mi salvo l'array filtrato con il mio dish
-                filteredCart[0].quantity++ //tanto c'è solo un elemento in questo array
-                this.totalCart += parseFloat(dish.price)
+            if(this.cart.length === 0 || localStorage.getItem('restaurant') == this.restaurant.id) {
+                localStorage.setItem('restaurant', JSON.stringify(this.restaurant.id))
+                let savedRestaurantID = localStorage.getItem('restaurant')
+
+                if(savedRestaurantID == this.restaurant.id) {
+
+                    //controllo se filtrando il cart mi trova l'elemento dish (se > 0)
+                    if (this.cart.filter(value => value.id === dish.id).length > 0) {
+
+                        let filteredCart = this.cart.filter(value => value.id === dish.id) //mi salvo l'array filtrato con il mio dish
+                        filteredCart[0].quantity++ //tanto c'è solo un elemento in questo array
+                        this.totalCart += parseFloat(dish.price)
+
+                    } else {
+
+                        dish.quantity = 1
+                        this.cart.push(dish)
+                        this.totalCart += parseFloat(dish.price)
+
+                    }
+                    //STEP:1 salvare dati nel local storage ad ogni modifica
+                    localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando aggiungo un piatto
+                    localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando aggiungo un piatto
+                    console.log(this.cart)
+                    // console.log(localStorage.getItem('cart'))
+                } else {
+                    console.log('NON FAI NULLA')
+                }
             } else {
-                dish.quantity = 1
-                this.cart.push(dish)
-                this.totalCart += parseFloat(dish.price)
+                
+                console.log('NON FAI NULLA UGUALE')
             }
-            //STEP:1 salvare dati nel local storage ad ogni modifica
-            localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando aggiungo un piatto
-            localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando aggiungo un piatto
-            console.log(this.cart)
-            // console.log(localStorage.getItem('cart'))
+
+            // controllare SE il ristorante esiste
+            // recuperarlo e salvarlo in una variabile
+            // ALTRIMENTI salviamolo in localstorage restaurantID
+            // salvare in localstoarge ID restaurant quando viene aggiunto un piatto al carrello
+            // controllare SE dish.restaurant_id, corrisponde all'ID del ristorante
+            // se corrisponde ....
+
+            //ELSE eureka
+            
+
+            
         },
+        
         deleteFoodQuantity(dish, index) {
 
             //se il carrello ha un elemento e, quell'elemento ha 1 sola quantità e, il 'conferma ordine' è nascosto
@@ -380,6 +416,7 @@ export default {
             dishes: [],
             cart: [], // NON TOCCARE MAREMMAHANE
             orderID: '', //id dell' ordine
+            restaurantID: '', //id del ristorante
             firstName: '', //nome del cliente
             lastName: '', //cognome del cliente
             email: '', //email del cliente
