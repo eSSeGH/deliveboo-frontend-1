@@ -78,9 +78,11 @@ export default {
             const basePath = 'http://127.0.0.1:8000/api/restaurants'
 
             // evito di pushare 'this.currentSelectedCategories' quando è nullo
-            if (this.currentSelectedCategories != null || this.currentSelectedCategories != '') {
-                this.currentSelectedCategories.toLowerCase()
-                this.selectedCategories.push(this.currentSelectedCategories)
+            if (this.currentSelectedCategories != null && this.currentSelectedCategories != '') {
+                const lcTrimmedSelectedCategory = this.currentSelectedCategories.trim().toLowerCase()
+                this.selectedCategories.push(lcTrimmedSelectedCategory)
+            } else {
+                console.log('non è entrato nel controllo')
             }
 
             // controllo: se è stato pushato '' tramite v-model la elimino dall'array
@@ -102,12 +104,12 @@ export default {
                 })
                 .catch((err) => {
                     this.$router.push('/404')
+                }).finally(() => {
+                    this.scrollToTop()
                 })
         },
         // funzione di redirect all'advanced search page alla pressione di enter
         goToAdvancedSearchPage() {
-
-            this.store.currentSelectedCategories = this.currentSelectedCategories.trim()
 
             if (this.$route.name === 'home') {
                 this.$router.push('/restaurants')
@@ -120,7 +122,15 @@ export default {
                 console.log('senza il reindirizzamento + fetchRestaurantByCategories', this.selectedCategories)
             }
 
-            this.store.currentSelectedCategories = ''
+            this.store.currentSelectedCategories = null
+
+            this.scrollToTop()
+        },
+        scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            })
         }
     },
     computed: {
