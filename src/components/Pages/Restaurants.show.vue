@@ -349,7 +349,7 @@ export default {
                 axios.post('http://127.0.0.1:8000/api/leads', {
                     name: this.firstName,
                     email: this.restaurant.user.email,
-                    message: 'Hai ricevuto un nuovo ordine da: ' + this.email
+                    message: JSON.stringify(this.cart)
                 })
                 .then((res) => {
                     console.log(res);
@@ -358,7 +358,7 @@ export default {
                 axios.post('http://127.0.0.1:8000/api/leads', {
                     name: this.firstName,
                     email: this.email,
-                    message: 'Hai ordinato da: ' + this.restaurant.name
+                    message: JSON.stringify(this.cart)
                 })
                 .then((res) => {
                     console.log(res);
