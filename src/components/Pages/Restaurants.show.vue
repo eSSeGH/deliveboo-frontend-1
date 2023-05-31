@@ -290,11 +290,15 @@ export default {
         },
         showOrderForm() {
 
-            if (this.totalCart !== 0) {
+            if(this.totalCart === null) {
+                this.showForm = false
+                this.showButtonConfirm = true 
+            }else if (this.totalCart !== 0) {
                 this.showForm = true
                 this.showButtonConfirm = false
-                console.log('show form')
-            }
+                // console.log('show form')
+                // console.log(this.totalCart)
+            } 
         },
 
         // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
