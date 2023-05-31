@@ -217,28 +217,32 @@ export default {
             .searchbar {
                 height: 24px;
                 border: 3px solid $purple-4;
-                border-radius: 20px;
                 background-color: white;
                 color: black;
                 cursor: pointer;
                 padding: 7px 12px;
-                transition: outline-color 1s;
+                transition: outline-color 0.5s;
                 flex-shrink: 1;
                 width: 100%;
+                border-radius: 20px 0 0 20px;
+                border-right: 0;
             }
 
             .search-btn {
                 border: none !important;
                 border-radius: 0 20px 20px 0;
-                background-color: $purple-3;
+                background-color: $purple-4;
                 color: white;
                 cursor: pointer;
-                width: 0;
-                height: 0;
-                transition: all 0.3s;
+                transition: all 0.5s;
                 overflow: hidden;
                 position: relative;
                 right: 3px;
+                width: 30px;
+                height: 24px;
+                padding-right: 3px;
+                border-left: none !important;
+                box-sizing: content-box;
 
                 #icon {
                     font-family: Font Awesome 6 Free;
@@ -249,16 +253,12 @@ export default {
 
         .searchbar:focus {
             outline-color: yellow;
-            border-radius: 20px 0 0 20px;
-            border-right: 0;
         }
 
         .searchbar:focus+.search-btn {
             border: 3px solid rgb(254, 254, 150) !important;
-            width: 30px;
-            height: 28px;
-            padding-right: 3px;
             border-left: none !important;
+            height: 22px;
         }
 
         .header-buttons {
