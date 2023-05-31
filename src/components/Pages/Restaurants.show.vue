@@ -182,7 +182,7 @@ export default {
                     // console.log(res)
 
                     this.restaurant = res.data.results
-
+                    console.log(this.restaurant);
                     this.dishes = this.restaurant.dishes
                     
                 }).catch((err) => {
@@ -345,10 +345,28 @@ export default {
             .then((res) => {
                 console.log(res.data.results)
                 this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+                //Invio la mail al ristoratore
+                axios.post('http://127.0.0.1:8000/api/leads', {
+                    name: this.firstName,
+                    email: this.restaurant.user.email,
+                    message: 'Hai ricevuto un nuovo ordine da: ' + this.email
+                })
+                .then((res) => {
+                    console.log(res);
+                });
+                //Invio la mail al cliente
+                axios.post('http://127.0.0.1:8000/api/leads', {
+                    name: this.firstName,
+                    email: this.email,
+                    message: 'Hai ordinato da: ' + this.restaurant.name
+                })
+                .then((res) => {
+                    console.log(res);
+                });
             })
             .finally(() => {
-                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
-                paymentFormEl.submit(); //faccio il submit del form di pagamento 
+                // const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
+                // paymentFormEl.submit(); //faccio il submit del form di pagamento 
             })
             this.clearLocalStorage()
             console.log(this.cart)
