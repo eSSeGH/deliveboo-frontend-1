@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import { toHandlers } from 'vue';
 import store from '../store';
 import axios from 'axios';
 
@@ -101,6 +102,9 @@ export default {
         },
         // funzione di redirect all'advanced search page alla pressione di enter
         goToAdvancedSearchPage() {
+
+            this.store.currentSelectedCategories = this.currentSelectedCategories.trim()
+
             if (this.$route.name === 'home') {
                 this.$router.push('/restaurants')
 
@@ -111,6 +115,8 @@ export default {
                 this.fetchRestaurantsByCategory()
                 console.log('senza il reindirizzamento + fetchRestaurantByCategories', this.selectedCategories)
             }
+
+            this.store.currentSelectedCategories = ''
         }
     },
     computed: {
