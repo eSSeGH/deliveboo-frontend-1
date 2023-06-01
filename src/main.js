@@ -16,10 +16,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faUserSecret, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import { faUserSecret, faMagnifyingGlass, faCircleRight } from '@fortawesome/free-solid-svg-icons'
 
 /* add icons to the library */
-library.add(faUserSecret, faMagnifyingGlass)
+library.add(faUserSecret, faMagnifyingGlass, faCircleRight)
 // /FONTAWESOME
 
 // BOOTSTRAP

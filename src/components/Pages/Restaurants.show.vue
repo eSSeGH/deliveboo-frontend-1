@@ -88,12 +88,18 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-center pt-3" v-if="this.cart.length != []">
-                                <span class="block-msg">Per favore svuota
-                                    il carrello per
-                                    aggiungere piatti di un
-                                    ristornte diverso =></span>
-                                <DeleteAllFoodButton @click="deleteAllFood()" />
+                            <div class="d-flex justify-content-center pt-3 align-items-center gap-2"
+                                v-if="this.cart.length != []">
+                                <div class="block-msg col-8 align-items-center">
+                                    <span>Svuota
+                                        il carrello, prima di
+                                        aggiungere piatti da un
+                                        ristorante diverso</span>
+                                    <font-awesome-icon id="icon"
+                                        style="font-size: 25px; color: red; font-family: Font Awesome 6 Free"
+                                        class="magnifying-glass" icon="fa-solid fa-circle-right"></font-awesome-icon>
+                                </div>
+                                <DeleteAllFoodButton class="delete-all-food-btn col-4" @click="deleteAllFood()" />
                             </div>
 
                             <div class="confirm-button d-flex justify-content-center py-3">
@@ -353,7 +359,11 @@ export default {
         },
         showBlockMsg() {
             const blockMsg = document.querySelector('.block-msg')
-            blockMsg.style.display = 'inline'
+            blockMsg.style.display = 'flex'
+            setTimeout(() => {
+                const blockMsg = document.querySelector('.block-msg')
+                blockMsg.style.display = 'none'
+            }, 3000)
         },
         // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
         getCartFromLocalStorage() {
@@ -587,6 +597,11 @@ export default {
     .block-msg {
         display: none;
         color: red;
+        transition: all .3s;
+    }
+
+    .delete-all-food-btn {
+        flex-shrink: 0;
     }
 }
 
