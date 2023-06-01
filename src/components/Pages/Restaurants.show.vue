@@ -120,40 +120,67 @@
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Nome</label>
-                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2" id="name"
+                                        <input @blur="formCheckFirstName()" type="text" class="form-control ps-2" id="name"
                                             placeholder="Nome..." name="firstName" v-model="firstName">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
+                                    <div class="err-msg-firstName" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'nome' non può essere vuoto
+                                    </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Cognome</label>
-                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2" id="surname"
-                                            placeholder="Cognome..." name="lastName" v-model="lastName">
+                                        <input @blur="formCheckLastName()" type="text" class="form-control ps-2"
+                                            id="surname" placeholder="Cognome..." name="lastName" v-model="lastName">
                                         <span id="payment-error" class="message-error text-danger"></span>
+                                    </div>
+                                    <div class="err-msg-lastName" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'cognome' non può essere vuoto
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Email</label>
-                                        <input @blur="isAvailableForm()" type="email" class="form-control ps-2" id="email"
+                                        <input @blur="formCheckEmail()" type="email" class="form-control ps-2" id="email"
                                             placeholder="name@example.com" name="email" v-model="email">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
+                                    <div class="err-msg-Email" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'email' non può essere vuoto
+                                    </div>
+                                    <div class="err-regex-eMail" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'email' ha un formato non valido
+                                    </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Numero</label>
-                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2" id="number"
+                                        <input @blur="formCheckPhone()" type="text" class="form-control ps-2" id="number"
                                             placeholder="Numero..." name="phone" v-model="phone">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
+                                    <div class="err-msg-phone" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'numero' non può essere vuoto
+                                    </div>
+                                    <div class="err-regex-phone" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'numero' ha un formato non valido
+                                    </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Indirizzo</label>
-                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2" id="address"
+                                        <input @blur="formCheckAddress()" type="text" class="form-control ps-2" id="address"
                                             placeholder="Indirizzo..." name="address" v-model="address">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
+                                    <div class="err-msg-address" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'indirizzo' non può essere vuoto
+                                    </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Codice postale</label>
-                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2"
+                                        <input @blur="formCheckPostalCode()" type="text" class="form-control ps-2"
                                             id="postal-code" placeholder="Codice postale..." name="postal_code"
                                             v-model="postalCode">
                                         <span id="payment-error" class="message-error text-danger"></span>
+                                    </div>
+                                    <div class="err-msg-postalCode" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'codice postale' non può essere vuoto
+                                    </div>
+                                    <div class="err-regex-postalCode" style="color: red; display: none; font-size: 10px;">
+                                        Il campo 'codice postale' ha un formato non valido
                                     </div>
                                     <input type="hidden" name="order_id" v-model="orderID">
 
@@ -199,7 +226,91 @@ export default {
     },
 
     methods: {
+        formCheckFirstName() {
+            if (this.firstName.length != 0) {
+                this.isFormValid = true;
+            } else {
+                const errMsgEmpty = document.querySelector('.err-msg-firstName')
+                errMsgEmpty.style.display = 'block'
+                this.isFormValid = false;
+            }
+        },
+        formCheckLastName() {
+            if (this.lastName.length != 0) {
+                this.isFormValid = true;
+            } else {
+                const errMsgEmpty = document.querySelector('.err-msg-lastName')
+                errMsgEmpty.style.display = 'block'
+                this.isFormValid = false;
+            }
+        },
+        formCheckEmail() {
+            if (this.email.length != 0) {
+                this.isFormValid = true;
+            } else {
+                const errMsgEmpty = document.querySelector('.err-msg-email')
+                errMsgEmpty.style.display = 'block'
+                this.isFormValid = false;
+            }
+
+            const reEmail = /[a-zA-Z0-9_\-\.]+[@][a-z]+[\.][a-z]{2,3}/
+
+            if (reEmail.test(this.email)) {
+                this.isFormValid = true;
+            } else {
+                const errMsgEmail = document.querySelector('.err-regex-eMail')
+                errMsgEmail.style.display = 'block'
+                this.isFormValid = false;
+            }
+        },
+        formCheckPhone() {
+            if (this.phone.length != 0) {
+                this.isFormValid = true;
+            } else {
+                const errMsgEmpty = document.querySelector('.err-msg-phone')
+                errMsgEmpty.style.display = 'block'
+                this.isFormValid = false;
+            }
+
+            const rePhone = /[0-9]{10}/
+
+            if (rePhone.test(this.phone)) {
+                this.isFormValid = true;
+            } else {
+                const errMsgPhone = document.querySelector('.err-regex-phone')
+                errMsgPhone.style.display = 'block'
+                this.isFormValid = false;
+            }
+        },
+        formCheckAddress() {
+            if (this.address.length != 0) {
+                this.isFormValid = true;
+            } else {
+                const errMsgEmpty = document.querySelector('.err-msg-address')
+                errMsgEmpty.style.display = 'block'
+                this.isFormValid = false;
+            }
+        },
+        formCheckPostalCode() {
+            if (this.postalCode.length != 0) {
+                this.isFormValid = true;
+            } else {
+                const errMsgEmpty = document.querySelector('.err-msg-postalCode')
+                errMsgEmpty.style.display = 'block'
+                this.isFormValid = false;
+            }
+            const rePostalCode = /[0-9]{5}/
+
+            if (rePostalCode.test(this.postalCode)) {
+                this.isFormValid = true;
+            } else {
+                const errMsgPostalCode = document.querySelector('.err-regex-postalCode')
+                errMsgPostalCode.style.display = 'block'
+                this.isFormValid = false;
+            }
+        },
         isAvailableForm() {
+
             if (this.firstName.length != 0 &&
                 this.lastName.length != 0 &&
                 this.email.length != 0 &&
@@ -450,6 +561,7 @@ export default {
             localStorage.removeItem('RName')
             localStorage.removeItem('RID')
 
+            // chiamata axios
             axios.post('http://localhost:8000/api/order/pay', {
                 cart: this.cart,
                 form: {
