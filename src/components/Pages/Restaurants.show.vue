@@ -236,6 +236,7 @@ export default {
         removeRID() {
             if (this.cart.length == 0) {
                 localStorage.removeItem('RID')
+                console.log('RID rimosso')
             }
         },
         addFoodToCart(dish) {
@@ -396,6 +397,8 @@ export default {
             console.log(this.totalCart)
         },
         goToPay() {
+            localStorage.removeItem('RID')
+
             axios.post('http://localhost:8000/api/order/pay', {
                 cart: this.cart,
                 form: {
@@ -408,31 +411,34 @@ export default {
                 }
 
             })
-                .then((res) => {
-                    console.log(res.data.results)
-                    this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
-                    //Invio la mail al ristoratore
-                    axios.post('http://127.0.0.1:8000/api/leads', {
-                        name: this.firstName,
-                        email: this.restaurant.user.email,
-                        message: JSON.stringify(this.cart)
-                    })
-                        .then((res) => {
-                            console.log(res);
-                        });
-                    //Invio la mail al cliente
-                    axios.post('http://127.0.0.1:8000/api/leads', {
-                        name: this.firstName,
-                        email: this.email,
-                        message: JSON.stringify(this.cart)
-                    })
-                        .then((res) => {
-                            console.log(res);
-                        });
+
+            .then((res) => {
+                console.log(res.data.results)
+                this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+                //Messaggio da inviare al ristoratore
+                let messageRestaurant = {
+                    message: "Hai ricevuto un nuovo ordine da consegnare a: " + this.firstName + " " + this.lastName + " in " + this.address + ", " + this.postalCode,
+                    cart: this.cart
+                };
+                //Messaggio da inviare al cliente
+                let messageClient = {
+                    message: "Hai ordinato da: " + this.restaurant.name,
+                    cart: this.cart
+                };
+                //Invio la mail al ristoratore
+                axios.post('http://127.0.0.1:8000/api/leads', {
+                    name: this.firstName + " " + this.lastName,
+                    email: this.restaurant.user.email,
+                    message: JSON.stringify(messageRestaurant)
                 })
-                .finally(() => {
-                    const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
-                    paymentFormEl.submit(); //faccio il submit del form di pagamento 
+                .then((res) => {
+                    console.log(res);
+                });
+                //Invio la mail al cliente
+                axios.post('http://127.0.0.1:8000/api/leads', {
+                    name: this.firstName + " " + this.lastName,
+                    email: this.email,
+                    message: JSON.stringify(messageClient)
                 })
 
             this.clearLocalStorage()
