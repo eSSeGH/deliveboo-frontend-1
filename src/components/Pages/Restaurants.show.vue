@@ -316,8 +316,12 @@ export default {
                 this.cart.splice(index, 1)
             }
 
-            this.showForm = false
-            this.showButtonConfirm = true
+            if(this.cart.length === 0 && !this.showButtonConfirm) {
+                this.showForm = false
+                this.showButtonConfirm = true
+            }
+            
+            
 
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
