@@ -113,33 +113,33 @@
                                 <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET" class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Nome..."
+                                        <label for="exampleFormControlInput1" class="ps-2 form-label">Nome</label>
+                                        <input type="text" class="ps-2 form-control" id="name" placeholder="Nome..."
                                             name="firstName" v-model="firstName">
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Cognome</label>
-                                        <input type="text" class="form-control" id="surname" placeholder="Cognome..."
+                                        <label for="exampleFormControlInput1" class="ps-2 form-label">Cognome</label>
+                                        <input type="text" class="ps-2 form-control" id="surname" placeholder="Cognome..."
                                             name="lastName" v-model="lastName">
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                                        <label for="exampleFormControlInput1" class="ps-2 form-label">Email</label>
+                                        <input type="email" class="ps-2 form-control" id="exampleFormControlInput1"
                                             placeholder="name@example.com" name="email" v-model="email">
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Numero</label>
-                                        <input type="text" class="form-control" id="number" placeholder="Numero..."
+                                        <label for="exampleFormControlInput1" class="ps-2 form-label">Numero</label>
+                                        <input type="text" class="ps-2 form-control" id="number" placeholder="Numero..."
                                             name="phone" v-model="phone">
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
-                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo..."
+                                        <label for="exampleFormControlInput1" class="ps-2 form-label">Indirizzo</label>
+                                        <input type="text" class="ps-2 form-control" id="address" placeholder="Indirizzo..."
                                             name="address" v-model="address">
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Codice postale</label>
-                                        <input type="text" class="form-control" id="postal-code"
+                                        <label for="exampleFormControlInput1" class="ps-2 form-label">Codice postale</label>
+                                        <input type="text" class="ps-2 form-control" id="postal-code"
                                             placeholder="Codice postale..." name="postal_code" v-model="postalCode">
                                     </div>
                                     <input type="hidden" name="order_id" v-model="orderID">
