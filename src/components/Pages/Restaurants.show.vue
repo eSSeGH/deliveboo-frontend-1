@@ -110,7 +110,8 @@
                                     Prosegui con l'ordine
                                 </h5>
 
-                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET" class="form" id="payment-form">
+                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET"
+                                    class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
@@ -229,6 +230,7 @@ export default {
         removeRID() {
             if (this.cart.length == 0) {
                 localStorage.removeItem('RID')
+                console.log('RID rimosso')
             }
         },
         addFoodToCart(dish) {
@@ -385,6 +387,8 @@ export default {
             console.log(this.totalCart)
         },
         goToPay() {
+            localStorage.removeItem('RID')
+
             axios.post('http://localhost:8000/api/order/pay', {
                 cart: this.cart,
                 form: {
@@ -397,6 +401,7 @@ export default {
                 }
 
             })
+
             .then((res) => {
                 console.log(res.data.results)
                 this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
@@ -425,14 +430,6 @@ export default {
                     email: this.email,
                     message: JSON.stringify(messageClient)
                 })
-                .then((res) => {
-                    console.log(res);
-                });
-            })
-            .finally(() => {
-                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
-                paymentFormEl.submit(); //faccio il submit del form di pagamento 
-            })
 
             this.clearLocalStorage()
             console.log(this.cart)
