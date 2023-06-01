@@ -144,9 +144,10 @@
                                     </div>
                                     <input type="hidden" name="order_id" v-model="orderID">
                                     <div class="col-12 d-flex justify-content-center py-3">
+                                        <button type="submit" class="px-4">
+                                            Paga <span class="fw-bold">{{ totalCart}}€</span>
+                                        </button>
                                     </div>
-                                    <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart
-                                    }}€</span></button>
                                 </form>
                             </div>
                         </div>
