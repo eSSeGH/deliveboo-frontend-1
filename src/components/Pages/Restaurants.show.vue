@@ -36,11 +36,9 @@
             class="d-flex justify-content-center justify-content-md-between justify-content-xl-between flex-wrap row-gap-5">
             <div class="col col-md-6 col-lg-6 col-xl-6 col-xxl-8">
 
-                <ul
-                    class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
+                <ul class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
 
-                    <li class="my-card col-12 col-xxl-5 gap-3 d-flex flex-column justify-content-between"
-                        v-for="dish in dishes" :key="dish.id">
+                    <li :class="['my-card', 'col-12', 'col-xxl-5', 'gap-3','d-flex', 'flex-column', 'justify-content-between', dish.is_visible === 1 ? '' : 'd-none']" v-for="dish in dishes" :key="dish.id">
 
                         <div class="row justify-content-center justify-content-sm-between gap-2 text-center ">
                             <div class="food-img col-4">
@@ -88,12 +86,11 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-center pt-3" v-if="this.cart.length != []">
-                                <span class="block-msg">Per favore svuota
-                                    il carrello per
-                                    aggiungere piatti di un
-                                    ristornte diverso =></span>
-                                <DeleteAllFoodButton @click="deleteAllFood()" />
+                            <div class="d-flex justify-content-between pt-3 flex-wrap row-gap-3 align-items-center" v-if="this.cart.length != []">
+                                <span class="block-msg col-12 col-sm-7 text-center">
+                                    Hai ancora dei piatti di {{ this.savedRestaurantName }} nel carrello, svuotalo per aggiugerne altri
+                                </span>
+                                <DeleteAllFoodButton @click="deleteAllFood()" class="col-4" />
                             </div>
 
                             <div class="confirm-button d-flex justify-content-center py-3">
@@ -195,8 +192,10 @@ export default {
                     this.restaurant = res.data.results
                     console.log(this.restaurant);
                     this.dishes = this.restaurant.dishes
+                    console.log(this.dishes)
 
                     this.store.restaurantID = this.restaurant.id
+                    this.store.restaurantName = this.restaurant.name
                     console.log('salvo rid nello store')
 
                 }).catch((err) => {
@@ -212,6 +211,7 @@ export default {
 
             if (localStorage.getItem('RID')) {
                 const savedRID = localStorage.getItem('RID')
+                this.savedRestaurantName = localStorage.getItem('RName')
 
                 if (parseInt(savedRID) === parseInt(this.store.restaurantID)) {
                     this.addFoodToCart(dish)
@@ -221,6 +221,7 @@ export default {
                 }
             } else {
                 localStorage.setItem('RID', JSON.stringify(this.store.restaurantID))
+                localStorage.setItem('RName', JSON.stringify(this.restaurant.name))
 
                 this.addFoodToCart(dish)
             }
@@ -229,6 +230,11 @@ export default {
         removeRID() {
             if (this.cart.length == 0) {
                 localStorage.removeItem('RID')
+            }
+        },
+        removeRName() {
+            if (this.cart.length == 0) {
+                localStorage.removeItem('RName')
             }
         },
         addFoodToCart(dish) {
@@ -385,6 +391,8 @@ export default {
             console.log(this.totalCart)
         },
         goToPay() {
+            localStorage.removeItem('RName')
+
             axios.post('http://localhost:8000/api/order/pay', {
                 cart: this.cart,
                 form: {
@@ -450,6 +458,7 @@ export default {
             restaurant: [],
             dishes: [],
             cart: [], // NON TOCCARE MAREMMAHANE
+            savedRestaurantName: '',
             orderID: '', //id dell' ordine
             firstName: '', //nome del cliente
             lastName: '', //cognome del cliente
