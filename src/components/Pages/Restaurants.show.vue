@@ -72,26 +72,28 @@
                             <h3 class="card-title text-center fw-bold py-4">
                                 Il tuo Deliveboo
                             </h3>
-                            <p class="text-center" v-if="this.cart.length !== 0">Hai aggiunto piatti del ristorante {{ this.localRestaurantName }}.</p>
+                            <p class="text-center mb-3" v-if="this.cart.length !== 0">Hai aggiunto piatti del ristorante {{ this.localRestaurantName }}.</p>
                             <p class="text-center my-text" v-else="this.cart.length === 0">Aggiungi dei piatti al carrello...
                             </p>
                             <div v-for="(dish, index) in cart" :key="dish.id">
-                                <div class="box-cart d-flex align-items-start">
+                                <div class="box-cart d-flex align-items-center align-items-sm-start">
 
                                     <span class="col-2 fw-bold fs-5">{{ dish.quantity }}x</span>
-                                    <p class="col-6 m-0">{{ dish.name }}</p>
-                                    <p class="col-2 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
-                                    <DeleteButton class="col-1 " @click="deleteFoodQuantity(dish, index)" />
-                                    <DeleteEntityButton @click="deleteFoodEntity(dish, index)"
-                                        class="col-1 ms-1 align-self-start" />
+                                    <p class="col-5 m-0">{{ dish.name }}</p>
+                                    <p class="col-3 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
+                                    <div class="row col-2 justify-content-center row-gap-1 gap-1">
+                                        <DeleteButton class="col-5" @click="deleteFoodQuantity(dish, index)" />
+                                        <DeleteEntityButton @click="deleteFoodEntity(dish, index)" class="col-5" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-between pt-3 flex-wrap row-gap-3 align-items-center" v-if="this.cart.length != []">
-                                <span class="block-msg col-12 col-sm-7 text-center">
+                            <div class="d-flex justify-content-center pt-3 flex-wrap row-gap-3 align-items-center" v-if="this.cart.length != []">
+
+                                <DeleteAllFoodButton @click="deleteAllFood()" class="col-12" />
+                                <span class="block-msg col-12 text-center">
                                     Hai ancora dei piatti di {{ this.localRestaurantName }} nel carrello, svuotalo per aggiugerne altri
                                 </span>
-                                <DeleteAllFoodButton @click="deleteAllFood()" class="col-4" />
                             </div>
 
                             <div class="confirm-button d-flex justify-content-center py-3">
