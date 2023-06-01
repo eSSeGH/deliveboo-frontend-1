@@ -89,7 +89,6 @@
                             </div>
 
                             <div class="d-flex justify-content-center pt-3 flex-wrap row-gap-3 align-items-center" v-if="this.cart.length != []">
-
                                 <DeleteAllFoodButton @click="deleteAllFood()" class="col-12" />
                                 <span class="block-msg col-12 text-center">
                                     Hai ancora dei piatti di {{ this.localRestaurantName }} nel carrello, svuotalo per aggiugerne altri
@@ -144,9 +143,9 @@
                                     </div>
                                     <input type="hidden" name="order_id" v-model="orderID">
                                     <div class="col-12 d-flex justify-content-center py-3">
+                                        <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart
+                                        }}€</span></button>
                                     </div>
-                                    <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart
-                                    }}€</span></button>
                                 </form>
                             </div>
                         </div>
@@ -370,7 +369,11 @@ export default {
         },
         showBlockMsg() {
             const blockMsg = document.querySelector('.block-msg')
-            blockMsg.style.display = 'inline'
+            blockMsg.style.display = 'flex'
+            setTimeout(() => {
+                const blockMsg = document.querySelector('.block-msg')
+                blockMsg.style.display = 'none'
+            }, 3000)
         },
         // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
         getCartFromLocalStorage() {
@@ -404,7 +407,9 @@ export default {
             console.log(this.totalCart)
         },
         goToPay() {
+
             this.removeRName()
+            localStorage.removeItem('RID')
 
             axios.post('http://localhost:8000/api/order/pay', {
                 cart: this.cart,
@@ -421,20 +426,30 @@ export default {
             .then((res) => {
                 console.log(res.data.results)
                 this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+                //Messaggio da inviare al ristoratore
+                let messageRestaurant = {
+                    message: "Hai ricevuto un nuovo ordine da consegnare a: " + this.firstName + " " + this.lastName + " in " + this.address + ", " + this.postalCode,
+                    cart: this.cart
+                };
+                //Messaggio da inviare al cliente
+                let messageClient = {
+                    message: "Hai ordinato da: " + this.restaurant.name,
+                    cart: this.cart
+                };
                 //Invio la mail al ristoratore
                 axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName,
+                    name: this.firstName + " " + this.lastName,
                     email: this.restaurant.user.email,
-                    message: JSON.stringify(this.cart)
+                    message: JSON.stringify(messageRestaurant)
                 })
                 .then((res) => {
                     console.log(res);
                 });
                 //Invio la mail al cliente
                 axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName,
+                    name: this.firstName + " " + this.lastName,
                     email: this.email,
-                    message: JSON.stringify(this.cart)
+                    message: JSON.stringify(messageClient)
                 })
                 .then((res) => {
                     console.log(res);
@@ -607,6 +622,11 @@ export default {
     .block-msg {
         display: none;
         color: red;
+        transition: all .3s;
+    }
+
+    .delete-all-food-btn {
+        flex-shrink: 0;
     }
 }
 
