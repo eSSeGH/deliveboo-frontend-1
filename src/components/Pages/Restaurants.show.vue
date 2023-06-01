@@ -230,6 +230,7 @@ export default {
         removeRID() {
             if (this.cart.length == 0) {
                 localStorage.removeItem('RID')
+                console.log('RID rimosso')
             }
         },
         addFoodToCart(dish) {
@@ -386,6 +387,8 @@ export default {
             console.log(this.totalCart)
         },
         goToPay() {
+            localStorage.removeItem('RID')
+
             axios.post('http://localhost:8000/api/order/pay', {
                 cart: this.cart,
                 form: {
@@ -426,7 +429,6 @@ export default {
                 })
 
             this.clearLocalStorage()
-            this.removeRID()
             console.log(this.cart)
 
         },
