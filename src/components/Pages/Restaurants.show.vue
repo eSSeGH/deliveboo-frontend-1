@@ -113,39 +113,48 @@
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Nome..."
+                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="name" placeholder="Nome..."
                                             name="firstName" v-model="firstName">
+                                        <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Cognome</label>
-                                        <input type="text" class="form-control" id="surname" placeholder="Cognome..."
+                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="surname" placeholder="Cognome..."
                                             name="lastName" v-model="lastName">
+                                        <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                                        <input @blur="isAvilableForm()" type="email" class="form-control" id="email"
                                             placeholder="name@example.com" name="email" v-model="email">
+                                        <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Numero</label>
-                                        <input type="text" class="form-control" id="number" placeholder="Numero..."
+                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="number" placeholder="Numero..."
                                             name="phone" v-model="phone">
+                                        <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
-                                        <input type="text" class="form-control" id="address" placeholder="Indirizzo..."
+                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="address" placeholder="Indirizzo..."
                                             name="address" v-model="address">
+                                        <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Codice postale</label>
-                                        <input type="text" class="form-control" id="postal-code"
+                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="postal-code"
                                             placeholder="Codice postale..." name="postal_code" v-model="postalCode">
+                                        <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <input type="hidden" name="order_id" v-model="orderID">
+                                    
                                     <div class="col-12 d-flex justify-content-center py-3">
-                                        <button type="submit" class="px-4">Paga <span class="fw-bold">{{ totalCart
-                                        }}€</span></button>
+                                        <button type="submit" class="px-4" id="btn-sub-login" :disabled="!isFormValid">
+                                            Paga <span class="fw-bold">{{ totalCart}}€</span>
+                                        </button>
                                     </div>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -182,6 +191,13 @@ export default {
     },
 
     methods: {
+        isAvilableForm() {
+            if(this.firstName.length != 0 && this.lastName.length != 0 && this.email.length != 0 && this.phone.length != 0 && this.address.length != 0 && this.postalCode.length != 0) {
+                this.isFormValid = true;
+            } else {
+                this.isFormValid = false;
+            }
+        },
         fetchRestaurantBySlug() {
 
             const slug = this.$route.params.slug
@@ -331,8 +347,12 @@ export default {
                 this.cart.splice(index, 1)
             }
 
-            this.showForm = false
-            this.showButtonConfirm = true
+            if(this.cart.length === 0 && !this.showButtonConfirm) {
+                this.showForm = false
+                this.showButtonConfirm = true
+            }
+            
+            
 
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
@@ -487,6 +507,7 @@ export default {
             store,
             showForm: false,
             showButtonConfirm: true,
+            isFormValid: false,
             totalCart: 0,
             restaurant: [],
             dishes: [],

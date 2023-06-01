@@ -39,7 +39,7 @@
         <h2 class="text-center mb-5 px-3">Scegli tra le nostre categorie</h2>
 
         <div class="d-flex gap-3 flex-wrap justify-content-center align-items-center text-center">
-            <div class="my-card col-4 col-sm-3 col-md-2" v-for="category in categories" :key="category.name">
+            <div class="my-card col-8 col-sm-5 col-md-3 col-xl-2" v-for="category in categories" :key="category.name">
                 <div class="category-box" v-on:click="goToAdvancedSearchPage(category)">
                     <img class="category-thumb" :src="getImageUrl(category.img)" alt="">
                     <div class="text-box">
