@@ -444,7 +444,7 @@ export default {
             // this.totalCart = 0
         }
     },
-
+    //
     mounted() {
         this.fetchRestaurantBySlug()
         this.getCartFromLocalStorage()
