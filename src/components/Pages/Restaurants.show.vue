@@ -218,7 +218,13 @@ export default {
 
                 }).catch((err) => {
                     this.$router.push('/404')
-                })
+            })
+            
+            window.scrollTo({
+                top:0,
+                behavior: 'smooth'
+            })
+                
         },
         getImageUrl(imagePath) {
             if (imagePath) {

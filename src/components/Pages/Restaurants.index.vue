@@ -204,7 +204,10 @@ export default {
                     this.$router.push('/404')
                 })
 
-            window.scrollTo(0, 0)
+            window.scrollTo({
+                top:0,
+                behavior: 'smooth'
+            })
         }
         this.fetchCategories()
     },
