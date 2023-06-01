@@ -25,11 +25,11 @@
                 <div class="col">
                     <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow">
                         <h3 class="my-footer-title">Links of interest</h3>
-                        <div class="col">About us</div>
-                        <div class="col">FAQ</div>
-                        <div class="col">Deliveboo Prime</div>
-                        <div class="col">Blog</div>
-                        <div class="col">Contact us</div>
+                        <div class="col"><a href="https://github.com/eSSeGH">About us</a></div>
+                        <div class="col"><a href="https://github.com/r3ig">FAQ</a></div>
+                        <div class="col"><a href="https://github.com/rennavittorio">Deliveboo Prime</a></div>
+                        <div class="col"><a href="https://github.com/Lapo0">Blog</a></div>
+                        <div class="col"><a href="https://github.com/fracs31">Contact us</a></div>
                         <div class="col">Security</div>
                     </div>
                 </div>
@@ -116,5 +116,10 @@ import FollowButton from './elements/FollowButton.vue';
 .d-flex > .col:hover {
     text-decoration: underline;
     color: white;
+}
+
+a {
+    text-decoration: none;
+    color: currentColor;
 }
 </style>
