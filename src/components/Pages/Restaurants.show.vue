@@ -112,38 +112,38 @@
                                 <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET" class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Nome</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="name" placeholder="Nome..."
+                                        <label for="exampleFormControlInput1" class="form-label ps-2">Nome</label>
+                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="name" placeholder="Nome..."
                                             name="firstName" v-model="firstName">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Cognome</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="surname" placeholder="Cognome..."
+                                        <label for="exampleFormControlInput1" class="form-label ps-2">Cognome</label>
+                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="surname" placeholder="Cognome..."
                                             name="lastName" v-model="lastName">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                        <input @blur="isAvilableForm()" type="email" class="form-control" id="email"
+                                        <label for="exampleFormControlInput1" class="form-label ps-2">Email</label>
+                                        <input @blur="isAvilableForm()" type="email" class="form-control ps-2" id="email"
                                             placeholder="name@example.com" name="email" v-model="email">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Numero</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="number" placeholder="Numero..."
+                                        <label for="exampleFormControlInput1" class="form-label ps-2">Numero</label>
+                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="number" placeholder="Numero..."
                                             name="phone" v-model="phone">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Indirizzo</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="address" placeholder="Indirizzo..."
+                                        <label for="exampleFormControlInput1" class="form-label ps-2">Indirizzo</label>
+                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="address" placeholder="Indirizzo..."
                                             name="address" v-model="address">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
-                                        <label for="exampleFormControlInput1" class="form-label">Codice postale</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control" id="postal-code"
+                                        <label for="exampleFormControlInput1" class="form-label ps-2">Codice postale</label>
+                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="postal-code"
                                             placeholder="Codice postale..." name="postal_code" v-model="postalCode">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
