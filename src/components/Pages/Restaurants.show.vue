@@ -88,12 +88,18 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-center pt-3" v-if="this.cart.length != []">
-                                <span class="block-msg">Per favore svuota
-                                    il carrello per
-                                    aggiungere piatti di un
-                                    ristornte diverso =></span>
-                                <DeleteAllFoodButton @click="deleteAllFood()" />
+                            <div class="d-flex justify-content-center pt-3 align-items-center gap-2"
+                                v-if="this.cart.length != []">
+                                <div class="block-msg col-8 align-items-center">
+                                    <span>Svuota
+                                        il carrello, prima di
+                                        aggiungere piatti da un
+                                        ristorante diverso</span>
+                                    <font-awesome-icon id="icon"
+                                        style="font-size: 25px; color: red; font-family: Font Awesome 6 Free"
+                                        class="magnifying-glass" icon="fa-solid fa-circle-right"></font-awesome-icon>
+                                </div>
+                                <DeleteAllFoodButton class="delete-all-food-btn col-4" @click="deleteAllFood()" />
                             </div>
 
                             <div class="confirm-button d-flex justify-content-center py-3">
@@ -110,7 +116,8 @@
                                     Prosegui con l'ordine
                                 </h5>
 
-                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET" class="form" id="payment-form">
+                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET"
+                                    class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label">Nome</label>
@@ -351,7 +358,11 @@ export default {
         },
         showBlockMsg() {
             const blockMsg = document.querySelector('.block-msg')
-            blockMsg.style.display = 'inline'
+            blockMsg.style.display = 'flex'
+            setTimeout(() => {
+                const blockMsg = document.querySelector('.block-msg')
+                blockMsg.style.display = 'none'
+            }, 3000)
         },
         // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
         getCartFromLocalStorage() {
@@ -397,32 +408,32 @@ export default {
                 }
 
             })
-            .then((res) => {
-                console.log(res.data.results)
-                this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
-                //Invio la mail al ristoratore
-                axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName,
-                    email: this.restaurant.user.email,
-                    message: JSON.stringify(this.cart)
-                })
                 .then((res) => {
-                    console.log(res);
-                });
-                //Invio la mail al cliente
-                axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName,
-                    email: this.email,
-                    message: JSON.stringify(this.cart)
+                    console.log(res.data.results)
+                    this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+                    //Invio la mail al ristoratore
+                    axios.post('http://127.0.0.1:8000/api/leads', {
+                        name: this.firstName,
+                        email: this.restaurant.user.email,
+                        message: JSON.stringify(this.cart)
+                    })
+                        .then((res) => {
+                            console.log(res);
+                        });
+                    //Invio la mail al cliente
+                    axios.post('http://127.0.0.1:8000/api/leads', {
+                        name: this.firstName,
+                        email: this.email,
+                        message: JSON.stringify(this.cart)
+                    })
+                        .then((res) => {
+                            console.log(res);
+                        });
                 })
-                .then((res) => {
-                    console.log(res);
-                });
-            })
-            .finally(() => {
-                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
-                paymentFormEl.submit(); //faccio il submit del form di pagamento 
-            })
+                .finally(() => {
+                    const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
+                    paymentFormEl.submit(); //faccio il submit del form di pagamento 
+                })
 
             this.clearLocalStorage()
             console.log(this.cart)
@@ -580,6 +591,11 @@ export default {
     .block-msg {
         display: none;
         color: red;
+        transition: all .3s;
+    }
+
+    .delete-all-food-btn {
+        flex-shrink: 0;
     }
 }
 
