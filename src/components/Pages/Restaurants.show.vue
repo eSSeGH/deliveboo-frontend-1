@@ -408,7 +408,7 @@ export default {
         },
         goToPay() {
 
-            this.removeRName()
+            localStorage.removeItem('RName')
             localStorage.removeItem('RID')
 
             axios.post('http://localhost:8000/api/order/pay', {
