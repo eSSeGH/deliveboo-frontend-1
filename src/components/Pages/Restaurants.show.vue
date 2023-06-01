@@ -72,7 +72,8 @@
                             <h3 class="card-title text-center fw-bold py-4">
                                 Il tuo Deliveboo
                             </h3>
-                            <p class="text-center my-text" v-if="this.cart.length === 0">Aggiungi dei piatti al carrello...
+                            <p class="text-center" v-if="this.cart.length !== 0">Hai aggiunto piatti del ristorante {{ this.localRestaurantName }}.</p>
+                            <p class="text-center my-text" v-else="this.cart.length === 0">Aggiungi dei piatti al carrello...
                             </p>
                             <div v-for="(dish, index) in cart" :key="dish.id">
                                 <div class="box-cart d-flex align-items-start">
@@ -88,7 +89,7 @@
 
                             <div class="d-flex justify-content-between pt-3 flex-wrap row-gap-3 align-items-center" v-if="this.cart.length != []">
                                 <span class="block-msg col-12 col-sm-7 text-center">
-                                    Hai ancora dei piatti di {{ this.savedRestaurantName }} nel carrello, svuotalo per aggiugerne altri
+                                    Hai ancora dei piatti di {{ this.localRestaurantName }} nel carrello, svuotalo per aggiugerne altri
                                 </span>
                                 <DeleteAllFoodButton @click="deleteAllFood()" class="col-4" />
                             </div>
@@ -195,8 +196,8 @@ export default {
                     console.log(this.dishes)
 
                     this.store.restaurantID = this.restaurant.id
-                    this.store.restaurantName = this.restaurant.name
                     console.log('salvo rid nello store')
+                    this.store.restaurantName = this.restaurant.name
 
                 }).catch((err) => {
                     this.$router.push('/404')
@@ -211,8 +212,11 @@ export default {
 
             if (localStorage.getItem('RID')) {
                 const savedRID = localStorage.getItem('RID')
-                this.savedRestaurantName = localStorage.getItem('RName')
-
+                console.log(savedRID)
+                const savedRestaurantName = localStorage.getItem('RName')
+                this.localRestaurantName = savedRestaurantName
+                console.log(this.localRestaurantName)
+                
                 if (parseInt(savedRID) === parseInt(this.store.restaurantID)) {
                     this.addFoodToCart(dish)
                 } else {
@@ -220,8 +224,12 @@ export default {
                     this.showBlockMsg()
                 }
             } else {
+                
                 localStorage.setItem('RID', JSON.stringify(this.store.restaurantID))
-                localStorage.setItem('RName', JSON.stringify(this.restaurant.name))
+                localStorage.setItem('RName', JSON.stringify(this.store.restaurantName))
+
+                const savedRestaurantName = localStorage.getItem('RName')
+                this.localRestaurantName = savedRestaurantName
 
                 this.addFoodToCart(dish)
             }
@@ -288,6 +296,7 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
 
+            this.removeRName()
             this.removeRID()
         },
         // deleteFoodFromCard(cart) {
@@ -328,6 +337,7 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
 
+            this.removeRName()
             this.removeRID()
         },
         deleteAllFood() {
@@ -340,7 +350,8 @@ export default {
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
-
+            
+            this.removeRName()
             this.removeRID()
         },
         showOrderForm() {
@@ -391,7 +402,7 @@ export default {
             console.log(this.totalCart)
         },
         goToPay() {
-            localStorage.removeItem('RName')
+            this.removeRName()
 
             axios.post('http://localhost:8000/api/order/pay', {
                 cart: this.cart,
@@ -447,6 +458,11 @@ export default {
         this.fetchRestaurantBySlug()
         this.getCartFromLocalStorage()
         console.log(this.cart)
+
+        if(localStorage.getItem('RID')) {
+            const savedRestaurantName = localStorage.getItem('RName')
+            this.localRestaurantName = savedRestaurantName
+        }
     },
 
     data() {
@@ -458,7 +474,7 @@ export default {
             restaurant: [],
             dishes: [],
             cart: [], // NON TOCCARE MAREMMAHANE
-            savedRestaurantName: '',
+            localRestaurantName: '',
             orderID: '', //id dell' ordine
             firstName: '', //nome del cliente
             lastName: '', //cognome del cliente

@@ -27,6 +27,7 @@ const store = reactive({
   restaurants: [],
   cart: [],
   restaurantID: null,
+  restaurantName: null,
 })
 
 
