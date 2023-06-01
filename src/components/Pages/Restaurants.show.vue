@@ -36,11 +36,9 @@
             class="d-flex justify-content-center justify-content-md-between justify-content-xl-between flex-wrap row-gap-5">
             <div class="col col-md-6 col-lg-6 col-xl-6 col-xxl-8">
 
-                <ul
-                    class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
+                <ul class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
 
-                    <li class="my-card col-12 col-xxl-5 gap-3 d-flex flex-column justify-content-between"
-                        v-for="dish in dishes" :key="dish.id">
+                    <li :class="['my-card', 'col-12', 'col-xxl-5', 'gap-3','d-flex', 'flex-column', 'justify-content-between', dish.is_visible === 1 ? '' : 'd-none']" v-for="dish in dishes" :key="dish.id">
 
                         <div class="row justify-content-center justify-content-sm-between gap-2 text-center ">
                             <div class="food-img col-4">
@@ -74,26 +72,27 @@
                             <h3 class="card-title text-center fw-bold py-4">
                                 Il tuo Deliveboo
                             </h3>
-                            <p class="text-center my-text" v-if="this.cart.length === 0">Aggiungi dei piatti al carrello...
+                            <p class="text-center mb-3" v-if="this.cart.length !== 0">Hai aggiunto piatti del ristorante {{ this.localRestaurantName }}.</p>
+                            <p class="text-center my-text" v-else="this.cart.length === 0">Aggiungi dei piatti al carrello...
                             </p>
                             <div v-for="(dish, index) in cart" :key="dish.id">
-                                <div class="box-cart d-flex align-items-start">
+                                <div class="box-cart d-flex align-items-center align-items-sm-start">
 
                                     <span class="col-2 fw-bold fs-5">{{ dish.quantity }}x</span>
-                                    <p class="col-6 m-0">{{ dish.name }}</p>
-                                    <p class="col-2 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
-                                    <DeleteButton class="col-1 " @click="deleteFoodQuantity(dish, index)" />
-                                    <DeleteEntityButton @click="deleteFoodEntity(dish, index)"
-                                        class="col-1 ms-1 align-self-start" />
+                                    <p class="col-5 m-0">{{ dish.name }}</p>
+                                    <p class="col-3 m-0 fw-bold text-center">{{ dish.quantity * dish.price }}€</p>
+                                    <div class="row col-2 justify-content-center row-gap-1 gap-1">
+                                        <DeleteButton class="col-5" @click="deleteFoodQuantity(dish, index)" />
+                                        <DeleteEntityButton @click="deleteFoodEntity(dish, index)" class="col-5" />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-center pt-3" v-if="this.cart.length != []">
-                                <span class="block-msg">Per favore svuota
-                                    il carrello per
-                                    aggiungere piatti di un
-                                    ristornte diverso =></span>
-                                <DeleteAllFoodButton @click="deleteAllFood()" />
+                            <div class="d-flex justify-content-center pt-3 flex-wrap row-gap-3 align-items-center" v-if="this.cart.length != []">
+                                <DeleteAllFoodButton @click="deleteAllFood()" class="col-12" />
+                                <span class="block-msg col-12 text-center">
+                                    Hai ancora dei piatti di {{ this.localRestaurantName }} nel carrello, svuotalo per aggiugerne altri
+                                </span>
                             </div>
 
                             <div class="confirm-button d-flex justify-content-center py-3">
@@ -149,11 +148,13 @@
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <input type="hidden" name="order_id" v-model="orderID">
+                                    
                                     <div class="col-12 d-flex justify-content-center py-3">
                                         <button type="submit" class="px-4" id="btn-sub-login" :disabled="!isFormValid">
                                             Paga <span class="fw-bold">{{ totalCart}}€</span>
                                         </button>
                                     </div>
+                                    
                                 </form>
                             </div>
                         </div>
@@ -209,9 +210,11 @@ export default {
                     this.restaurant = res.data.results
                     console.log(this.restaurant);
                     this.dishes = this.restaurant.dishes
+                    console.log(this.dishes)
 
                     this.store.restaurantID = this.restaurant.id
                     console.log('salvo rid nello store')
+                    this.store.restaurantName = this.restaurant.name
 
                 }).catch((err) => {
                     this.$router.push('/404')
@@ -226,7 +229,11 @@ export default {
 
             if (localStorage.getItem('RID')) {
                 const savedRID = localStorage.getItem('RID')
-
+                console.log(savedRID)
+                const savedRestaurantName = localStorage.getItem('RName')
+                this.localRestaurantName = savedRestaurantName
+                console.log(this.localRestaurantName)
+                
                 if (parseInt(savedRID) === parseInt(this.store.restaurantID)) {
                     this.addFoodToCart(dish)
                 } else {
@@ -234,7 +241,12 @@ export default {
                     this.showBlockMsg()
                 }
             } else {
+                
                 localStorage.setItem('RID', JSON.stringify(this.store.restaurantID))
+                localStorage.setItem('RName', JSON.stringify(this.store.restaurantName))
+
+                const savedRestaurantName = localStorage.getItem('RName')
+                this.localRestaurantName = savedRestaurantName
 
                 this.addFoodToCart(dish)
             }
@@ -243,6 +255,11 @@ export default {
         removeRID() {
             if (this.cart.length == 0) {
                 localStorage.removeItem('RID')
+            }
+        },
+        removeRName() {
+            if (this.cart.length == 0) {
+                localStorage.removeItem('RName')
             }
         },
         addFoodToCart(dish) {
@@ -296,6 +313,7 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
 
+            this.removeRName()
             this.removeRID()
         },
         // deleteFoodFromCard(cart) {
@@ -340,6 +358,7 @@ export default {
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
 
+            this.removeRName()
             this.removeRID()
         },
         deleteAllFood() {
@@ -352,7 +371,8 @@ export default {
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
-
+            
+            this.removeRName()
             this.removeRID()
         },
         showOrderForm() {
@@ -369,7 +389,11 @@ export default {
         },
         showBlockMsg() {
             const blockMsg = document.querySelector('.block-msg')
-            blockMsg.style.display = 'inline'
+            blockMsg.style.display = 'flex'
+            setTimeout(() => {
+                const blockMsg = document.querySelector('.block-msg')
+                blockMsg.style.display = 'none'
+            }, 3000)
         },
         // STEP:2 creiamo una funzionare per assegnare i dati del carrello in local storage ai dati della pagina ricaricata
         getCartFromLocalStorage() {
@@ -403,6 +427,10 @@ export default {
             console.log(this.totalCart)
         },
         goToPay() {
+
+            localStorage.removeItem('RName')
+            localStorage.removeItem('RID')
+
             axios.post('http://localhost:8000/api/order/pay', {
                 cart: this.cart,
                 form: {
@@ -418,20 +446,30 @@ export default {
             .then((res) => {
                 console.log(res.data.results)
                 this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+                //Messaggio da inviare al ristoratore
+                let messageRestaurant = {
+                    message: "Hai ricevuto un nuovo ordine da consegnare a: " + this.firstName + " " + this.lastName + " in " + this.address + ", " + this.postalCode,
+                    cart: this.cart
+                };
+                //Messaggio da inviare al cliente
+                let messageClient = {
+                    message: "Hai ordinato da: " + this.restaurant.name,
+                    cart: this.cart
+                };
                 //Invio la mail al ristoratore
                 axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName,
+                    name: this.firstName + " " + this.lastName,
                     email: this.restaurant.user.email,
-                    message: JSON.stringify(this.cart)
+                    message: JSON.stringify(messageRestaurant)
                 })
                 .then((res) => {
                     console.log(res);
                 });
                 //Invio la mail al cliente
                 axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName,
+                    name: this.firstName + " " + this.lastName,
                     email: this.email,
-                    message: JSON.stringify(this.cart)
+                    message: JSON.stringify(messageClient)
                 })
                 .then((res) => {
                     console.log(res);
@@ -457,6 +495,11 @@ export default {
         this.fetchRestaurantBySlug()
         this.getCartFromLocalStorage()
         console.log(this.cart)
+
+        if(localStorage.getItem('RID')) {
+            const savedRestaurantName = localStorage.getItem('RName')
+            this.localRestaurantName = savedRestaurantName
+        }
     },
 
     data() {
@@ -469,6 +512,7 @@ export default {
             restaurant: [],
             dishes: [],
             cart: [], // NON TOCCARE MAREMMAHANE
+            localRestaurantName: '',
             orderID: '', //id dell' ordine
             firstName: '', //nome del cliente
             lastName: '', //cognome del cliente
@@ -599,6 +643,11 @@ export default {
     .block-msg {
         display: none;
         color: red;
+        transition: all .3s;
+    }
+
+    .delete-all-food-btn {
+        flex-shrink: 0;
     }
 }
 

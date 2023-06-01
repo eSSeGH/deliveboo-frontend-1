@@ -1,7 +1,7 @@
 <template>
     <div class="btn">
         <span class="icon-wrapper">
-            X
+            x
         </span>
     </div>
 </template>
