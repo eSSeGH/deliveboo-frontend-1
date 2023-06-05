@@ -36,9 +36,11 @@
             class="d-flex justify-content-center justify-content-md-between justify-content-xl-between flex-wrap row-gap-5">
             <div class="col col-md-6 col-lg-6 col-xl-6 col-xxl-8">
 
-                <ul class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
+                <ul
+                    class="d-flex align-items-center justify-content-center justify-content-xxl-between flex-wrap row-gap-3">
 
-                    <li :class="['my-card', 'col-12', 'col-xxl-5', 'gap-3','d-flex', 'flex-column', 'justify-content-between', dish.is_visible === 1 ? '' : 'd-none']" v-for="dish in dishes" :key="dish.id">
+                    <li :class="['my-card', 'col-12', 'col-xxl-5', 'gap-3', 'd-flex', 'flex-column', 'justify-content-between', dish.is_visible === 1 ? '' : 'd-none']"
+                        v-for="dish in dishes" :key="dish.id">
 
                         <div class="row justify-content-center justify-content-sm-between gap-2 text-center ">
                             <div class="food-img col-4">
@@ -72,8 +74,10 @@
                             <h3 class="card-title text-center fw-bold py-4">
                                 Il tuo Deliveboo
                             </h3>
-                            <p class="text-center mb-3" v-if="this.cart.length !== 0">Hai aggiunto piatti del ristorante {{ this.localRestaurantName }}.</p>
-                            <p class="text-center my-text" v-else="this.cart.length === 0">Aggiungi dei piatti al carrello...
+                            <p class="text-center mb-3" v-if="this.cart.length !== 0">Hai aggiunto piatti del ristorante {{
+                                this.localRestaurantName }}.</p>
+                            <p class="text-center my-text" v-else="this.cart.length === 0">Aggiungi dei piatti al
+                                carrello...
                             </p>
                             <div v-for="(dish, index) in cart" :key="dish.id">
                                 <div class="box-cart d-flex align-items-center align-items-sm-start">
@@ -88,10 +92,12 @@
                                 </div>
                             </div>
 
-                            <div class="d-flex justify-content-center pt-3 flex-wrap row-gap-3 align-items-center" v-if="this.cart.length != []">
+                            <div class="d-flex justify-content-center pt-3 flex-wrap row-gap-3 align-items-center"
+                                v-if="this.cart.length != []">
                                 <DeleteAllFoodButton @click="deleteAllFood()" class="col-12" />
                                 <span class="block-msg col-12 text-center">
-                                    Hai ancora dei piatti di {{ this.localRestaurantName }} nel carrello, svuotalo per aggiugerne altri
+                                    Hai ancora dei piatti di {{ this.localRestaurantName }} nel carrello, svuotalo per
+                                    aggiugerne altri
                                 </span>
                             </div>
 
@@ -109,52 +115,54 @@
                                     Prosegui con l'ordine
                                 </h5>
 
-                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET" class="form" id="payment-form">
+                                <form @submit.prevent="goToPay()" action="http://127.0.0.1:8000/orders/create" method="GET"
+                                    class="form" id="payment-form">
                                     <!-- action to rotta api -->
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Nome</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="name" placeholder="Nome..."
-                                            name="firstName" v-model="firstName">
+                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2" id="name"
+                                            placeholder="Nome..." name="firstName" v-model="firstName">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Cognome</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="surname" placeholder="Cognome..."
-                                            name="lastName" v-model="lastName">
+                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2" id="surname"
+                                            placeholder="Cognome..." name="lastName" v-model="lastName">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Email</label>
-                                        <input @blur="isAvilableForm()" type="email" class="form-control ps-2" id="email"
+                                        <input @blur="isAvailableForm()" type="email" class="form-control ps-2" id="email"
                                             placeholder="name@example.com" name="email" v-model="email">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Numero</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="number" placeholder="Numero..."
-                                            name="phone" v-model="phone">
+                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2" id="number"
+                                            placeholder="Numero..." name="phone" v-model="phone">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Indirizzo</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="address" placeholder="Indirizzo..."
-                                            name="address" v-model="address">
+                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2" id="address"
+                                            placeholder="Indirizzo..." name="address" v-model="address">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <div class="">
                                         <label for="exampleFormControlInput1" class="form-label ps-2">Codice postale</label>
-                                        <input @blur="isAvilableForm()" type="text" class="form-control ps-2" id="postal-code"
-                                            placeholder="Codice postale..." name="postal_code" v-model="postalCode">
+                                        <input @blur="isAvailableForm()" type="text" class="form-control ps-2"
+                                            id="postal-code" placeholder="Codice postale..." name="postal_code"
+                                            v-model="postalCode">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
                                     <input type="hidden" name="order_id" v-model="orderID">
-                                    
+
                                     <div class="col-12 d-flex justify-content-center py-3">
                                         <button type="submit" class="px-4" id="btn-sub-login" :disabled="!isFormValid">
-                                            Paga <span class="fw-bold">{{ totalCart}}€</span>
+                                            Paga <span class="fw-bold">{{ totalCart }}€</span>
                                         </button>
                                     </div>
-                                    
+
                                 </form>
                             </div>
                         </div>
@@ -191,8 +199,13 @@ export default {
     },
 
     methods: {
-        isAvilableForm() {
-            if(this.firstName.length != 0 && this.lastName.length != 0 && this.email.length != 0 && this.phone.length != 0 && this.address.length != 0 && this.postalCode.length != 0) {
+        isAvailableForm() {
+            if (this.firstName.length != 0 &&
+                this.lastName.length != 0 &&
+                this.email.length != 0 &&
+                this.phone.length != 0 &&
+                this.address.length != 0 &&
+                this.postalCode.length != 0) {
                 this.isFormValid = true;
             } else {
                 this.isFormValid = false;
@@ -218,13 +231,13 @@ export default {
 
                 }).catch((err) => {
                     this.$router.push('/404')
-            })
-            
+                })
+
             window.scrollTo({
-                top:0,
+                top: 0,
                 behavior: 'smooth'
             })
-                
+
         },
         getImageUrl(imagePath) {
             if (imagePath) {
@@ -239,7 +252,7 @@ export default {
                 const savedRestaurantName = localStorage.getItem('RName')
                 this.localRestaurantName = savedRestaurantName
                 console.log(this.localRestaurantName)
-                
+
                 if (parseInt(savedRID) === parseInt(this.store.restaurantID)) {
                     this.addFoodToCart(dish)
                 } else {
@@ -247,7 +260,7 @@ export default {
                     this.showBlockMsg()
                 }
             } else {
-                
+
                 localStorage.setItem('RID', JSON.stringify(this.store.restaurantID))
                 localStorage.setItem('RName', JSON.stringify(this.store.restaurantName))
 
@@ -353,12 +366,12 @@ export default {
                 this.cart.splice(index, 1)
             }
 
-            if(this.cart.length === 0 && !this.showButtonConfirm) {
+            if (this.cart.length === 0 && !this.showButtonConfirm) {
                 this.showForm = false
                 this.showButtonConfirm = true
             }
-            
-            
+
+
 
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
@@ -377,7 +390,7 @@ export default {
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando rimuovo un piatto
-            
+
             this.removeRName()
             this.removeRID()
         },
@@ -449,42 +462,42 @@ export default {
                 }
 
             })
-            .then((res) => {
-                console.log(res.data.results)
-                this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
-                //Messaggio da inviare al ristoratore
-                let messageRestaurant = {
-                    message: "Hai ricevuto un nuovo ordine da consegnare a: " + this.firstName + " " + this.lastName + " in " + this.address + ", " + this.postalCode,
-                    cart: this.cart
-                };
-                //Messaggio da inviare al cliente
-                let messageClient = {
-                    message: "Hai ordinato da: " + this.restaurant.name,
-                    cart: this.cart
-                };
-                //Invio la mail al ristoratore
-                axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName + " " + this.lastName,
-                    email: this.restaurant.user.email,
-                    message: JSON.stringify(messageRestaurant)
-                })
                 .then((res) => {
-                    console.log(res);
-                });
-                //Invio la mail al cliente
-                axios.post('http://127.0.0.1:8000/api/leads', {
-                    name: this.firstName + " " + this.lastName,
-                    email: this.email,
-                    message: JSON.stringify(messageClient)
+                    console.log(res.data.results)
+                    this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
+                    //Messaggio da inviare al ristoratore
+                    let messageRestaurant = {
+                        message: "Hai ricevuto un nuovo ordine da consegnare a: " + this.firstName + " " + this.lastName + " in " + this.address + ", " + this.postalCode,
+                        cart: this.cart
+                    };
+                    //Messaggio da inviare al cliente
+                    let messageClient = {
+                        message: "Hai ordinato da: " + this.restaurant.name,
+                        cart: this.cart
+                    };
+                    //Invio la mail al ristoratore
+                    axios.post('http://127.0.0.1:8000/api/leads', {
+                        name: this.firstName + " " + this.lastName,
+                        email: this.restaurant.user.email,
+                        message: JSON.stringify(messageRestaurant)
+                    })
+                        .then((res) => {
+                            console.log(res);
+                        });
+                    //Invio la mail al cliente
+                    axios.post('http://127.0.0.1:8000/api/leads', {
+                        name: this.firstName + " " + this.lastName,
+                        email: this.email,
+                        message: JSON.stringify(messageClient)
+                    })
+                        .then((res) => {
+                            console.log(res);
+                        });
                 })
-                .then((res) => {
-                    console.log(res);
-                });
-            })
-            .finally(() => {
-                const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
-                paymentFormEl.submit(); //faccio il submit del form di pagamento 
-            })
+                .finally(() => {
+                    const paymentFormEl = document.getElementById('payment-form'); //prendo il form di pagamento
+                    paymentFormEl.submit(); //faccio il submit del form di pagamento 
+                })
 
             this.clearLocalStorage()
             console.log(this.cart)
@@ -502,7 +515,7 @@ export default {
         this.getCartFromLocalStorage()
         console.log(this.cart)
 
-        if(localStorage.getItem('RID')) {
+        if (localStorage.getItem('RID')) {
             const savedRestaurantName = localStorage.getItem('RName')
             this.localRestaurantName = savedRestaurantName
         }
