@@ -49,22 +49,32 @@
             <div class="container mx-auto d-flex justify-content-between flex-wrap row-gap-5">
                 <div class="col-12 col-md-5 d-flex flex-column">
                     <h3 class="mb-2">Ben Arrivato cliente!</h3>
-                    <p>Benvenuti nel nostro sito internet, il luogo ideale per soddisfare le vostre voglie culinarie senza uscire di casa! Siamo un servizio di consegna di cibo online che collabora con una vasta selezione di ristoranti locali, offrendovi una varietà di delizie gastronomiche da gustare nel comfort del vostro salotto.</p>
+                    <p>Benvenuti nel nostro sito internet, il luogo ideale per soddisfare le vostre voglie culinarie senza
+                        uscire di casa! Siamo un servizio di consegna di cibo online che collabora con una vasta selezione
+                        di ristoranti locali, offrendovi una varietà di delizie gastronomiche da gustare nel comfort del
+                        vostro salotto.</p>
                 </div>
                 <div class="col-12 col-md-5 d-flex flex-column">
                     <h3 class="mb-2">Il nostro Obiettivo</h3>
-                    <p>Il nostro obiettivo è offrirvi una piattaforma facile da usare, dove potrete sfogliare i menu dei migliori ristoranti della zona e ordinare i vostri piatti preferiti con pochi clic. Che siate alla ricerca di una pizza saporita, una pasta al dente, un sushi fresco o un'insalata croccante, avrete a disposizione un'ampia scelta di cucine internazionali per accontentare ogni palato.</p>
+                    <p>Il nostro obiettivo è offrirvi una piattaforma facile da usare, dove potrete sfogliare i menu dei
+                        migliori ristoranti della zona e ordinare i vostri piatti preferiti con pochi clic. Che siate alla
+                        ricerca di una pizza saporita, una pasta al dente, un sushi fresco o un'insalata croccante, avrete a
+                        disposizione un'ampia scelta di cucine internazionali per accontentare ogni palato.</p>
                 </div>
             </div>
 
             <div class="container mx-auto d-flex justify-content-between flex-wrap row-gap-5">
                 <div class="col-12 col-md-5 d-flex flex-column">
                     <h3 class="mb-2">&eacute; Facile!</h3>
-                    <p>La nostra interfaccia intuitiva vi permetterà di filtrare le opzioni in base alle vostre preferenze, consentendovi di cercare ristoranti di diverse nazionalit&aacute; tra le quali: cinese, giapponese, argentino, indiano e molto altro </p>
+                    <p>La nostra interfaccia intuitiva vi permetterà di filtrare le opzioni in base alle vostre preferenze,
+                        consentendovi di cercare ristoranti di diverse nazionalit&aacute; tra le quali: cinese, giapponese,
+                        argentino, indiano e molto altro </p>
                 </div>
                 <div class="col-12 col-md-5 d-flex flex-column">
                     <h3 class="mb-2">Il nostro Impegno</h3>
-                    <p>Ci preoccupiamo della qualità del cibo che offriamo e collaboriamo solo con ristoranti che rispettano i più alti standard igienici e di sicurezza. I nostri corrieri dedicati garantiranno che il vostro ordine arrivi caldo e fresco direttamente a casa vostra, in tempi rapidi e puntuali.</p>
+                    <p>Ci preoccupiamo della qualità del cibo che offriamo e collaboriamo solo con ristoranti che rispettano
+                        i più alti standard igienici e di sicurezza. I nostri corrieri dedicati garantiranno che il vostro
+                        ordine arrivi caldo e fresco direttamente a casa vostra, in tempi rapidi e puntuali.</p>
                 </div>
             </div>
         </section>
@@ -114,8 +124,6 @@ export default {
                 })
         },
         addFilter(category) {
-            console.log('launched addFilter')
-            console.log('category', category)
 
             const basePath = 'http://127.0.0.1:8000/api/restaurants'
 
@@ -131,8 +139,6 @@ export default {
                 category.toLowerCase()
                 this.selectedCategories.push(category)
             }
-
-            console.log('selected categories dopo il push di category', this.selectedCategories)
 
             // chiamata con l'array di parametri inseriti nello store
             axios.get(basePath, {
@@ -205,7 +211,7 @@ export default {
                 })
 
             window.scrollTo({
-                top:0,
+                top: 0,
                 behavior: 'smooth'
             })
         }
@@ -419,5 +425,4 @@ main {
     .wave-bottom {
         bottom: -18px;
     }
-}
-</style>
+}</style>
