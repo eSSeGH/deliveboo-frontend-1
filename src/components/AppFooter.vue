@@ -14,39 +14,39 @@
 
                 <div class="col">
                     <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow">
-                        <h3 class="my-footer-title">Let's do it together</h3>
-                        <div class="col">Careers</div>
-                        <div class="col">Debliveboo for Partners</div>
-                        <div class="col">Couriers</div>
-                        <div class="col">Deliveboo Business</div>
+                        <h3 class="my-footer-title">Insieme</h3>
+                        <div class="col">Carriere</div>
+                        <div class="col">Debliveboo per Partners</div>
+                        <div class="col">Corrieri</div>
+                        <div class="col">Deliveboo Aziende</div>
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow">
-                        <h3 class="my-footer-title">Links of interest</h3>
-                        <div class="col"><a href="https://github.com/eSSeGH">About us</a></div>
+                        <h3 class="my-footer-title">Link di interesse</h3>
+                        <div class="col"><a href="https://github.com/eSSeGH">A proposito di noi</a></div>
                         <div class="col"><a href="https://github.com/r3ig">FAQ</a></div>
                         <div class="col"><a href="https://github.com/rennavittorio">Deliveboo Prime</a></div>
                         <div class="col"><a href="https://github.com/Lapo0">Blog</a></div>
-                        <div class="col"><a href="https://github.com/fracs31">Contact us</a></div>
-                        <div class="col">Security</div>
+                        <div class="col"><a href="https://github.com/fracs31">Contattaci</a></div>
+                        <div class="col">Sicurezza</div>
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow">
-                        <h3 class="my-footer-title">Follow us</h3>
+                        <h3 class="my-footer-title">Seguici</h3>
                         <FollowButton class="follow-btn" />
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="d-flex flex-column pb-4 gap-2 my-footer-text shadow uppercase">
-                        <h3 class="my-footer-title">Terms & Conditions</h3>
-                        <div class="col">Privacy policy</div>
-                        <div class="col">Cookies policy</div>
-                        <div class="col">Compliance</div>
+                        <h3 class="my-footer-title">Termini e Condizioni</h3>
+                        <div class="col">Politica sulla privacy</div>
+                        <div class="col">Politica sui cookies</div>
+                        <div class="col">Conformit&aacute;</div>
                     </div>
                 </div>
 
