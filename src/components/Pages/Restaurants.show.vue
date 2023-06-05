@@ -142,7 +142,7 @@
                                             placeholder="name@example.com" name="email" v-model="email">
                                         <span id="payment-error" class="message-error text-danger"></span>
                                     </div>
-                                    <div class="err-msg-Email" style="color: red; display: none; font-size: 10px;">
+                                    <div class="err-msg-email" style="color: red; display: none; font-size: 10px;">
                                         Il campo 'email' non può essere vuoto
                                     </div>
                                     <div class="err-regex-eMail" style="color: red; display: none; font-size: 10px;">
@@ -227,8 +227,13 @@ export default {
 
     methods: {
         formCheckFirstName() {
+            // reset messaggi di errore
+            const errMsgEmpty = document.querySelector('.err-msg-firstName')
+            errMsgEmpty.style.display = 'none'
+
+
             if (this.firstName.length != 0) {
-                this.isFormValid = true;
+                this.isAvailableForm()
             } else {
                 const errMsgEmpty = document.querySelector('.err-msg-firstName')
                 errMsgEmpty.style.display = 'block'
@@ -236,8 +241,13 @@ export default {
             }
         },
         formCheckLastName() {
+            // reset messaggi di errore
+            const errMsgEmpty = document.querySelector('.err-msg-lastName')
+            errMsgEmpty.style.display = 'none'
+
+
             if (this.lastName.length != 0) {
-                this.isFormValid = true;
+                this.isAvailableForm()
             } else {
                 const errMsgEmpty = document.querySelector('.err-msg-lastName')
                 errMsgEmpty.style.display = 'block'
@@ -245,46 +255,59 @@ export default {
             }
         },
         formCheckEmail() {
+            // reset messaggi di errore
+            const errMsgEmail = document.querySelector('.err-regex-eMail')
+            errMsgEmail.style.display = 'none'
+            const errMsgEmpty = document.querySelector('.err-msg-email')
+            errMsgEmpty.style.display = 'none'
+
+            const reEmail = /[a-zA-Z0-9_\-\.]+[@][a-z]+[\.][a-z]{2,3}/
+
             if (this.email.length != 0) {
-                this.isFormValid = true;
+
+                if (reEmail.test(this.email)) {
+                    this.isAvailableForm()
+                } else {
+                    const errMsgEmail = document.querySelector('.err-regex-eMail')
+                    errMsgEmail.style.display = 'block'
+                    this.isFormValid = false;
+                }
             } else {
                 const errMsgEmpty = document.querySelector('.err-msg-email')
                 errMsgEmpty.style.display = 'block'
                 this.isFormValid = false;
             }
-
-            const reEmail = /[a-zA-Z0-9_\-\.]+[@][a-z]+[\.][a-z]{2,3}/
-
-            if (reEmail.test(this.email)) {
-                this.isFormValid = true;
-            } else {
-                const errMsgEmail = document.querySelector('.err-regex-eMail')
-                errMsgEmail.style.display = 'block'
-                this.isFormValid = false;
-            }
         },
         formCheckPhone() {
+            // reset messaggi di errore
+            const errMsgPhone = document.querySelector('.err-regex-phone')
+            errMsgPhone.style.display = 'none'
+            const errMsgEmpty = document.querySelector('.err-msg-phone')
+            errMsgEmpty.style.display = 'none'
+
             if (this.phone.length != 0) {
-                this.isFormValid = true;
+
+                if (this.phone.length == 10) {
+                    this.isAvailableForm()
+                } else {
+                    const errMsgPhone = document.querySelector('.err-regex-phone')
+                    errMsgPhone.style.display = 'block'
+                    this.isFormValid = false;
+                }
             } else {
                 const errMsgEmpty = document.querySelector('.err-msg-phone')
                 errMsgEmpty.style.display = 'block'
                 this.isFormValid = false;
             }
-
-            const rePhone = /[0-9]{10}/
-
-            if (rePhone.test(this.phone)) {
-                this.isFormValid = true;
-            } else {
-                const errMsgPhone = document.querySelector('.err-regex-phone')
-                errMsgPhone.style.display = 'block'
-                this.isFormValid = false;
-            }
         },
         formCheckAddress() {
+            // reset messaggi di errore
+            const errMsgEmpty = document.querySelector('.err-msg-address')
+            errMsgEmpty.style.display = 'none'
+
+
             if (this.address.length != 0) {
-                this.isFormValid = true;
+                this.isAvailableForm()
             } else {
                 const errMsgEmpty = document.querySelector('.err-msg-address')
                 errMsgEmpty.style.display = 'block'
@@ -292,25 +315,28 @@ export default {
             }
         },
         formCheckPostalCode() {
+            // reset messaggi di errore
+            const errMsgPostalCode = document.querySelector('.err-regex-postalCode')
+            errMsgPostalCode.style.display = 'none'
+            const errMsgEmpty = document.querySelector('.err-msg-postalCode')
+            errMsgEmpty.style.display = 'none'
+
             if (this.postalCode.length != 0) {
-                this.isFormValid = true;
+
+                if (this.postalCode.length == 5) {
+                    this.isAvailableForm()
+                } else {
+                    const errMsgPostalCode = document.querySelector('.err-regex-postalCode')
+                    errMsgPostalCode.style.display = 'block'
+                    this.isFormValid = false;
+                }
             } else {
                 const errMsgEmpty = document.querySelector('.err-msg-postalCode')
                 errMsgEmpty.style.display = 'block'
                 this.isFormValid = false;
             }
-            const rePostalCode = /[0-9]{5}/
-
-            if (rePostalCode.test(this.postalCode)) {
-                this.isFormValid = true;
-            } else {
-                const errMsgPostalCode = document.querySelector('.err-regex-postalCode')
-                errMsgPostalCode.style.display = 'block'
-                this.isFormValid = false;
-            }
         },
         isAvailableForm() {
-
             if (this.firstName.length != 0 &&
                 this.lastName.length != 0 &&
                 this.email.length != 0 &&
@@ -329,15 +355,12 @@ export default {
             axios.get(`http://127.0.0.1:8000/api/restaurants/${slug}`)
                 .then(res => {
 
-                    // console.log(res)
-
                     this.restaurant = res.data.results
-                    console.log(this.restaurant);
+
                     this.dishes = this.restaurant.dishes
-                    console.log(this.dishes)
 
                     this.store.restaurantID = this.restaurant.id
-                    console.log('salvo rid nello store')
+
                     this.store.restaurantName = this.restaurant.name
 
                 }).catch((err) => {
@@ -357,19 +380,24 @@ export default {
         },
         addFoodToCartWithRID(dish) {
 
+            // controllo se esite il rid salvato
+            // se esiste lo prendo e lo confronto con il current rid
+            // se è uguale aggiungo il paitto al carrello
+            // altrimenti creo un rid e lo salvo persistentemente
+
             if (localStorage.getItem('RID')) {
                 const savedRID = localStorage.getItem('RID')
-                console.log(savedRID)
+
                 const savedRestaurantName = localStorage.getItem('RName')
                 this.localRestaurantName = savedRestaurantName
-                console.log(this.localRestaurantName)
+
 
                 if (parseInt(savedRID) === parseInt(this.store.restaurantID)) {
                     this.addFoodToCart(dish)
                 } else {
-                    console.log('non cambaciano i RID')
                     this.showBlockMsg()
                 }
+
             } else {
 
                 localStorage.setItem('RID', JSON.stringify(this.store.restaurantID))
@@ -394,11 +422,6 @@ export default {
         },
         addFoodToCart(dish) {
 
-            // controllo se esite il rid salvato
-            // se esiste lo prendo e lo confronto con il current rid
-            // se è uguale aggiungo il paitto al carrello
-            // altrimenti creo un rid e lo salvo persistentemente
-
             //controllo se filtrando il cart mi trova l'elemento dish (se > 0)
             if (this.cart.filter(value => value.id === dish.id).length > 0) {
                 let filteredCart = this.cart.filter(value => value.id === dish.id) //mi salvo l'array filtrato con il mio dish
@@ -412,8 +435,6 @@ export default {
             //STEP:1 salvare dati nel local storage ad ogni modifica
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando aggiungo un piatto
             localStorage.setItem('totalCart', JSON.stringify(this.totalCart)) // salvo il totale nel local storage quando aggiungo un piatto
-            console.log(this.cart)
-            // console.log(localStorage.getItem('cart'))
         },
         deleteFoodQuantity(dish, index) {
 
@@ -446,29 +467,6 @@ export default {
             this.removeRName()
             this.removeRID()
         },
-        // deleteFoodFromCard(cart) {
-
-        //     if (this.cart.length === 1 && dish.quantity === 1 && !this.showButtonConfirm) {
-        //         //togli prezzo ed elemento da carrello
-        //         this.totalCart -= parseFloat(dish.price)
-        //         this.cart.splice(index, 1)
-
-        //         //riportami il 'conferma ordine'
-        //         this.showForm = false
-        //         this.showButtonConfirm = true
-        //     }
-
-        //     if (this.cart.includes(dish)) {
-        //         if (dish.quantity > 1) {
-        //             dish.quantity -= 1
-        //             this.totalCart -= parseFloat(dish.price)
-        //         } else if (dish.quantity === 1) {
-        //             this.totalCart -= parseFloat(dish.price)
-        //             this.cart.splice(index, 1)
-        //         }
-        //     }
-
-        // },
         deleteFoodEntity(dish, index) {
             //se abbiamo elementi nel carrello, gestisci il delete e totale
             if (this.cart.includes(dish)) {
@@ -481,8 +479,6 @@ export default {
                 this.showForm = false
                 this.showButtonConfirm = true
             }
-
-
 
             // STEP:1
             localStorage.setItem('cart', JSON.stringify(this.cart)) // salvo il carrello come stringa JSON nel local storage quando rimuovo un piatto
@@ -513,8 +509,6 @@ export default {
             } else if (this.totalCart !== 0) {
                 this.showForm = true
                 this.showButtonConfirm = false
-                // console.log('show form')
-                // console.log(this.totalCart)
             }
         },
         showBlockMsg() {
@@ -531,7 +525,6 @@ export default {
             // SE esiste lo converto in array 
             // ALTRIMENTI metto l'array vuoto
             const savedCartData = localStorage.getItem('cart')
-            // console.log(savedCartData)
             let localCart = []
 
             if (savedCartData) {
@@ -544,9 +537,7 @@ export default {
             // SE esiste diventa float 
             // ALTRIMENTI metto il totale a 0
             const savedTotalCart = localStorage.getItem('totalCart')
-            console.log(savedTotalCart, typeof savedTotalCart)
             let localTotalCart = 0
-            // console.log(localTotalCart)
 
             if (savedTotalCart !== 0) {
                 localTotalCart = JSON.parse(savedTotalCart)
@@ -554,7 +545,6 @@ export default {
 
             this.cart = localCart
             this.totalCart = localTotalCart
-            console.log(this.totalCart)
         },
         goToPay() {
 
@@ -575,7 +565,7 @@ export default {
 
             })
                 .then((res) => {
-                    console.log(res.data.results)
+
                     this.orderID = res.data.results.order_id; //salvo l'id dell'ordine appena creato
                     //Messaggio da inviare al ristoratore
                     let messageRestaurant = {
@@ -594,7 +584,7 @@ export default {
                         message: JSON.stringify(messageRestaurant)
                     })
                         .then((res) => {
-                            console.log(res);
+
                         });
                     //Invio la mail al cliente
                     axios.post('http://127.0.0.1:8000/api/leads', {
@@ -603,7 +593,7 @@ export default {
                         message: JSON.stringify(messageClient)
                     })
                         .then((res) => {
-                            console.log(res);
+
                         });
                 })
                 .finally(() => {
@@ -612,7 +602,7 @@ export default {
                 })
 
             this.clearLocalStorage()
-            console.log(this.cart)
+
 
         },
         clearLocalStorage() {
@@ -625,7 +615,7 @@ export default {
     mounted() {
         this.fetchRestaurantBySlug()
         this.getCartFromLocalStorage()
-        console.log(this.cart)
+
 
         if (localStorage.getItem('RID')) {
             const savedRestaurantName = localStorage.getItem('RName')
